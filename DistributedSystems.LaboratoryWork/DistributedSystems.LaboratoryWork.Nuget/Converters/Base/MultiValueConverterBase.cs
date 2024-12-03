@@ -30,7 +30,7 @@ public abstract class MultiValueConverterBase<TMultiValueConverter> :
     public override object ProvideValue(
         IServiceProvider serviceProvider)
     {
-        return _instance.Value;
+        return _instance.Value!;
     }
 
     #endregion

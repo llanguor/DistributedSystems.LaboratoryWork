@@ -3,9 +3,7 @@ using DistributedSystems.LaboratoryWork.Nuget.Converters.Base;
 
 namespace DistributedSystems.LaboratoryWork.Nuget.Converters;
 
-/// <summary>
-/// 
-/// </summary>
+
 public sealed class ArithmeticConverter :
     MultiValueConverterBase<ArithmeticConverter>
 {
@@ -14,25 +12,10 @@ public sealed class ArithmeticConverter :
 
     public enum Operators
     {
-        /// <summary>
-        /// 
-        /// </summary>
         Plus,
-        /// <summary>
-        /// 
-        /// </summary>
         Minus,
-        /// <summary>
-        /// 
-        /// </summary>
         Multiply,
-        /// <summary>
-        /// 
-        /// </summary>
         Divide,
-        /// <summary>
-        /// 
-        /// </summary>
         RemainderDivide
     }
 
@@ -40,7 +23,6 @@ public sealed class ArithmeticConverter :
 
     #region RGU.DistributedSystems.WPF.MVVM.MultiValueConverterBase<ArithmeticConverter> overrides
 
-    /// <inheritdoc cref="MultiValueConverterBase{TMultiValueConverter}.Convert" />
     public override object? Convert(
         object?[] values,
         Type targetType,
@@ -56,12 +38,12 @@ public sealed class ArithmeticConverter :
 
         if (!Enum.IsDefined(typeof(Operators), parameter))
         {
-            // TODO: throw an exception
+            throw new NotSupportedException("This operation is not supported!");
         }
 
         var @operator = (Operators)parameter;
-        dynamic leftOperand = values[0];
-        dynamic rightOperand = values[1];
+        dynamic leftOperand = values[0] ?? throw new ArgumentNullException("First parameter was null");
+        dynamic rightOperand = values[1] ?? throw new ArgumentNullException("Second parameter was null");
 
         switch (@operator)
         {
