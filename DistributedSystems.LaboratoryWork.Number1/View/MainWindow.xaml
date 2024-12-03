@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DistributedSystems.LaboratoryWork.Number1"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:attached="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Attached"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
@@ -34,11 +36,20 @@
             />
         <!-- Background="Brown" Foreground="Aqua" FontSize="10" -->
 
+
         <Button
             Grid.Column="1"
             Grid.Row="0"
-            Style="{StaticResource ResourceKey=PictureButtonStyle}">
+            Style="{DynamicResource ResourceKey=PictureButtonStyle}"
+            Content="ЖМИ"
+            FontSize="20"
+            Foreground="White"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            attached:ImageButtonTemplateAttachedProperty.Source="../Meta/ButtonImage.png"
+            attached:ImageButtonTemplateAttachedProperty.ImageScaleX="150"
+            attached:ImageButtonTemplateAttachedProperty.ImageScaleY="150"
+            />
 
-        </Button>
     </Grid>
 </Window>

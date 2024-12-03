@@ -25,3 +25,4 @@ C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems
 C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\Packages\Resources\ButtonsDictionary.baml
 C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\View\MainWindow.g.cs
 C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\View\MainWindow.baml
+C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs

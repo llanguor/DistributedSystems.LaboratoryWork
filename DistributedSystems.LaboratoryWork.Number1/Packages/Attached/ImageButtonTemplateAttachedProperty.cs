@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace DistributedSystems.LaboratoryWork.Number1.Packages.Attached
 {
@@ -15,13 +16,14 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Attached
         public static readonly DependencyProperty Source =
             DependencyProperty.RegisterAttached(
                 "Source",
-                typeof(string),
-                typeof(ImageButtonTemplateAttachedProperty)
+                typeof(ImageSource),
+                typeof(ImageButtonTemplateAttachedProperty),
+                new PropertyMetadata(null)
                 );
 
-        public static string GetSource(DependencyObject obj)
+        public static ImageSource GetSource(DependencyObject obj)
         {
-            return (string)obj.GetValue(Source);
+            return (ImageSource)obj.GetValue(Source);
         }
 
         public static void SetSource(DependencyObject obj, object value)
@@ -29,5 +31,42 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Attached
              obj.SetValue(Source, value);
         }
 
+
+
+        public static readonly DependencyProperty ImageScaleX =
+    DependencyProperty.RegisterAttached(
+        "ImageScaleX",
+        typeof(double),
+        typeof(ImageButtonTemplateAttachedProperty)
+        );
+
+        public static double GetImageScaleX(DependencyObject obj)
+        {
+            return (double)obj.GetValue(ImageScaleX);
+        }
+
+        public static void SetImageScaleX(DependencyObject obj, object value)
+        {
+            obj.SetValue(ImageScaleX, value);
+        }
+
+
+
+        public static readonly DependencyProperty ImageScaleY =
+    DependencyProperty.RegisterAttached(
+        "ImageScaleY",
+        typeof(double),
+        typeof(ImageButtonTemplateAttachedProperty)
+        );
+
+        public static double GetImageScaleY(DependencyObject obj)
+        {
+            return (double)obj.GetValue(ImageScaleX);
+        }
+
+        public static void SetImageScaleY(DependencyObject obj, object value)
+        {
+            obj.SetValue(ImageScaleX, value);
+        }
     }
 }

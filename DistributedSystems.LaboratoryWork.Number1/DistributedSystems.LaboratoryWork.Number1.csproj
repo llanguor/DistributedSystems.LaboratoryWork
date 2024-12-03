@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Meta\ButtonImage.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\DistributedSystems.LaboratoryWork.Nuget\DistributedSystems.LaboratoryWork.Nuget.csproj" />
   </ItemGroup>
 
@@ -18,6 +22,10 @@
 
   <ItemGroup>
     <PackageReference Include="DryIoc.dll" Version="5.4.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Meta\ButtonImage.png" />
   </ItemGroup>
 
 </Project>

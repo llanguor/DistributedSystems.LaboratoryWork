@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>DistributedSystems.LaboratoryWork.Nuget</id>
+    <version>1.0.0</version>
+    <authors>DistributedSystems.LaboratoryWork.Nuget</authors>
+    <description>Package Description</description>
+    <repository type="git" commit="1b0e1bb95dd46680de9c8994a02a9ba6737641f1" />
+    <dependencies>
+      <group targetFramework="net8.0-windows7.0" />
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework="net8.0-windows7.0">
+        <frameworkReference name="Microsoft.WindowsDesktop.App.WPF" />
+      </group>
+    </frameworkReferences>
+  </metadata>
+  <files>
+    <file src="C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Nuget\bin\Debug\net8.0-windows\DistributedSystems.LaboratoryWork.Nuget.dll" target="lib\net8.0-windows7.0\DistributedSystems.LaboratoryWork.Nuget.dll" />
+  </files>
+</package>

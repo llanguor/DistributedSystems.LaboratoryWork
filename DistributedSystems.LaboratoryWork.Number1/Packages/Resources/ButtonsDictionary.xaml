@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:attached="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Attached">
 
     <Style x:Key="ForegroundButtonStyle" 
            TargetType="{x:Type Button}">
@@ -29,9 +30,23 @@
             
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate 
-                    TargetType="{x:Type Button}">
-                        <Image />
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Image 
+                                Source="{Binding (attached:ImageButtonTemplateAttachedProperty.Source), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}"
+                                Width="{Binding (attached:ImageButtonTemplateAttachedProperty.ImageScaleX), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}"
+                                Height="{Binding (attached:ImageButtonTemplateAttachedProperty.ImageScaleY), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}"
+                                />
+                            <TextBlock
+                                FontSize="{TemplateBinding FontSize}"
+                                Foreground="{TemplateBinding Foreground}"
+                                Text="{TemplateBinding Content}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                Visibility="{TemplateBinding Visibility}"
+                                Padding="{TemplateBinding Padding}"
+                                />
+                        </Grid>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
