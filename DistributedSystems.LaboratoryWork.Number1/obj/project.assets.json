@@ -1,0 +1,151 @@
+{
+  "version": 3,
+  "targets": {
+    "net8.0-windows7.0": {
+      "DryIoc.dll/5.4.3": {
+        "type": "package",
+        "compile": {
+          "lib/net7.0/DryIoc.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net7.0/DryIoc.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "DistributedSystems.LaboratoryWork.Nuget/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/DistributedSystems.LaboratoryWork.Nuget.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DistributedSystems.LaboratoryWork.Nuget.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
+      }
+    }
+  },
+  "libraries": {
+    "DryIoc.dll/5.4.3": {
+      "sha512": "yhXOG3SOxeWYxBAWskNRDD8fzw5hriEawv4VN4WKaFHOuubiop4kxe2rkWTEyCnTgRVgxVUSQCDBBkZqwPm1iQ==",
+      "type": "package",
+      "path": "dryioc.dll/5.4.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "DryIoc.snk",
+        "LICENSE.txt",
+        "dryioc.dll.5.4.3.nupkg.sha512",
+        "dryioc.dll.nuspec",
+        "icon.png",
+        "lib/net45/DryIoc.dll",
+        "lib/net45/DryIoc.xml",
+        "lib/net6.0/DryIoc.dll",
+        "lib/net6.0/DryIoc.xml",
+        "lib/net7.0/DryIoc.dll",
+        "lib/net7.0/DryIoc.xml",
+        "lib/netstandard2.0/DryIoc.dll",
+        "lib/netstandard2.0/DryIoc.xml",
+        "lib/netstandard2.1/DryIoc.dll",
+        "lib/netstandard2.1/DryIoc.xml"
+      ]
+    },
+    "DistributedSystems.LaboratoryWork.Nuget/1.0.0": {
+      "type": "project",
+      "path": "../DistributedSystems.LaboratoryWork.Nuget/DistributedSystems.LaboratoryWork.Nuget.csproj",
+      "msbuildProject": "../DistributedSystems.LaboratoryWork.Nuget/DistributedSystems.LaboratoryWork.Nuget.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net8.0-windows7.0": [
+      "DistributedSystems.LaboratoryWork.Nuget >= 1.0.0",
+      "DryIoc.dll >= 5.4.3"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\lifem\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\lifem\\source\\repos\\DistributedSystems.LaboratoryWork\\DistributedSystems.LaboratoryWork.Number1\\DistributedSystems.LaboratoryWork.Number1.csproj",
+      "projectName": "DistributedSystems.LaboratoryWork.Number1",
+      "projectPath": "C:\\Users\\lifem\\source\\repos\\DistributedSystems.LaboratoryWork\\DistributedSystems.LaboratoryWork.Number1\\DistributedSystems.LaboratoryWork.Number1.csproj",
+      "packagesPath": "C:\\Users\\lifem\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\lifem\\source\\repos\\DistributedSystems.LaboratoryWork\\DistributedSystems.LaboratoryWork.Number1\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\lifem\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net8.0-windows"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net8.0-windows7.0": {
+          "targetAlias": "net8.0-windows",
+          "projectReferences": {
+            "C:\\Users\\lifem\\source\\repos\\DistributedSystems.LaboratoryWork\\DistributedSystems.LaboratoryWork.Nuget\\DistributedSystems.LaboratoryWork.Nuget.csproj": {
+              "projectPath": "C:\\Users\\lifem\\source\\repos\\DistributedSystems.LaboratoryWork\\DistributedSystems.LaboratoryWork.Nuget\\DistributedSystems.LaboratoryWork.Nuget.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      }
+    },
+    "frameworks": {
+      "net8.0-windows7.0": {
+        "targetAlias": "net8.0-windows",
+        "dependencies": {
+          "DryIoc.dll": {
+            "target": "Package",
+            "version": "[5.4.3, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          },
+          "Microsoft.WindowsDesktop.App.WPF": {
+            "privateAssets": "none"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

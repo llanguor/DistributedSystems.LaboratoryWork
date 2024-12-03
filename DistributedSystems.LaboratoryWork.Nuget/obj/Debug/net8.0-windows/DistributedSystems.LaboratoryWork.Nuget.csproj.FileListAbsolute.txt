@@ -1,0 +1,12 @@
+C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Nuget\bin\Debug\net8.0-windows\DistributedSystems.LaboratoryWork.Nuget.deps.json
+C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Nuget\bin\Debug\net8.0-windows\DistributedSystems.LaboratoryWork.Nuget.dll
+C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Nuget\bin\Debug\net8.0-windows\DistributedSystems.LaboratoryWork.Nuget.pdb
+C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Nuget\obj\Debug\net8.0-windows\DistributedSystems.LaboratoryWork.Nuget.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Nuget\obj\Debug\net8.0-windows\DistributedSystems.LaboratoryWork.Nuget.AssemblyInfoInputs.cache
+C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Nuget\obj\Debug\net8.0-windows\DistributedSystems.LaboratoryWork.Nuget.AssemblyInfo.cs
+C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Nuget\obj\Debug\net8.0-windows\DistributedSystems.LaboratoryWork.Nuget.csproj.CoreCompileInputs.cache
+C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Nuget\obj\Debug\net8.0-windows\DistributedSystems.LaboratoryWork.Nuget.sourcelink.json
+C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Nuget\obj\Debug\net8.0-windows\DistributedSystems.LaboratoryWork.Nuget.dll
+C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Nuget\obj\Debug\net8.0-windows\refint\DistributedSystems.LaboratoryWork.Nuget.dll
+C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Nuget\obj\Debug\net8.0-windows\DistributedSystems.LaboratoryWork.Nuget.pdb
+C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Nuget\obj\Debug\net8.0-windows\ref\DistributedSystems.LaboratoryWork.Nuget.dll

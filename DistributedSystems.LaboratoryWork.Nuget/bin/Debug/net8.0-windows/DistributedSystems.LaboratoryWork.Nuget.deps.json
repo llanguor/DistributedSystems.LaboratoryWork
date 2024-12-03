@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "DistributedSystems.LaboratoryWork.Nuget/1.0.0": {
+        "runtime": {
+          "DistributedSystems.LaboratoryWork.Nuget.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "DistributedSystems.LaboratoryWork.Nuget/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

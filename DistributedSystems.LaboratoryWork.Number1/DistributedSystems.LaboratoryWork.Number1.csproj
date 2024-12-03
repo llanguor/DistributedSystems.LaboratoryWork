@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DistributedSystems.LaboratoryWork.Nuget\DistributedSystems.LaboratoryWork.Nuget.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Packages\Controls\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DryIoc.dll" Version="5.4.3" />
+  </ItemGroup>
+
+</Project>
