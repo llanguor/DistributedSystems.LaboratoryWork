@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>W
+
+  <ItemGroup>
+    <PackageReference Include="DistributedSystems.LaboratoryWork.Nuget_PackageNumber1" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Packages\Converters\" />
+    <Folder Include="Utils\" />
+    <Folder Include="ViewModel\Pages\" />
+    <Folder Include="ViewModel\Windows\" />
+    <Folder Include="View\Pages\" />
+    <Folder Include="Packages\Controls\" />
+    <Folder Include="Packages\Resources\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="App.xaml" />
+  </ItemGroup>
+
+</Project>
