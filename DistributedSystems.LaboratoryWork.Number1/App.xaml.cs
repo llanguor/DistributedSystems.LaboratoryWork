@@ -1,8 +1,9 @@
-﻿using DistributedSystems.LaboratoryWork.Number1.Packages.Utils;
+﻿using DistributedSystems.LaboratoryWork.Number1.Packages.Utils.Navigations;
 using System.Configuration;
 using System.Data;
 using System.Windows;
 using DryIoc;
+using DistributedSystems.LaboratoryWork.Number1.ViewModel;
 
 namespace DistributedSystems.LaboratoryWork.Number1
 {
@@ -86,6 +87,7 @@ namespace DistributedSystems.LaboratoryWork.Number1
 
         private App RegisterWindowsViewModels()
         {
+            Container.Register<MainWindowViewModel>(Reuse.Singleton);
             return this;
         }
 

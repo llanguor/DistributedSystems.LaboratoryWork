@@ -33,7 +33,7 @@
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
                             <Image 
-                                Source="{Binding (attached:ImageButtonTemplateAttachedProperty.Source), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}"
+                                Source="{Binding (attached:ImageButtonTemplateAttachedProperty.ImageSource), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}"
                                 Width="{Binding (attached:ImageButtonTemplateAttachedProperty.ImageScaleX), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}"
                                 Height="{Binding (attached:ImageButtonTemplateAttachedProperty.ImageScaleY), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}"
                                 />

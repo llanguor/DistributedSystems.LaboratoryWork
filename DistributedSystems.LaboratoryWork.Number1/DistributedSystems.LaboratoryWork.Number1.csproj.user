@@ -7,7 +7,24 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Packages\Controls\DialogHost.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Packages\Controls\MessageDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Packages\Controls\DialogHost.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Packages\Controls\MessageDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Packages\Resources\ButtonsDictionary.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Packages\Resources\ScrollViewersDictionary.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\MainWindow.xaml">

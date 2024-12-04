@@ -1,6 +1,6 @@
 ﻿using DistributedSystems.LaboratoryWork.Nuget.Navigation;
 using DistributedSystems.LaboratoryWork.Nuget.ViewModel;
-using DistributedSystems.LaboratoryWork.Number1.Packages.Utils;
+using DistributedSystems.LaboratoryWork.Number1.Packages.Utils.Navigations;
 
 namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Base;
 

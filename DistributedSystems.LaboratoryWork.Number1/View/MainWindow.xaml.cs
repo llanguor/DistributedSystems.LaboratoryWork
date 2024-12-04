@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using DistributedSystems.LaboratoryWork.Number1.ViewModel;
+using DryIoc;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,6 +18,7 @@ namespace DistributedSystems.LaboratoryWork.Number1
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = App.Container.Resolve<MainWindowViewModel>();
         }
     }
 }

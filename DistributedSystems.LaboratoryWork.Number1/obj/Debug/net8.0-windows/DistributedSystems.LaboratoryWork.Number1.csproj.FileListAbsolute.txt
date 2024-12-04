@@ -26,3 +26,8 @@ C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems
 C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\View\MainWindow.g.cs
 C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\View\MainWindow.baml
 C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\Packages\Resources\ScrollViewersDictionary.baml
+C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\Packages\Controls\DialogHost.g.cs
+C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\Packages\Controls\DialogHost.baml
+C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\Packages\Controls\MessageDialog.g.cs
+C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\Packages\Controls\MessageDialog.baml

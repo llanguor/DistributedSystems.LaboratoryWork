@@ -15,18 +15,18 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Attached
     {
         public static readonly DependencyProperty Source =
             DependencyProperty.RegisterAttached(
-                "Source",
+                "ImageSource",
                 typeof(ImageSource),
                 typeof(ImageButtonTemplateAttachedProperty),
                 new PropertyMetadata(null)
                 );
 
-        public static ImageSource GetSource(DependencyObject obj)
+        public static ImageSource GetImageSource(DependencyObject obj)
         {
             return (ImageSource)obj.GetValue(Source);
         }
 
-        public static void SetSource(DependencyObject obj, object value)
+        public static void SetImageSource(DependencyObject obj, object value)
         {
              obj.SetValue(Source, value);
         }
