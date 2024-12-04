@@ -87,19 +87,19 @@
         </controls:DialogHost>
 
         <controls:MessageDialog
-        Grid.Row="1"
-        Grid.Column="1"
-        DialogTypeValue="OkCancel"
-        FontSize="14"
-        ScrollViewerBackground="DarkGray"
-        ScrollViewerVisible="Auto"
-        Text="Some funny text"
-        PositiveCommand="{Binding Path=PositiveCommand}"
-        NegativeCommand="{Binding Path=NegativeCommand}">
+            Grid.Row="1"
+            Grid.Column="1"
+            DialogTypeValue="Ok"
+            FontSize="14"
+            ScrollViewerBackground="DarkGray"
+            ScrollViewerVisible="Auto"
+            Text="Some funny text"
+            PositiveCommand="{Binding Path=PositiveCommand}"
+            NegativeCommand="{Binding Path=NegativeCommand}"/>
 
-        </controls:MessageDialog>
 
-       
+
+
 
     </Grid>
 </Page>

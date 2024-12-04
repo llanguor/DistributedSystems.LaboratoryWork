@@ -5,7 +5,7 @@
     <Style x:Key="ForegroundButtonStyle" 
            TargetType="{x:Type Button}">
         <Style.Setters>
-            
+
             <Setter Property="Background"
                 Value="DarkSeaGreen"/>
             <Setter Property="Foreground"
@@ -19,7 +19,7 @@
                     Value="Center"/>
             <Setter Property="VerticalContentAlignment"
                     Value="Center"/>
-            
+
         </Style.Setters>
     </Style>
 

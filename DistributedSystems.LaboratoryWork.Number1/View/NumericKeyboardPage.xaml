@@ -21,7 +21,7 @@
     <controls:NumericKeyboard
          Grid.Row="1"
          Grid.Column="2"
-         Background="PaleGreen"
+         Background="DarkGray"
          ButtonsStyle="{StaticResource ResourceKey=ForegroundButtonStyle}"
          ButtonClearStyle="{StaticResource ResourceKey=ForegroundButtonStyle}"
          ButtonsCommand="{Binding ButtonCommand}"

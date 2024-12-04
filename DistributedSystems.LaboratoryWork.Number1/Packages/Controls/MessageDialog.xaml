@@ -68,6 +68,15 @@
                                 </MultiBinding.Bindings>
                             </MultiBinding>
                         </Button.Content>
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding DialogTypeValue, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:MessageDialog}}" Value="{x:Static local:MessageDialog+DialogType.Ok}">
+                                        <Setter Property="Grid.Column" Value="0"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                     </Button>
 
                     <Button 
@@ -92,11 +101,9 @@
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Style.Triggers>
-                                    <Trigger Property="Content" Value="">
-                                        <Trigger.Setters>
-                                            <Setter Property="Visibility" Value="Hidden"/>
-                                        </Trigger.Setters>
-                                    </Trigger>
+                                    <DataTrigger Binding="{Binding DialogTypeValue, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:MessageDialog}}" Value="{x:Static local:MessageDialog+DialogType.Ok}">
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                    </DataTrigger>
                                 </Style.Triggers>
                             </Style>
                         </Button.Style>
