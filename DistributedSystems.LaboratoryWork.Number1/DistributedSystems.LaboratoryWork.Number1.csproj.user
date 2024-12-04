@@ -10,7 +10,22 @@
     <Compile Update="Packages\Controls\DialogHost.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Packages\Controls\LetterKeyboard.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Packages\Controls\MessageDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Packages\Controls\NumericKeyboard.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\ButtonsPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\LetterKeyboardPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\NumericKeyboardPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -18,7 +33,16 @@
     <Page Update="Packages\Controls\DialogHost.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Packages\Controls\LetterKeyboard.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Packages\Controls\MessageDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Packages\Controls\NumericKeyboard.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Packages\Resources\ButtonsAppendDictionary.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Packages\Resources\ButtonsDictionary.xaml">
@@ -27,7 +51,16 @@
     <Page Update="Packages\Resources\ScrollViewersDictionary.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\LetterKeyboardPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ButtonsPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\NumericKeyboardPage.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

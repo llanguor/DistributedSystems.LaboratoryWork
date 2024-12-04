@@ -4,6 +4,7 @@ using System.Data;
 using System.Windows;
 using DryIoc;
 using DistributedSystems.LaboratoryWork.Number1.ViewModel;
+using DistributedSystems.LaboratoryWork.Number1.View;
 
 namespace DistributedSystems.LaboratoryWork.Number1
 {
@@ -70,6 +71,9 @@ namespace DistributedSystems.LaboratoryWork.Number1
 
         private App RegisterPagesViews()
         {
+            Container.Register<ButtonsPage>(Reuse.Singleton);
+            Container.Register<NumericKeyboardPage>(Reuse.Singleton);
+            Container.Register<LetterKeyboardPage>(Reuse.Singleton);
             return this;
         }
 
@@ -88,11 +92,15 @@ namespace DistributedSystems.LaboratoryWork.Number1
         private App RegisterWindowsViewModels()
         {
             Container.Register<MainWindowViewModel>(Reuse.Singleton);
+
             return this;
         }
 
         private App RegisterPagesViewModels()
         {
+            Container.Register<ButtonsPageViewModel>(Reuse.Singleton);
+            Container.Register<NumericKeyboardPageViewModel>(Reuse.Singleton);
+            Container.Register<LetterKeyboardPageViewModel>(Reuse.Singleton);
             return this;
         }
 
@@ -113,10 +121,12 @@ namespace DistributedSystems.LaboratoryWork.Number1
             var navigationManager = new NavigationManager();
             Container.RegisterInstance(navigationManager);
 
-            /*
+
             navigationManager
-                .AddMapping<HelloWPFPage, HelloWPFPageViewModel>()
-            */
+                .AddMapping<ButtonsPage, ButtonsPageViewModel>()
+                .AddMapping<NumericKeyboardPage, NumericKeyboardPageViewModel>()
+                .AddMapping<LetterKeyboardPage, LetterKeyboardPageViewModel>();
+
 
             return this;
         }
