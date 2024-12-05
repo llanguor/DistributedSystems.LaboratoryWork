@@ -17,16 +17,28 @@
         </ResourceDictionary>
     </Page.Resources>
 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="7*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0"
+                   Padding="0,15,0,0"
+                   Text="{Binding OutputText}"
+                   TextAlignment="Center"
+                   Foreground="DimGray"
+                   FontSize="25">
 
-    <controls:NumericKeyboard
-         Grid.Row="1"
-         Grid.Column="2"
-         Background="DarkGray"
-         ButtonsStyle="{StaticResource ResourceKey=ForegroundButtonStyle}"
-         ButtonClearStyle="{StaticResource ResourceKey=ForegroundButtonStyle}"
-         ButtonsCommand="{Binding ButtonCommand}"
-         ButtonClearCommand="{Binding ButtonClearCommand}">
+        </TextBlock>
 
-    </controls:NumericKeyboard>
+        <controls:NumericKeyboard
+                 Grid.Row="1"
+                 ButtonsStyle="{StaticResource ResourceKey=ForegroundButtonStyle}"
+                 ButtonClearStyle="{StaticResource ResourceKey=ForegroundButtonStyle}"
+                 ButtonsCommand="{Binding ButtonCommand}"
+                 ButtonClearCommand="{Binding ButtonClearCommand}">
 
+        </controls:NumericKeyboard>
+
+    </Grid>
 </Page>

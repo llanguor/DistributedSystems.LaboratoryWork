@@ -22,6 +22,18 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel
             _buttonClearCommand = new Lazy<ICommand>(() => new RelayCommand((prop) => ButtonClearCommandExecute((string)prop!)));
         }
 
+        private string _outputText = "";
+
+        public string OutputText
+        {
+            get => _outputText;
+            set
+            {
+                _outputText = value;
+                RaisePropertiesChanged(nameof(OutputText));
+            }
+        }
+
         private readonly Lazy<ICommand> _buttonCommand;
 
         public ICommand ButtonCommand =>
@@ -29,7 +41,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel
 
         private void ButtonCommandExecute([CallerMemberName] string prop="")
         {
-            MessageBox.Show($"Command executed with parameter: {prop}");
+            OutputText+=prop;
         }
 
         private readonly Lazy<ICommand> _buttonClearCommand;
@@ -39,7 +51,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel
 
         private void ButtonClearCommandExecute([CallerMemberName] string prop = "")
         {
-            MessageBox.Show($"Command clear executed");
+            OutputText = "";
         }
     }
 }

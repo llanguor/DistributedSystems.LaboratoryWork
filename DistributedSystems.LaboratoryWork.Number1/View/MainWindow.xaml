@@ -8,7 +8,7 @@
         xmlns:attached="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Attached"
         xmlns:controls="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Controls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow" Height="600" Width="1000"
         Loaded="MainWindow_OnLoaded"
         WindowStartupLocation="CenterScreen">
 
