@@ -48,7 +48,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
 
         private LetterKeyboardTypes.Languages _keyboardLanguage;
 
-        private string[] _keyboardLayout;
+        private string[]? _keyboardLayout;
 
         private int _gridColumnCount;
 
@@ -85,7 +85,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
             }
         }
 
-        public string[] KeyboardLayout
+        public string[]? KeyboardLayout
         {
             get => _keyboardLayout;
             set  
