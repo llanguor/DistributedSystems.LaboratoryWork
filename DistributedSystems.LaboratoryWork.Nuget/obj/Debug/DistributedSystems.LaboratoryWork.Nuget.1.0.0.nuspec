@@ -5,7 +5,7 @@
     <version>1.0.0</version>
     <authors>DistributedSystems.LaboratoryWork.Nuget</authors>
     <description>Package Description</description>
-    <repository type="git" commit="091d31624546b0598afc832d55777e7ee43276ed" />
+    <repository type="git" commit="12537f95e66c6004fcb505a901b487fcec72a0fc" />
     <dependencies>
       <group targetFramework="net8.0-windows7.0" />
     </dependencies>

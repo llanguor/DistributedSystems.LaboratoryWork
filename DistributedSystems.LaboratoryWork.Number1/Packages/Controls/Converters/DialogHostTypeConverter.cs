@@ -5,19 +5,13 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static DistributedSystems.LaboratoryWork.Nuget.Converters.ArithmeticConverter;
+using DistributedSystems.LaboratoryWork.Number1.Packages.Controls.Types;
 
 namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls.Converters
 {
     public sealed class DialogHostTypeConverter:
         MultiValueConverterBase<DialogHostTypeConverter>
     {
-        public enum DialogType
-        {
-            Ok = 1,
-            OkCancel = 2,
-            YesNo = 3
-        }
 
         public override object? Convert(object[] values, Type targetType, object? parameter, CultureInfo culture)
         {
@@ -27,15 +21,15 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls.Converters
             }
 
             bool buttonPositive = (bool)values[1];
-            var type = (DialogType)values[0];
+            var type = (MessageDialogTypes.DialogType)values[0];
 
             switch (type) 
             {
-                case DialogType.Ok:
+                case MessageDialogTypes.DialogType.Ok:
                     return buttonPositive ? "Ok" : "";
-                case DialogType.OkCancel:
+                case MessageDialogTypes.DialogType.OkCancel:
                     return buttonPositive ? "Ok" : "Cancel";
-                case DialogType.YesNo:
+                case MessageDialogTypes.DialogType.YesNo:
                     return buttonPositive ? "Yes" : "No";
                 default:
                     throw new ArgumentOutOfRangeException(nameof(parameter));

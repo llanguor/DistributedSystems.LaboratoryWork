@@ -15,7 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using DistributedSystems.LaboratoryWork.Number1.Packages.Controls.Types;
 
 namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
 {
@@ -25,22 +25,15 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
     public partial class MessageDialog : UserControl
     {
 
-        public enum DialogType
-        {
-            Ok=1,
-            OkCancel=2,
-            YesNo=3
-        }
-
         public MessageDialog()
         {
             InitializeComponent();
         }
 
-        public DialogType DialogTypeValue
+        public MessageDialogTypes.DialogType DialogTypeValue
         {
             get =>
-                (DialogType)GetValue(DialogTypeProperty);
+                (MessageDialogTypes.DialogType)GetValue(DialogTypeProperty);
 
             set =>
                 SetValue(DialogTypeProperty, value);
@@ -49,9 +42,9 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
         public static readonly DependencyProperty DialogTypeProperty
             = DependencyProperty.Register(
                 nameof(DialogTypeValue),
-                typeof(DialogType),
+                typeof(MessageDialogTypes.DialogType),
                 typeof(MessageDialog),
-                new PropertyMetadata(DialogType.Ok));
+                new PropertyMetadata(MessageDialogTypes.DialogType.YesNo));
 
 
         public string Text

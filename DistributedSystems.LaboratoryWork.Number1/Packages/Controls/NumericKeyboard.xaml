@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Controls"
              xmlns:controls="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Controls"
+             xmlns:templateSelectors="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Controls.TemplateSelectors"
              mc:Ignorable="d">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -13,58 +14,44 @@
     </UserControl.Resources>
    
     <Viewbox Stretch="Uniform">
-        <UniformGrid 
-        Height="400" 
-        Width="300" 
-        Rows="4"
-        Columns="3"
-        Background="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:NumericKeyboard}}">
-            <Button Content="1" 
-                    Style="{Binding ButtonsStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:NumericKeyboard}}"
-                    Command="{Binding ButtonsCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:NumericKeyboard}}"
-                    CommandParameter="{Binding Content, RelativeSource={RelativeSource Mode=Self}}"/>
-            <Button Content="2" 
-                    Style="{Binding ButtonsStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:NumericKeyboard}}"
-                    Command="{Binding ButtonsCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:NumericKeyboard}}"
-                    CommandParameter="{Binding Content, RelativeSource={RelativeSource Mode=Self}}"/>
-            <Button Content="3" 
-                    Style="{Binding ButtonsStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:NumericKeyboard}}"
-                    Command="{Binding ButtonsCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:NumericKeyboard}}"
-                    CommandParameter="{Binding Content, RelativeSource={RelativeSource Mode=Self}}"/>
-            <Button Content="4" 
-                    Style="{Binding ButtonsStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:NumericKeyboard}}"
-                    Command="{Binding ButtonsCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:NumericKeyboard}}"
-                    CommandParameter="{Binding Content, RelativeSource={RelativeSource Mode=Self}}"/>
-            <Button Content="5" 
-                    Style="{Binding ButtonsStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:NumericKeyboard}}"
-                    Command="{Binding ButtonsCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:NumericKeyboard}}"
-                    CommandParameter="{Binding Content, RelativeSource={RelativeSource Mode=Self}}"/>
-            <Button Content="6" 
-                    Style="{Binding ButtonsStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:NumericKeyboard}}"
-                    Command="{Binding ButtonsCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:NumericKeyboard}}"
-                    CommandParameter="{Binding Content, RelativeSource={RelativeSource Mode=Self}}"/>
-            <Button Content="7" 
-                    Style="{Binding ButtonsStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:NumericKeyboard}}"
-                    Command="{Binding ButtonsCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:NumericKeyboard}}"
-                    CommandParameter="{Binding Content, RelativeSource={RelativeSource Mode=Self}}"/>
-            <Button Content="8" 
-                    Style="{Binding ButtonsStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:NumericKeyboard}}"
-                    Command="{Binding ButtonsCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:NumericKeyboard}}"
-                    CommandParameter="{Binding Content, RelativeSource={RelativeSource Mode=Self}}"/>
-            <Button Content="9" 
-                    Style="{Binding ButtonsStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:NumericKeyboard}}"
-                    Command="{Binding ButtonsCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:NumericKeyboard}}"
-                    CommandParameter="{Binding Content, RelativeSource={RelativeSource Mode=Self}}"/>
-            <Grid/>
-            <Button Content="0" 
-                    Style="{Binding ButtonsStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:NumericKeyboard}}"
-                    Command="{Binding ButtonsCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:NumericKeyboard}}"
-                    CommandParameter="{Binding Content, RelativeSource={RelativeSource Mode=Self}}"/>
-            <Button Content="C" 
-                    Style="{Binding ButtonClearStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:NumericKeyboard}}"
-                    Command="{Binding ButtonClearCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:NumericKeyboard}}"
-                    CommandParameter="{Binding Content, RelativeSource={RelativeSource Mode=Self}}"/>
 
-        </UniformGrid>
-        </Viewbox>
+        <ItemsControl
+            ItemsSource="{Binding Path=Buttons, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:NumericKeyboard}}">
+            <ItemsControl.Resources>
+                <ResourceDictionary>
+                    <DataTemplate x:Key="NumericTemplate">
+                        <Button Content="{Binding .}"
+                            Style="{Binding ButtonsStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:NumericKeyboard}}"
+                            Command="{Binding ButtonsCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:NumericKeyboard}}"
+                            CommandParameter="{Binding Content, RelativeSource={RelativeSource Mode=Self}}"/>
+                    </DataTemplate>
+                    <DataTemplate x:Key="VoidTemplate">
+                        <Grid/>
+                    </DataTemplate>
+                    <DataTemplate x:Key="ClearTemplate">
+                        <Button Content="{Binding .}" 
+                            Style="{Binding ButtonClearStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:NumericKeyboard}}"
+                            Command="{Binding ButtonClearCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:NumericKeyboard}}"
+                            CommandParameter="{Binding Content, RelativeSource={RelativeSource Mode=Self}}"/>
+                    </DataTemplate>
+                </ResourceDictionary>
+            </ItemsControl.Resources>
+
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid 
+                         Height="400" 
+                         Width="300" 
+                         Rows="4"
+                         Columns="3"
+                         Background="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:NumericKeyboard}}"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+
+            <ItemsControl.ItemTemplateSelector>
+                <templateSelectors:TemplateSelector_NumericKeyboard_ButtonsType/>
+            </ItemsControl.ItemTemplateSelector>
+
+        </ItemsControl>
+    </Viewbox>
 </UserControl>

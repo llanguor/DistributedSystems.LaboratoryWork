@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DistributedSystems.LaboratoryWork.Number1.Packages.Controls.Types;
 
 namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
 {
@@ -25,7 +26,9 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
             InitializeComponent();
         }
 
+        private static readonly Lazy<string[]> _buttons = new Lazy<string[]>(new string[]{ "1", "2", "3", "4", "5", "6", "7", "8", "9", NumericKeyboardTypes.ButtonTags.VoidTag, "0", NumericKeyboardTypes.ButtonTags.ClearButtonTag });
 
+        public string[] Buttons => _buttons.Value;
 
 
         public Style ButtonsStyle

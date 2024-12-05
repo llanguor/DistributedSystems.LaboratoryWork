@@ -8,6 +8,7 @@
              xmlns:attached="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Attached"
              xmlns:converters="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Controls.Converters"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:types="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Controls.Types"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -71,7 +72,7 @@
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding DialogTypeValue, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:MessageDialog}}" Value="{x:Static local:MessageDialog+DialogType.Ok}">
+                                    <DataTrigger Binding="{Binding DialogTypeValue, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:MessageDialog}}" Value="{x:Static types:MessageDialogTypes+DialogType.Ok}">
                                         <Setter Property="Grid.Column" Value="0"/>
                                     </DataTrigger>
                                 </Style.Triggers>
@@ -101,7 +102,7 @@
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding DialogTypeValue, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:MessageDialog}}" Value="{x:Static local:MessageDialog+DialogType.Ok}">
+                                    <DataTrigger Binding="{Binding DialogTypeValue, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:MessageDialog}}" Value="{x:Static types:MessageDialogTypes+DialogType.Ok}">
                                         <Setter Property="Visibility" Value="Hidden"/>
                                     </DataTrigger>
                                 </Style.Triggers>
