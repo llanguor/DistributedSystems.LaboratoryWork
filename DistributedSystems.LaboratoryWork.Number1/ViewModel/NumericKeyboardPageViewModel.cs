@@ -18,8 +18,8 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel
         public NumericKeyboardPageViewModel(NavigationManager navigationManager) :
            base(navigationManager)
         {
-            _buttonCommand = new Lazy<ICommand>(() => new RelayCommand((prop) => ButtonCommandExecute((string)prop!)));
-            _buttonClearCommand = new Lazy<ICommand>(() => new RelayCommand((prop) => ButtonClearCommandExecute((string)prop!)));
+            _buttonCommand = new Lazy<ICommand>(() => new RelayCommand((prop) => ButtonCommandExecute(prop.ToString())));
+            _buttonClearCommand = new Lazy<ICommand>(() => new RelayCommand((prop) => ButtonClearCommandExecute(prop.ToString())));
         }
 
         private string _outputText = "";

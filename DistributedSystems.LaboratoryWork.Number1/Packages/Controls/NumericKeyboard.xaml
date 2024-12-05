@@ -7,12 +7,7 @@
              xmlns:controls="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Controls"
              xmlns:templateSelectors="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Controls.TemplateSelectors"
              mc:Ignorable="d">
-    <UserControl.Resources>
-        <ResourceDictionary>
 
-        </ResourceDictionary>
-    </UserControl.Resources>
-   
     <Viewbox Stretch="Uniform">
 
         <ItemsControl 

@@ -9,8 +9,8 @@ using DistributedSystems.LaboratoryWork.Number1.Packages.Controls.Types;
 
 namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls.Converters
 {
-    public sealed class DialogHostTypeConverter:
-        MultiValueConverterBase<DialogHostTypeConverter>
+    public sealed class MessageDialogTypeConverter:
+        MultiValueConverterBase<MessageDialogTypeConverter>
     {
 
         public override object? Convert(object[] values, Type targetType, object? parameter, CultureInfo culture)

@@ -13,7 +13,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls.TemplateSe
         DataTemplateSelector
     {
 
-        public override DataTemplate SelectTemplate(object item, DependencyObject container)
+        public override DataTemplate? SelectTemplate(object item, DependencyObject container)
         {
 
             ArgumentNullException.ThrowIfNull(item);
@@ -23,17 +23,15 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls.TemplateSe
                 throw new ArgumentException($"Incorrect argument: {nameof(container)}");
             }
 
-            if (item.ToString() == NumericKeyboardTypes.ButtonTags.ClearButtonTag)
+            switch((char)item)
             {
-                return frameworkElement.FindResource("ClearTemplate") as DataTemplate ?? base.SelectTemplate(item, container);
+                case NumericKeyboardTypes.ButtonTags.ClearButtonTag:
+                    return frameworkElement.FindResource("ClearTemplate") as DataTemplate;
+                case NumericKeyboardTypes.ButtonTags.VoidTag:
+                    return frameworkElement.FindResource("VoidTemplate") as DataTemplate;
+                default:
+                    return frameworkElement.FindResource("NumericTemplate") as DataTemplate;
             }
-
-            if (item.ToString() == NumericKeyboardTypes.ButtonTags.VoidTag)
-            {
-                return frameworkElement.FindResource("VoidTemplate") as DataTemplate ?? base.SelectTemplate(item, container);
-            }
-
-            return frameworkElement.FindResource("NumericTemplate") as DataTemplate ?? base.SelectTemplate(item, container);
         }
     }
 }

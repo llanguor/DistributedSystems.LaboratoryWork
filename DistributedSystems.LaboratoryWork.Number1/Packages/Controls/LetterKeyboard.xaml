@@ -4,9 +4,93 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Controls"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="Aqua">
-          
+             xmlns:controls="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Controls"
+             xmlns:templateSelectors="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Controls.TemplateSelectors"
+             xmlns:converters="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Controls.Converters"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:types="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Controls.Types"
+             mc:Ignorable="d"  >
+    <Grid>
+        <Viewbox Stretch="Uniform">
+
+            <ItemsControl 
+             ItemsSource="{Binding Path=KeyboardLayout, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:LetterKeyboard}}">
+                <ItemsControl.Resources>
+                    <ResourceDictionary>
+                        <DataTemplate x:Key="NumericTemplate">
+                            <Button 
+                                Style="{Binding ButtonsStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:LetterKeyboard}}"
+                                Command="{Binding ButtonsCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:LetterKeyboard}}"
+                                CommandParameter="{Binding Content, RelativeSource={RelativeSource Mode=Self}}">
+                                
+                                <Button.Content>
+                                    <MultiBinding Converter="{converters:LetterKeyboardCapslockConverter}">
+                                        <MultiBinding.Bindings>
+                                            <Binding Path="CapsLockOn" Mode="OneWay" RelativeSource="{RelativeSource Mode=FindAncestor,AncestorType=controls:LetterKeyboard}"/>
+                                            <Binding Path="."/>
+
+                                        </MultiBinding.Bindings>
+                                    </MultiBinding>
+                                </Button.Content>
+                            </Button>
+                        </DataTemplate>
+                        <DataTemplate x:Key="VoidTemplate">
+                            <Grid/>
+                        </DataTemplate>
+                        <DataTemplate x:Key="ClearTemplate">
+                            <Button Content="{Binding .}" 
+                            Style="{Binding ButtonClearStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:LetterKeyboard}}"
+                            Command="{Binding ButtonClearCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:LetterKeyboard}}"/>
+                        </DataTemplate>
+                        <DataTemplate x:Key="ClearAllTemplate">
+                            <Button Content="{Binding .}"
+                                Style="{Binding ButtonClearAllStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:LetterKeyboard}}"
+                                Command="{Binding ButtonClearAllCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:LetterKeyboard}}"/>
+                        </DataTemplate>
+
+                        <DataTemplate x:Key="LanguageTemplate">
+                            <Button Content="{Binding .}"
+                                Style="{Binding ButtonLanguageStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:LetterKeyboard}}"
+                                Command="{Binding ButtonLanguageCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:LetterKeyboard}}"/>
+                        </DataTemplate>
+
+                        <DataTemplate x:Key="CapsLockTemplate">
+                            <Button Content="{Binding .}"
+                                    x:Name="capslockbutton"
+                                Command="{Binding ButtonCapsLockCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:LetterKeyboard}}"/>
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding CapsLockOn, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:LetterKeyboard}}" Value="{x:Static system:Boolean.TrueString}">
+                                    <Setter TargetName="capslockbutton" Property="Style" Value="{Binding ButtonCapsLockOnStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:LetterKeyboard}}"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding CapsLockOn, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:LetterKeyboard}}" Value="{x:Static system:Boolean.FalseString}">
+                                    <Setter TargetName="capslockbutton" Property="Style" Value="{Binding ButtonCapsLockOffStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:LetterKeyboard}}"/>
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+
+                        <DataTemplate x:Key="EnterTemplate">
+                            <Button Content="{Binding .}"
+                                Style="{Binding ButtonEnterStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:LetterKeyboard}}"
+                                Command="{Binding ButtonEnterCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:LetterKeyboard}}"/>
+                        </DataTemplate>
+                    </ResourceDictionary>
+                </ItemsControl.Resources>
+
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid
+                      Height="200" 
+                      Width="800" 
+                      Rows="3"
+                      Columns="{Binding GridColumnCount, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:LetterKeyboard}}"
+                      Background="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:LetterKeyboard}}"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                
+                <ItemsControl.ItemTemplateSelector>
+                    <templateSelectors:TemplateSelector_LetterKeyboard_ButtonsType/>
+                </ItemsControl.ItemTemplateSelector>
+            </ItemsControl>
+        </Viewbox>
     </Grid>
 </UserControl>

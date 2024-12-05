@@ -23,6 +23,48 @@
         </Style.Setters>
     </Style>
 
+    <Style x:Key="ButtonStyle1" 
+       TargetType="{x:Type Button}">
+        <Style.Setters>
+
+            <Setter Property="Background"
+            Value="DarkSeaGreen"/>
+            <Setter Property="Foreground"
+            Value="White"/>
+            <Setter Property="FontSize"
+            Value="15"/>
+
+            <Setter Property="BorderThickness"
+                Value="2"/>
+            <Setter Property="HorizontalContentAlignment"
+                Value="Center"/>
+            <Setter Property="VerticalContentAlignment"
+                Value="Center"/>
+
+        </Style.Setters>
+    </Style>
+    <Style x:Key="ButtonStyle2" 
+   TargetType="{x:Type Button}">
+        <Style.Setters>
+
+            <Setter Property="Background"
+        Value="SeaGreen"/>
+            <Setter Property="Foreground"
+        Value="White"/>
+            <Setter Property="FontSize"
+        Value="15"/>
+
+            <Setter Property="BorderThickness"
+            Value="2"/>
+            <Setter Property="HorizontalContentAlignment"
+            Value="Center"/>
+            <Setter Property="VerticalContentAlignment"
+            Value="Center"/>
+
+        </Style.Setters>
+    </Style>
+
+
 
     <Style x:Key="PictureButtonStyle" 
            TargetType="{x:Type Button}">

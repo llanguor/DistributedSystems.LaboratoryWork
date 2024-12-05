@@ -10,8 +10,8 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls.Types
     {
         public static class ButtonTags
         {
-            public const string ClearButtonTag = "C";
-            public const string VoidTag = "";
+            public const char ClearButtonTag = 'C';
+            public const char VoidTag = ' ';
         }
     }
 }
