@@ -22,13 +22,33 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="7*"/>
         </Grid.RowDefinitions>
+
         <TextBlock Grid.Row="0"
                    Padding="0,15,0,0"
                    Text="{Binding OutputText}"
                    TextAlignment="Center"
                    Foreground="DimGray"
                    FontSize="25">
-
+            <TextBlock.Style>
+                <Style TargetType="TextBlock" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                    <Style.Resources>
+                        
+                        <VisualBrush x:Key="VoidHint" AlignmentX="Center" AlignmentY="Center" Stretch="None">
+                            <VisualBrush.Visual>
+                                <Label FontSize="25" Padding="0,0,0,5" VerticalAlignment="Center" Content="Please Input Some Text" Foreground="DimGray" />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Style.Resources>
+                    <Style.Triggers>
+                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                            <Setter Property="Background" Value="{StaticResource VoidHint}" />
+                        </Trigger>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter Property="Background" Value="{StaticResource VoidHint}" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
         </TextBlock>
 
         <controls:NumericKeyboard
