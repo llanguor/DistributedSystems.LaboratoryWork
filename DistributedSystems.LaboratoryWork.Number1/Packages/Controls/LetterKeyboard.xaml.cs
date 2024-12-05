@@ -15,116 +15,134 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Runtime.CompilerServices;
 using DistributedSystems.LaboratoryWork.Nuget.Command;
+using System.ComponentModel;
 
 namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
 {
     /// <summary>
     /// Interaction logic for LetterKeyboard.xaml
-    /// TODO: перенести все во вью модель. ОБЯЗ. ВСЁ ГДЕ НЕ НАДО ДП - ДЕЛАТЬ ПОЛЕМ. Обяз расставить Lazy на поля команд. Добавить приписку DataContext. к CapsLock в разметке. И тд
+    /// 
     ///
     /// </summary>
-    public partial class LetterKeyboard : UserControl
+    public partial class LetterKeyboard : UserControl, INotifyPropertyChanged
     {
-        
+
+        #region Constructors
+
         public LetterKeyboard()
         {
             InitializeComponent();
             KeyboardLanguage = LetterKeyboardTypes.Languages.En;
-            ButtonLanguageCommand =  new RelayCommand(_ => LanguageCommandExecute());
-            ButtonCapsLockCommand = new RelayCommand(_ => CapsLockCommandExecute()); 
+            _buttonLanguageCommand = new Lazy<ICommand>(() => new RelayCommand(_ => LanguageCommandExecute())); 
+            _buttonCapsLockCommand = new Lazy<ICommand>(() => new RelayCommand(_ => CapsLockCommandExecute()));
         }
 
+        #endregion
+
+
+        #region Fields
 
         private static readonly Lazy<string[]> _keyboardLayoutRu = new Lazy<string[]>(["Ё", "Й", "Ц", "У", "К", "Е", "Н", "Г", "Ш", "Щ", "З", "Х", LetterKeyboardTypes.ButtonTags.Clear, LetterKeyboardTypes.ButtonTags.CapsLock, "Ф", "Ы", "В", "А", "П", "Р", "О", "Л", "Д", "Ж", "Э", LetterKeyboardTypes.ButtonTags.ClearAll, LetterKeyboardTypes.ButtonTags.Language, "Я", "Ч", "С", "М", "И", "Т", "Ь", "Ъ", "ъ","Б", "Ю", LetterKeyboardTypes.ButtonTags.Enter]);
 
         private static readonly Lazy<string[]> _keyboardLayoutEn = new Lazy<string[]>([LetterKeyboardTypes.ButtonTags.ClearAll, "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", LetterKeyboardTypes.ButtonTags.CapsLock, "A", "S", "D", "F", "G", "H", "J", "K", "L",  LetterKeyboardTypes.ButtonTags.Clear, LetterKeyboardTypes.ButtonTags.Void, LetterKeyboardTypes.ButtonTags.Language, "Z", "X", "C", "V", "B", "N", "M", LetterKeyboardTypes.ButtonTags.Enter, LetterKeyboardTypes.ButtonTags.Void]);
 
-      
+        private LetterKeyboardTypes.Languages _keyboardLanguage;
+
+        private string[] _keyboardLayout;
+
+        private int _gridColumnCount;
+
+        private bool _capsLockActivated;
+
+        #endregion
+
+
+        #region Properties
+
         private LetterKeyboardTypes.Languages KeyboardLanguage
         {
-            get =>
-                (LetterKeyboardTypes.Languages)GetValue(KeyboardLanguageProperty);
+            get => _keyboardLanguage;
 
-            set =>
-                SetValue(KeyboardLanguageProperty, value);
-        }
-
-        private static readonly DependencyProperty KeyboardLanguageProperty
-            = DependencyProperty.Register(
-                nameof(KeyboardLanguage),
-                typeof(LetterKeyboardTypes.Languages),
-                typeof(LetterKeyboard),
-                new PropertyMetadata(KeyboardLanguagePropertyChangedCallback));
-
-        private static void KeyboardLanguagePropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (d is not LetterKeyboard keyboard)
+            set
             {
-                throw new ArgumentException(nameof(d));
-            }
+                _keyboardLanguage = value;
 
-            switch (e.NewValue)
+                switch (value)
+                {
+                    case LetterKeyboardTypes.Languages.Blank:
+                        break;
+                    case LetterKeyboardTypes.Languages.En:
+                        GridColumnCount = 11;
+                        KeyboardLayout = _keyboardLayoutEn.Value;
+                        break;
+                    case LetterKeyboardTypes.Languages.Ru:
+                        GridColumnCount = 13;
+                        KeyboardLayout = _keyboardLayoutRu.Value;
+                        break;
+                    default:
+                        throw new ArgumentException("Incorrect parameter");
+                }
+            }
+        }
+
+        public string[] KeyboardLayout
+        {
+            get => _keyboardLayout;
+            set  
+            { 
+                _keyboardLayout = value;
+                RaisePropertyChanged(nameof(KeyboardLayout));
+            }
+        }
+
+        public int GridColumnCount
+        {
+            get=> _gridColumnCount;
+            set
             {
-                case LetterKeyboardTypes.Languages.Blank:
-                    break;
-                case LetterKeyboardTypes.Languages.En:
-                    keyboard.GridColumnCount = 11;
-                    keyboard.KeyboardLayout = _keyboardLayoutEn.Value;
-                    break;
-                case LetterKeyboardTypes.Languages.Ru:
-                    keyboard.GridColumnCount = 13;
-                    keyboard.KeyboardLayout = _keyboardLayoutRu.Value;
-                    break;
-                default:
-                    throw new ArgumentException(nameof(e));
-
+                _gridColumnCount = value;
+                RaisePropertyChanged(nameof(GridColumnCount));
             }
-                
         }
 
-        private string[] KeyboardLayout
+        public bool CapsLockOn
         {
-            get =>
-                (string[])GetValue(KeyboardLayoutProperty);
-
-            set =>
-                SetValue(KeyboardLayoutProperty, value);
+            get => _capsLockActivated;
+            set
+            {
+                _capsLockActivated = value;
+                RaisePropertyChanged(nameof(CapsLockOn));
+            }
         }
 
-        private static readonly DependencyProperty KeyboardLayoutProperty
-            = DependencyProperty.Register(
-                nameof(KeyboardLayout),
-                typeof(string[]),
-                typeof(LetterKeyboard));
 
-        private int GridColumnCount
+        #endregion
+
+
+        #region Commands
+
+        private Lazy<ICommand> _buttonCapsLockCommand;
+        public ICommand ButtonCapsLockCommand
+            => _buttonCapsLockCommand.Value;
+        private void CapsLockCommandExecute()
         {
-            get =>
-                (int)GetValue(GridColumnCountProperty);
-
-            set =>
-                SetValue(GridColumnCountProperty, value);
+            CapsLockOn = !CapsLockOn;
         }
 
-        private static readonly DependencyProperty GridColumnCountProperty
-            = DependencyProperty.Register(
-                nameof(GridColumnCount),
-                typeof(int),
-                typeof(LetterKeyboard));
+
+        private Lazy<ICommand> _buttonLanguageCommand;
+        public ICommand ButtonLanguageCommand
+            => _buttonLanguageCommand.Value;
+        private void LanguageCommandExecute()
+        {
+            KeyboardLanguage = (KeyboardLanguage == LetterKeyboardTypes.Languages.En) ? LetterKeyboardTypes.Languages.Ru : LetterKeyboardTypes.Languages.En;
+        }
 
 
+        #endregion
 
 
-
-
-
-
-
-
-
-
-        #region commands and styles
-
+        #region DependencyProperty Styles
 
         public Style ButtonsStyle
         {
@@ -141,22 +159,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
                 typeof(Style),
                 typeof(LetterKeyboard));
 
-        public ICommand ButtonsCommand
-        {
-            get =>
-                (ICommand)GetValue(ButtonsCommandProperty);
-
-            set =>
-                SetValue(ButtonsCommandProperty, value);
-        }
-
-        public static readonly DependencyProperty ButtonsCommandProperty
-            = DependencyProperty.Register(
-                nameof(ButtonsCommand),
-                typeof(ICommand),
-                typeof(LetterKeyboard));
-
-
         public Style ButtonClearStyle
         {
             get =>
@@ -170,21 +172,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
             = DependencyProperty.Register(
                 nameof(ButtonClearStyle),
                 typeof(Style),
-                typeof(LetterKeyboard));
-
-        public ICommand ButtonClearCommand
-        {
-            get =>
-                (ICommand)GetValue(ButtonClearCommandProperty);
-
-            set =>
-                SetValue(ButtonClearCommandProperty, value);
-        }
-
-        public static readonly DependencyProperty ButtonClearCommandProperty
-            = DependencyProperty.Register(
-                nameof(ButtonClearCommand),
-                typeof(ICommand),
                 typeof(LetterKeyboard));
 
         public Style ButtonClearAllStyle
@@ -202,22 +189,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
                 typeof(Style),
                 typeof(LetterKeyboard));
 
-        public ICommand ButtonClearAllCommand
-        {
-            get =>
-                (ICommand)GetValue(ButtonClearAllCommandProperty);
-
-            set =>
-                SetValue(ButtonClearAllCommandProperty, value);
-        }
-
-        public static readonly DependencyProperty ButtonClearAllCommandProperty
-            = DependencyProperty.Register(
-                nameof(ButtonClearAllCommand),
-                typeof(ICommand),
-                typeof(LetterKeyboard));
-
-
         public Style ButtonEnterStyle
         {
             get =>
@@ -231,21 +202,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
             = DependencyProperty.Register(
                 nameof(ButtonEnterStyle),
                 typeof(Style),
-                typeof(LetterKeyboard));
-
-        public ICommand ButtonEnterCommand
-        {
-            get =>
-                (ICommand)GetValue(ButtonEnterCommandProperty);
-
-            set =>
-                SetValue(ButtonEnterCommandProperty, value);
-        }
-
-        public static readonly DependencyProperty ButtonEnterCommandProperty
-            = DependencyProperty.Register(
-                nameof(ButtonEnterCommand),
-                typeof(ICommand),
                 typeof(LetterKeyboard));
 
         public Style ButtonCapsLockOnStyle
@@ -278,21 +234,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
                 typeof(Style),
                 typeof(LetterKeyboard));
 
-        private ICommand ButtonCapsLockCommand
-        {
-            get =>
-                (ICommand)GetValue(ButtonCapsLockCommandProperty);
-
-            set =>
-                SetValue(ButtonCapsLockCommandProperty, value);
-        }
-
-        private static readonly DependencyProperty ButtonCapsLockCommandProperty
-            = DependencyProperty.Register(
-                nameof(ButtonCapsLockCommand),
-                typeof(ICommand),
-                typeof(LetterKeyboard));
-
         public Style ButtonLanguageStyle
         {
             get =>
@@ -303,61 +244,89 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
         }
 
         public static readonly DependencyProperty ButtonLanguageStyleProperty
-            = DependencyProperty.Register(
-                nameof(ButtonLanguageStyle),
-                typeof(Style),
-                typeof(LetterKeyboard));
+           = DependencyProperty.Register(
+               nameof(ButtonLanguageStyle),
+               typeof(Style),
+               typeof(LetterKeyboard));
 
-        private ICommand ButtonLanguageCommand
+        #endregion
+
+
+        #region DependencyProperty Commands
+
+        public ICommand ButtonsCommand
         {
             get =>
-                (ICommand)GetValue(ButtonLanguageCommandProperty);
+                (ICommand)GetValue(ButtonsCommandProperty);
 
             set =>
-                SetValue(ButtonLanguageCommandProperty, value);
+                SetValue(ButtonsCommandProperty, value);
         }
 
-        private static readonly DependencyProperty ButtonLanguageCommandProperty
+        public static readonly DependencyProperty ButtonsCommandProperty
             = DependencyProperty.Register(
-                nameof(ButtonLanguageCommand),
+                nameof(ButtonsCommand),
                 typeof(ICommand),
                 typeof(LetterKeyboard));
 
-        public bool CapsLockOn
+        public ICommand ButtonClearCommand
         {
             get =>
-                (bool)GetValue(CapsLockOnProperty);
+                (ICommand)GetValue(ButtonClearCommandProperty);
 
             set =>
-                SetValue(CapsLockOnProperty, value);
+                SetValue(ButtonClearCommandProperty, value);
         }
 
-        public static readonly DependencyProperty CapsLockOnProperty
+        public static readonly DependencyProperty ButtonClearCommandProperty
             = DependencyProperty.Register(
-                nameof(CapsLockOn),
-                typeof(bool),
-                typeof(LetterKeyboard),
-                new PropertyMetadata(false));
+                nameof(ButtonClearCommand),
+                typeof(ICommand),
+                typeof(LetterKeyboard));
+
+        public ICommand ButtonClearAllCommand
+        {
+            get =>
+                (ICommand)GetValue(ButtonClearAllCommandProperty);
+
+            set =>
+                SetValue(ButtonClearAllCommandProperty, value);
+        }
+
+        public static readonly DependencyProperty ButtonClearAllCommandProperty
+            = DependencyProperty.Register(
+                nameof(ButtonClearAllCommand),
+                typeof(ICommand),
+                typeof(LetterKeyboard));
+
+        public ICommand ButtonEnterCommand
+        {
+            get =>
+                (ICommand)GetValue(ButtonEnterCommandProperty);
+
+            set =>
+                SetValue(ButtonEnterCommandProperty, value);
+        }
+
+        public static readonly DependencyProperty ButtonEnterCommandProperty
+            = DependencyProperty.Register(
+                nameof(ButtonEnterCommand),
+                typeof(ICommand),
+                typeof(LetterKeyboard));
 
         #endregion
 
 
-        #region Commands
+        #region Implementation INotifyPropertyChanged
 
-
-        private void CapsLockCommandExecute()
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected void RaisePropertyChanged(
+           string propertyName)
         {
-            CapsLockOn = !CapsLockOn;
-            if (CapsLockOn)
-            {
-
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void LanguageCommandExecute()
-        {
-            KeyboardLanguage = (KeyboardLanguage == LetterKeyboardTypes.Languages.En) ? LetterKeyboardTypes.Languages.Ru : LetterKeyboardTypes.Languages.En;
-        }
         #endregion
+      
     }
 }

@@ -21,77 +21,99 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
     /// </summary>
     public partial class NumericKeyboard : UserControl
     {
+
+        #region Constructors
+
         public NumericKeyboard()
         {
             InitializeComponent();
         }
 
+        #endregion
 
-        private static readonly Lazy<char[]> _buttons = new Lazy<char[]>(['1', '2', '3', '4', '5', '6', '7', '8', '9', NumericKeyboardTypes.ButtonTags.VoidTag, '0', NumericKeyboardTypes.ButtonTags.ClearButtonTag]);
-       
+
+        #region Fields
+
+            private static readonly Lazy<char[]> _buttons = new Lazy<char[]>(['1', '2', '3', '4', '5', '6', '7', '8', '9', NumericKeyboardTypes.ButtonTags.VoidTag, '0', NumericKeyboardTypes.ButtonTags.ClearButtonTag]);
+
+        #endregion
+
+
+        #region Properties
+
         public char[] Buttons => _buttons.Value;
 
-
-        public Style ButtonsStyle
-        {
-            get =>
-                (Style)GetValue(ButtonStyleProperty);
-
-            set =>
-                SetValue(ButtonStyleProperty, value);
-        }
-
-        public static readonly DependencyProperty ButtonStyleProperty
-            = DependencyProperty.Register(
-                nameof(ButtonsStyle),
-                typeof(Style),
-                typeof(NumericKeyboard));
+        #endregion
 
 
-        public Style ButtonClearStyle
-        {
-            get =>
-                (Style)GetValue(ButtonClearStyleProperty);
+        #region DependencyProperty Styles
 
-            set =>
-                SetValue(ButtonClearStyleProperty, value);
-        }
+            public Style ButtonsStyle
+            {
+                get =>
+                    (Style)GetValue(ButtonStyleProperty);
 
-        public static readonly DependencyProperty ButtonClearStyleProperty
-            = DependencyProperty.Register(
-                nameof(ButtonClearStyle),
-                typeof(Style),
-                typeof(NumericKeyboard));
+                set =>
+                    SetValue(ButtonStyleProperty, value);
+            }
+
+            public static readonly DependencyProperty ButtonStyleProperty
+                = DependencyProperty.Register(
+                    nameof(ButtonsStyle),
+                    typeof(Style),
+                    typeof(NumericKeyboard));
+
+            public Style ButtonClearStyle
+            {
+                get =>
+                    (Style)GetValue(ButtonClearStyleProperty);
+
+                set =>
+                    SetValue(ButtonClearStyleProperty, value);
+            }
+
+            public static readonly DependencyProperty ButtonClearStyleProperty
+                = DependencyProperty.Register(
+                    nameof(ButtonClearStyle),
+                    typeof(Style),
+                    typeof(NumericKeyboard));
+
+        #endregion
 
 
-        public ICommand ButtonsCommand
-        {
-            get =>
-                (ICommand)GetValue(ButtonsCommandProperty);
+        #region DependencyProperty Commands
 
-            set =>
-                SetValue(ButtonsCommandProperty, value);
-        }
+            public ICommand ButtonsCommand
+            {
+                get =>
+                    (ICommand)GetValue(ButtonsCommandProperty);
 
-        public static readonly DependencyProperty ButtonsCommandProperty
-            = DependencyProperty.Register(
-                nameof(ButtonsCommand),
-                typeof(ICommand),
-                typeof(NumericKeyboard));
+                set =>
+                    SetValue(ButtonsCommandProperty, value);
+            }
 
-        public ICommand ButtonClearCommand
-        {
-            get =>
-                (ICommand)GetValue(ButtonClearCommandProperty);
+            public static readonly DependencyProperty ButtonsCommandProperty
+                = DependencyProperty.Register(
+                    nameof(ButtonsCommand),
+                    typeof(ICommand),
+                    typeof(NumericKeyboard));
 
-            set =>
-                SetValue(ButtonClearCommandProperty, value);
-        }
+            public ICommand ButtonClearCommand
+            {
+                get =>
+                    (ICommand)GetValue(ButtonClearCommandProperty);
 
-        public static readonly DependencyProperty ButtonClearCommandProperty
-            = DependencyProperty.Register(
-                nameof(ButtonClearCommand),
-                typeof(ICommand),
-                typeof(NumericKeyboard));
+                set =>
+                    SetValue(ButtonClearCommandProperty, value);
+            }
+
+            public static readonly DependencyProperty ButtonClearCommandProperty
+                = DependencyProperty.Register(
+                    nameof(ButtonClearCommand),
+                    typeof(ICommand),
+                    typeof(NumericKeyboard));
+        #endregion
+
+
     }
 }
