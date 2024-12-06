@@ -21,7 +21,7 @@
                                 Style="{Binding ButtonsStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:LetterKeyboard}}"
                                 Command="{Binding ButtonsCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:LetterKeyboard}}"
                                 CommandParameter="{Binding Content, RelativeSource={RelativeSource Mode=Self}}">
-                                
+
                                 <Button.Content>
                                     <MultiBinding Converter="{converters:LetterKeyboardCapslockConverter}">
                                         <MultiBinding.Bindings>
@@ -41,6 +41,7 @@
                             Style="{Binding ButtonClearStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:LetterKeyboard}}"
                             Command="{Binding ButtonClearCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:LetterKeyboard}}"/>
                         </DataTemplate>
+                        
                         <DataTemplate x:Key="ClearAllTemplate">
                             <Button Content="{Binding .}"
                                 Style="{Binding ButtonClearAllStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:LetterKeyboard}}"

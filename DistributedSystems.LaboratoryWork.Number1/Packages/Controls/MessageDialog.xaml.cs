@@ -19,23 +19,26 @@ using DistributedSystems.LaboratoryWork.Number1.Packages.Types;
 
 namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
 {
-    /// <summary>
-    /// Interaction logic for MessageDialog.xaml
-    /// </summary>
     public partial class MessageDialog : UserControl
     {
+        #region Constructors
 
         public MessageDialog()
         {
             InitializeComponent();
         }
 
+        #endregion
+
+
+        #region DependencyProprety DialogStyle 
+
         public MessageDialogTypes.DialogType DialogTypeValue
         {
             get =>
                 (MessageDialogTypes.DialogType)GetValue(DialogTypeProperty);
 
-            set =>
+            init =>
                 SetValue(DialogTypeProperty, value);
         }
 
@@ -45,7 +48,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
                 typeof(MessageDialogTypes.DialogType),
                 typeof(MessageDialog),
                 new PropertyMetadata(MessageDialogTypes.DialogType.YesNo));
-
 
         public string Text
         {
@@ -61,8 +63,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
                 nameof(Text),
                 typeof(string),
                 typeof(MessageDialog));
-
-
 
         public ScrollBarVisibility ScrollViewerVisible
         {
@@ -80,8 +80,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
                 typeof(MessageDialog),
                 new PropertyMetadata(ScrollBarVisibility.Auto));
 
-
-
         public Brush ScrollViewerBackground
         {
             get =>
@@ -98,7 +96,10 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
                 typeof(MessageDialog),
                 new PropertyMetadata(Brushes.DarkGray));
 
+        #endregion
 
+
+        #region DependencyProperty Commands
 
         public ICommand PositiveCommand
         {
@@ -129,5 +130,8 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
                 nameof(NegativeCommand),
                 typeof(ICommand),
                 typeof(MessageDialog));
+
+
+        #endregion
     }
 }

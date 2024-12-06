@@ -13,6 +13,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Attached
     public class ImageButtonTemplateAttachedProperty :
         Button
     {
+
         public static readonly DependencyProperty Source =
             DependencyProperty.RegisterAttached(
                 "ImageSource",
@@ -34,11 +35,10 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Attached
 
 
         public static readonly DependencyProperty ImageScaleX =
-    DependencyProperty.RegisterAttached(
-        "ImageScaleX",
-        typeof(double),
-        typeof(ImageButtonTemplateAttachedProperty)
-        );
+            DependencyProperty.RegisterAttached(
+                "ImageScaleX",
+                typeof(double),
+                typeof(ImageButtonTemplateAttachedProperty));
 
         public static double GetImageScaleX(DependencyObject obj)
         {
@@ -53,11 +53,10 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Attached
 
 
         public static readonly DependencyProperty ImageScaleY =
-    DependencyProperty.RegisterAttached(
-        "ImageScaleY",
-        typeof(double),
-        typeof(ImageButtonTemplateAttachedProperty)
-        );
+            DependencyProperty.RegisterAttached(
+                "ImageScaleY",
+                typeof(double),
+                typeof(ImageButtonTemplateAttachedProperty));
 
         public static double GetImageScaleY(DependencyObject obj)
         {

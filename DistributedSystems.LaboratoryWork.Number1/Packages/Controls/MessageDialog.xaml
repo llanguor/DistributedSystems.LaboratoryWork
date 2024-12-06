@@ -69,15 +69,6 @@
                                 </MultiBinding.Bindings>
                             </MultiBinding>
                         </Button.Content>
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding DialogTypeValue, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:MessageDialog}}" Value="{x:Static types:MessageDialogTypes+DialogType.Ok}">
-                                        <Setter Property="Grid.Column" Value="0"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
                     </Button>
 
                     <Button 

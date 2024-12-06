@@ -14,6 +14,8 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel
     class LetterKeyboardPageViewModel :
         PageViewModelBase
     {
+        #region Constructors
+
         public LetterKeyboardPageViewModel(NavigationManager navigationManager) :
            base(navigationManager)
         {
@@ -24,8 +26,25 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel
 
         }
 
+        #endregion
+
+
+        #region Fields
+
         private string _outputText = "";
 
+        private readonly Lazy<ICommand> _buttonCommand;
+
+        private readonly Lazy<ICommand> _buttonClearCommand;
+
+        private readonly Lazy<ICommand> _buttonClearAllCommand;
+
+        private readonly Lazy<ICommand> _buttonEnterCommand;
+
+        #endregion
+
+
+        #region Properties
 
         public string OutputText
         {
@@ -37,44 +56,43 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel
             }
         }
 
-        private readonly Lazy<ICommand> _buttonCommand;
-
         public ICommand ButtonCommand =>
-        _buttonCommand.Value;
+            _buttonCommand.Value;
+
+        public ICommand ButtonClearCommand =>
+            _buttonClearCommand.Value;
+
+        public ICommand ButtonClearAllCommand =>
+            _buttonClearAllCommand.Value;
+
+        public ICommand ButtonEnterCommand =>
+            _buttonEnterCommand.Value;
+
+        #endregion
+
+
+        #region Methods
 
         private void ButtonCommandExecute([CallerMemberName] string prop = "")
         {
             OutputText += prop;
         }
 
-        private readonly Lazy<ICommand> _buttonClearCommand;
-
-        public ICommand ButtonClearCommand =>
-        _buttonClearCommand.Value;
-
         private void ButtonClearCommandExecute()
         {
-           if(OutputText.Length!=0) OutputText = OutputText.Remove(OutputText.Length - 1);
+            if (OutputText.Length != 0) OutputText = OutputText.Remove(OutputText.Length - 1);
         }
-
-        private readonly Lazy<ICommand> _buttonClearAllCommand;
-
-        public ICommand ButtonClearAllCommand =>
-        _buttonClearAllCommand.Value;
 
         private void ButtonClearAllCommandExecute()
         {
             OutputText = "";
         }
 
-        private readonly Lazy<ICommand> _buttonEnterCommand;
-
-        public ICommand ButtonEnterCommand =>
-        _buttonEnterCommand.Value;
-
         private void ButtonEnterCommandExecute()
         {
             OutputText += "\r\n";
         }
+
+        #endregion
     }
 }

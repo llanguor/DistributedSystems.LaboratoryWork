@@ -27,7 +27,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
 
     public partial class LetterKeyboard : UserControl
     {
-
         #region Constructors
 
         public LetterKeyboard()
@@ -112,7 +111,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
         #endregion
 
 
-        #region DependencyProperty Internals
+        #region DependencyProperty Internal
 
         public int GridColumnCount
         {

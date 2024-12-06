@@ -8,4 +8,8 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Dialog\" />
+  </ItemGroup>
+
 </Project>

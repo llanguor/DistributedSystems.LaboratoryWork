@@ -27,7 +27,6 @@ namespace DistributedSystems.LaboratoryWork.Number1
             object sender,
             RoutedEventArgs e)
         {
-            // App.Container.Resolve<NavigationManager>().NavigationService = frameButtons.NavigationService;
             buttonsFrame.Navigate(App.Container.Resolve<ButtonsPage>());
             numericKeyboardFrame.Navigate(App.Container.Resolve<NumericKeyboardPage>());
             letterKeyboardFrame.Navigate(App.Container.Resolve<LetterKeyboardPage>()); 

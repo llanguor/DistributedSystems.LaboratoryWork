@@ -15,10 +15,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel
     internal class MainWindowViewModel:
         ViewModelBase
     {
-        public MainWindowViewModel()
-        {
-           
-        }
 
     }
 }

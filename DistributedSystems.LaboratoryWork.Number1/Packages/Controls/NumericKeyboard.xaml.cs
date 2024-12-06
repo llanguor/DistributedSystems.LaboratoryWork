@@ -21,7 +21,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
     /// </summary>
     public partial class NumericKeyboard : UserControl
     {
-
         #region Constructors
 
         public NumericKeyboard()
@@ -113,7 +112,5 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
                     typeof(ICommand),
                     typeof(NumericKeyboard));
         #endregion
-
-
     }
 }

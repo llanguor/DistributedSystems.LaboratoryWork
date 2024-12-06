@@ -13,6 +13,8 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel
 {
     class ButtonsPageViewModel : PageViewModelBase
     {
+        #region Constructor
+
         public ButtonsPageViewModel(NavigationManager navigationManager) :
             base(navigationManager)
         {
@@ -21,35 +23,50 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel
             _negativeCommand = new Lazy<ICommand>(() => new RelayCommand(_ => NegativeCommandExecute()));
         }
 
+        #endregion
+
+
+        #region Fields
 
         private readonly Lazy<ICommand> _dialogHostCommand;
 
+        private readonly Lazy<ICommand> _positiveCommand;
+
+        private readonly Lazy<ICommand> _negativeCommand;
+
+        #endregion
+
+
+        #region Properties
+
         public ICommand DialogHostCommand =>
-        _dialogHostCommand.Value;
+       _dialogHostCommand.Value;
+        public ICommand PositiveCommand =>
+       _positiveCommand.Value;
+
+        public ICommand NegativeCommand =>
+       _negativeCommand.Value;
+
+        #endregion
+
+
+        #region Methods
+
+        private void NegativeCommandExecute()
+        {
+            MessageBox.Show("Negative command executed");
+        }
 
         private void DialogHostCommandExecute()
         {
             MessageBox.Show("Command executed");
         }
 
-        private readonly Lazy<ICommand> _positiveCommand;
-
-        public ICommand PositiveCommand =>
-        _positiveCommand.Value;
-
         private void PositiveCommandExecute()
         {
             MessageBox.Show("Positive command executed");
         }
 
-        private readonly Lazy<ICommand> _negativeCommand;
-
-        public ICommand NegativeCommand =>
-        _negativeCommand.Value;
-
-        private void NegativeCommandExecute()
-        {
-            MessageBox.Show("Negative command executed");
-        }
+        #endregion
     }
 }

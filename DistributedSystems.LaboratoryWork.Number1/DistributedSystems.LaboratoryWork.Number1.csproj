@@ -24,4 +24,8 @@
     <Resource Include="Meta\ButtonImage.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Utils\Dialog\" />
+  </ItemGroup>
+
 </Project>

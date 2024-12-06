@@ -21,10 +21,17 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
     /// </summary>
     public partial class DialogHost : UserControl
     {
+        #region Constructors
+
         public DialogHost()
         {
             InitializeComponent();
         }
+
+        #endregion
+
+
+        #region DependencyProperty DialogStyle
 
         public CornerRadius DialogCornerRadius
         {
@@ -35,12 +42,12 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
                 SetValue(DialogCornerRadiusProperty, value);
         }
 
-        public static readonly DependencyProperty DialogCornerRadiusProperty 
+        public static readonly DependencyProperty DialogCornerRadiusProperty
             = DependencyProperty.Register(
-                nameof(DialogCornerRadius), 
-                typeof(CornerRadius), 
-                typeof(DialogHost), 
-                new PropertyMetadata(new CornerRadius(0,0,0,0)));
+                nameof(DialogCornerRadius),
+                typeof(CornerRadius),
+                typeof(DialogHost),
+                new PropertyMetadata(new CornerRadius(0, 0, 0, 0)));
 
         public double BackgroundOpacity
         {
@@ -58,6 +65,11 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
                 typeof(DialogHost),
                 new PropertyMetadata(0.4));
 
+        #endregion
+
+
+        #region DependencyProperty Commands
+
         public ICommand BackgroundCommand
         {
             get =>
@@ -73,5 +85,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
                 typeof(ICommand),
                 typeof(DialogHost));
 
+        #endregion
     }
 }

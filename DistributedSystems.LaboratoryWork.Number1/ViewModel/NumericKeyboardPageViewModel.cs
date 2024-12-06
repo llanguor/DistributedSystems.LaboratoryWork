@@ -12,9 +12,13 @@ using System.Runtime.CompilerServices;
 
 namespace DistributedSystems.LaboratoryWork.Number1.ViewModel
 {
+   
+
     class NumericKeyboardPageViewModel :
         PageViewModelBase
     {
+        #region Constructors
+
         public NumericKeyboardPageViewModel(NavigationManager navigationManager) :
            base(navigationManager)
         {
@@ -22,7 +26,21 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel
             _buttonClearCommand = new Lazy<ICommand>(() => new RelayCommand((prop) => ButtonClearCommandExecute(prop.ToString())));
         }
 
+        #endregion
+
+
+        #region Fields
+
         private string _outputText = "";
+
+        private readonly Lazy<ICommand> _buttonCommand;
+
+        private readonly Lazy<ICommand> _buttonClearCommand;
+
+        #endregion
+
+
+        #region Properties
 
         public string OutputText
         {
@@ -34,24 +52,27 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel
             }
         }
 
-        private readonly Lazy<ICommand> _buttonCommand;
-
         public ICommand ButtonCommand =>
-        _buttonCommand.Value;
-
-        private void ButtonCommandExecute([CallerMemberName] string prop="")
-        {
-            OutputText+=prop;
-        }
-
-        private readonly Lazy<ICommand> _buttonClearCommand;
+            _buttonCommand.Value;
 
         public ICommand ButtonClearCommand =>
-        _buttonClearCommand.Value;
+            _buttonClearCommand.Value;
+
+        #endregion
+
+
+        #region Methods
+
+        private void ButtonCommandExecute([CallerMemberName] string prop = "")
+        {
+            OutputText += prop;
+        }
 
         private void ButtonClearCommandExecute([CallerMemberName] string prop = "")
         {
             OutputText = "";
         }
+
+        #endregion
     }
 }
