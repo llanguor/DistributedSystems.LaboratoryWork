@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Controls"
              xmlns:controls="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Controls"
-             xmlns:templateSelectors="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Controls.TemplateSelectors"
+             xmlns:templateSelectors="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.TemplateSelectors"
              mc:Ignorable="d">
 
     <Viewbox Stretch="Uniform">

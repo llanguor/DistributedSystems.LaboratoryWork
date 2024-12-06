@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using DistributedSystems.LaboratoryWork.Number1.Packages.Controls.Types;
+using DistributedSystems.LaboratoryWork.Number1.Packages.Types;
 
 namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
 {

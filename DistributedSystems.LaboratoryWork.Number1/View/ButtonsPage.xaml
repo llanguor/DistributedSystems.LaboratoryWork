@@ -7,7 +7,7 @@
       xmlns:system="clr-namespace:System;assembly=mscorlib"
       xmlns:attached="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Attached"
       xmlns:controls="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Controls"
-      xmlns:types="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Controls.Types"
+      xmlns:types="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Types"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Page1">
@@ -71,8 +71,8 @@
             
             Text="Scroll Viewer Check Scroll Viewer Check Scroll Viewer Check Scroll Viewer Check " 
             Background="LightGray"
-            Width="300" 
-            Height="190" 
+            Width="500" 
+            Height="300" 
             TextWrapping="WrapWithOverflow"/>
         </ScrollViewer>
 

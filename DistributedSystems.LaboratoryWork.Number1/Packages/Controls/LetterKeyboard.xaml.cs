@@ -1,4 +1,4 @@
-﻿using DistributedSystems.LaboratoryWork.Number1.Packages.Controls.Types;
+﻿using DistributedSystems.LaboratoryWork.Number1.Packages.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;

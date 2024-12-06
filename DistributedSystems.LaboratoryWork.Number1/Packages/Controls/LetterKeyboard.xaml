@@ -5,10 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Controls"
              xmlns:controls="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Controls"
-             xmlns:templateSelectors="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Controls.TemplateSelectors"
-             xmlns:converters="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Controls.Converters"
+             xmlns:templateSelectors="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.TemplateSelectors"
+             xmlns:converters="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Converters"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
-             xmlns:types="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Controls.Types"
              mc:Ignorable="d"  >
     <Grid>
         <Viewbox Stretch="Uniform">

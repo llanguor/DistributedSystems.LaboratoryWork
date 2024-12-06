@@ -28,7 +28,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Attached
 
         public static void SetImageSource(DependencyObject obj, object value)
         {
-             obj.SetValue(Source, value);
+            obj.SetValue(Source, value);
         }
 
 
