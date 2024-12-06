@@ -24,7 +24,8 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
     /// 
     ///
     /// </summary>
-    public partial class LetterKeyboard : UserControl, INotifyPropertyChanged
+
+    public partial class LetterKeyboard : UserControl
     {
 
         #region Constructors
@@ -32,9 +33,10 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
         public LetterKeyboard()
         {
             InitializeComponent();
-            KeyboardLanguage = LetterKeyboardTypes.Languages.En;
-            _buttonLanguageCommand = new Lazy<ICommand>(() => new RelayCommand(_ => LanguageCommandExecute())); 
+
+            _buttonLanguageCommand = new Lazy<ICommand>(() => new RelayCommand(_ => LanguageCommandExecute()));
             _buttonCapsLockCommand = new Lazy<ICommand>(() => new RelayCommand(_ => CapsLockCommandExecute()));
+            if(KeyboardLanguage==LetterKeyboardTypes.Languages.NotSet) KeyboardLanguage = LetterKeyboardTypes.Languages.En;
         }
 
         #endregion
@@ -46,98 +48,104 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
 
         private static readonly Lazy<string[]> _keyboardLayoutEn = new Lazy<string[]>([LetterKeyboardTypes.ButtonTags.ClearAll, "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", LetterKeyboardTypes.ButtonTags.CapsLock, "A", "S", "D", "F", "G", "H", "J", "K", "L",  LetterKeyboardTypes.ButtonTags.Clear, LetterKeyboardTypes.ButtonTags.Void, LetterKeyboardTypes.ButtonTags.Language, "Z", "X", "C", "V", "B", "N", "M", LetterKeyboardTypes.ButtonTags.Enter, LetterKeyboardTypes.ButtonTags.Void]);
 
-        private LetterKeyboardTypes.Languages _keyboardLanguage;
-
-        private string[]? _keyboardLayout;
-
-        private int _gridColumnCount;
-
-        private bool _capsLockActivated;
-
         #endregion
 
 
-        #region Properties
+        #region DependencyProperty
 
-        private LetterKeyboardTypes.Languages KeyboardLanguage
+        public LetterKeyboardTypes.Languages KeyboardLanguage
         {
-            get => _keyboardLanguage;
+            get =>
+                (LetterKeyboardTypes.Languages)GetValue(KeyboardLanguageProperty);
 
-            set
-            {
-                _keyboardLanguage = value;
-
-                switch (value)
-                {
-                    case LetterKeyboardTypes.Languages.Blank:
-                        break;
-                    case LetterKeyboardTypes.Languages.En:
-                        GridColumnCount = 11;
-                        KeyboardLayout = _keyboardLayoutEn.Value;
-                        break;
-                    case LetterKeyboardTypes.Languages.Ru:
-                        GridColumnCount = 13;
-                        KeyboardLayout = _keyboardLayoutRu.Value;
-                        break;
-                    default:
-                        throw new ArgumentException("Incorrect parameter");
-                }
-            }
+            set =>
+                SetValue(KeyboardLanguageProperty, value);
         }
 
-        public string[]? KeyboardLayout
-        {
-            get => _keyboardLayout;
-            set  
-            { 
-                _keyboardLayout = value;
-                RaisePropertyChanged(nameof(KeyboardLayout));
-            }
-        }
+        public static readonly DependencyProperty KeyboardLanguageProperty
+            = DependencyProperty.Register(
+                nameof(KeyboardLanguage),
+                typeof(LetterKeyboardTypes.Languages),
+                typeof(LetterKeyboard),
+                new PropertyMetadata(LetterKeyboardTypes.Languages.NotSet, KeyboardLanguagePropertyChangedCallback));
 
-        public int GridColumnCount
+        private static void KeyboardLanguagePropertyChangedCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs eventArgs)
         {
-            get=> _gridColumnCount;
-            set
+            if (dependencyObject is not LetterKeyboard keyboard)
             {
-                _gridColumnCount = value;
-                RaisePropertyChanged(nameof(GridColumnCount));
+                throw new ArgumentException(nameof(dependencyObject));
+            }
+
+            switch (eventArgs.NewValue)
+            {
+                case LetterKeyboardTypes.Languages.NotSet:
+                    break;
+                case LetterKeyboardTypes.Languages.En:
+                    keyboard.GridColumnCount = 11;
+                    keyboard.KeyboardLayout = _keyboardLayoutEn.Value;
+                    break;
+                case LetterKeyboardTypes.Languages.Ru:
+                    keyboard.GridColumnCount = 13;
+                    keyboard.KeyboardLayout = _keyboardLayoutRu.Value;
+                    break;
+                default:
+                    throw new NotImplementedException();
             }
         }
 
         public bool CapsLockOn
         {
-            get => _capsLockActivated;
-            set
-            {
-                _capsLockActivated = value;
-                RaisePropertyChanged(nameof(CapsLockOn));
-            }
+            get =>
+                (bool)GetValue(CapsLockOnProperty);
+
+            set =>
+                SetValue(CapsLockOnProperty, value);
         }
 
+        public static DependencyProperty CapsLockOnProperty
+            = DependencyProperty.Register(
+                nameof(CapsLockOn),
+                typeof(bool),
+                typeof(LetterKeyboard),
+                new PropertyMetadata(false));
 
         #endregion
 
 
-        #region Commands
+        #region DependencyProperty Internals
 
-        private Lazy<ICommand> _buttonCapsLockCommand;
-        public ICommand ButtonCapsLockCommand
-            => _buttonCapsLockCommand.Value;
-        private void CapsLockCommandExecute()
+        public int GridColumnCount
         {
-            CapsLockOn = !CapsLockOn;
+            get =>
+                (int)GetValue(GridColumnCountProperty.DependencyProperty);
+
+            set =>
+                SetValue(GridColumnCountProperty, value);
         }
 
+        public static readonly DependencyPropertyKey GridColumnCountProperty
+            = DependencyProperty.RegisterReadOnly(
+                nameof(GridColumnCount),
+                typeof(int),
+                typeof(LetterKeyboard),
+                new PropertyMetadata());
 
-        private Lazy<ICommand> _buttonLanguageCommand;
-        public ICommand ButtonLanguageCommand
-            => _buttonLanguageCommand.Value;
-        private void LanguageCommandExecute()
+
+        public string[]? KeyboardLayout
         {
-            KeyboardLanguage = (KeyboardLanguage == LetterKeyboardTypes.Languages.En) ? LetterKeyboardTypes.Languages.Ru : LetterKeyboardTypes.Languages.En;
+            get =>
+                (string[]?)GetValue(KeyboardLayoutProperty.DependencyProperty);
+
+            set =>
+                SetValue(KeyboardLayoutProperty, value);
         }
 
+        public static readonly DependencyPropertyKey KeyboardLayoutProperty
+            = DependencyProperty.RegisterReadOnly(
+                nameof(KeyboardLayout),
+                typeof(string[]),
+                typeof(LetterKeyboard),
+                new PropertyMetadata());
 
         #endregion
 
@@ -317,16 +325,30 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
         #endregion
 
 
-        #region Implementation INotifyPropertyChanged
+        #region Commands
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-        protected void RaisePropertyChanged(
-           string propertyName)
+        private readonly Lazy<ICommand> _buttonCapsLockCommand;
+
+        public ICommand ButtonCapsLockCommand
+            => _buttonCapsLockCommand.Value;
+
+        private void CapsLockCommandExecute()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            CapsLockOn = !CapsLockOn;
         }
 
+
+        private readonly Lazy<ICommand> _buttonLanguageCommand;
+
+        public ICommand ButtonLanguageCommand
+            => _buttonLanguageCommand.Value;
+
+        private void LanguageCommandExecute()
+        {
+            KeyboardLanguage = (KeyboardLanguage == LetterKeyboardTypes.Languages.En) ? LetterKeyboardTypes.Languages.Ru : LetterKeyboardTypes.Languages.En;
+        }
+
+
         #endregion
-      
     }
 }

@@ -21,7 +21,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls.Types
 
         public enum Languages
         {
-            Blank,
+            NotSet,
             En,
             Ru
         }

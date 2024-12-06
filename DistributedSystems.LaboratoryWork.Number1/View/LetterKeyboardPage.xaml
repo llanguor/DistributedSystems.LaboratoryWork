@@ -64,7 +64,8 @@
                                   ButtonEnterCommand="{Binding ButtonEnterCommand}"
                                   ButtonsCommand="{Binding ButtonCommand}"
                                   ButtonClearCommand="{Binding ButtonClearCommand}"
-                                  ButtonClearAllCommand="{Binding ButtonClearAllCommand}">
+                                  ButtonClearAllCommand="{Binding ButtonClearAllCommand}"
+                                  KeyboardLanguage="Ru">
 
         </controls:LetterKeyboard>
     </Grid>
