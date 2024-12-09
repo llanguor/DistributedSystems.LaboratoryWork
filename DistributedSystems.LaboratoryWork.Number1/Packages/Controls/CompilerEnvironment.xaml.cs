@@ -1,4 +1,6 @@
-﻿using DistributedSystems.LaboratoryWork.Number1.Packages.Types;
+﻿using DistributedSystems.LaboratoryWork.Nuget.Command;
+using DistributedSystems.LaboratoryWork.Number1.Packages.Types;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,18 +25,51 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
         public CompilerEnvironment()
         {
             InitializeComponent();
-            Instructions = [new CompilerEnvironmentTypes.Instruction(19, 10, 10, 4)];
+            Instructions = new ObservableCollection<Instruction>();
+            //Instructions = [new Instruction(19, 10, 10, 4)];
+            _openFileCommand = new Lazy<ICommand>(() => new RelayCommand(_ => OpenFileCommandExecute()));
+            _compileCommand = new Lazy<ICommand>(() => new RelayCommand(_ => CompileCommandExecute()));
         }
 
-        public ObservableCollection<CompilerEnvironmentTypes.Instruction> Instructions
+        public ObservableCollection<Instruction> Instructions
         {
-            get => (ObservableCollection<CompilerEnvironmentTypes.Instruction>)GetValue(instructionsProperty);
+            get => (ObservableCollection<Instruction>)GetValue(instructionsProperty);
             set => SetValue(instructionsProperty, value);
         }
 
         public static readonly DependencyProperty instructionsProperty = DependencyProperty.Register(
             nameof(Instructions),
-            typeof(ObservableCollection<CompilerEnvironmentTypes.Instruction>),
+            typeof(ObservableCollection<Instruction>),
             typeof(CompilerEnvironment));
+
+
+
+        private readonly Lazy<ICommand> _openFileCommand;
+
+        public ICommand OpenFileCommand
+            => _openFileCommand.Value;
+
+        private void OpenFileCommandExecute()
+        {
+            var openFileDialog1 = new OpenFileDialog();
+            if (openFileDialog1.ShowDialog()==false)
+                return;
+
+            string fileText = System.IO.File.ReadAllText(openFileDialog1.FileName);
+            programTextBox.Text = fileText;
+
+            programTextBox.Focus();
+            programDataGrid.Focus();
+        }
+
+        private readonly Lazy<ICommand> _compileCommand;
+
+        public ICommand CompileCommand
+            => _compileCommand.Value;
+
+        private void CompileCommandExecute()
+        {
+            MessageBox.Show("Compile"); //сначала сделать диалог
+        }
     }
 }

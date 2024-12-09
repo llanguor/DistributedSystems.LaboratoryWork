@@ -56,8 +56,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.View {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/DistributedSystems.LaboratoryWork.Number1;V1.0.0.0;component/view/buttonspage.xa" +
-                    "ml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/DistributedSystems.LaboratoryWork.Number1;component/view/buttonspage.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\ButtonsPage.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

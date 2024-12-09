@@ -3,17 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:controls ="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Controls"
              xmlns:local="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Controls"
              xmlns:converters="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Converters"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" FontSize="13">
     <DockPanel>
-        <Menu Height="25" DockPanel.Dock="Top" Padding="5,2,0,0">
-            <MenuItem Header="File">
-                <MenuItem Header="Save" />
-                <MenuItem Header="Open" />
-            </MenuItem>
-            <MenuItem Header="Compile" ></MenuItem>
+        <Menu Height="40" DockPanel.Dock="Top" FontSize="13" Padding="5,10,0,0">
+            <MenuItem Header="Open" Command="{Binding OpenFileCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:CompilerEnvironment}}"/>
+            <MenuItem Header="Compile" Command="{Binding CompileCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:CompilerEnvironment}}"/>
         </Menu>
         
         <Grid>
@@ -26,7 +24,7 @@
             <GridSplitter Grid.Column="1" Width="3" HorizontalAlignment="Center" VerticalAlignment="Stretch" />
 
             
-            <TextBox TextWrapping="Wrap" Grid.Column="0" Grid.Row="0" DataContext="{Binding Instructions, RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor}}">
+            <TextBox x:Name="programTextBox" TextWrapping="Wrap" Grid.Column="0" AcceptsReturn="True" Grid.Row="0" DataContext="{Binding Instructions, RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor}}">
                 <TextBox.Text>
                     <MultiBinding Converter="{converters:CompilerEnvironmentConverter}">
                         <Binding Mode="TwoWay"  Path="Instructions" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=UserControl}" />
@@ -38,19 +36,16 @@
                 </TextBox.Text>
             </TextBox>
 
-            <DataGrid  Grid.Column="2" AutoGenerateColumns="False"  
+            <DataGrid x:Name="programDataGrid" Grid.Column="2" AutoGenerateColumns="False" 
                 ItemsSource="{Binding Instructions, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor}}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Операнд 1" Binding="{Binding Path=Operand1}"/>
-                    <DataGridTextColumn Header="Операнд 2" Binding="{Binding Path=Operand2}"/>
-                    <DataGridTextColumn Header="Операнд 3" Binding="{Binding Path=Operand3}"/>
-                    <DataGridTextColumn Header="Операция" Binding="{Binding Path=Operation}"/>
+                    <DataGridTextColumn Header="Операнд 1" Binding="{Binding Path=Operand1}" Width="*"/>
+                    <DataGridTextColumn Header="Операнд 2" Binding="{Binding Path=Operand2}" Width="*"/>
+                    <DataGridTextColumn Header="Операнд 3" Binding="{Binding Path=Operand3}" Width="*"/>
+                    <DataGridTextColumn Header="Операция" Binding="{Binding Path=Operation}" Width="*"/>
                     <!--DataGridComboBoxColumn Header="Операция" Binding="{Binding Path=Operation}"/-->
                 </DataGrid.Columns>
-            
             </DataGrid>
-
-
         </Grid>
     </DockPanel>
 </UserControl>

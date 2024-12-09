@@ -18,7 +18,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Converters
         {
             if (values.Length != 1)
             {
-                throw new ArgumentException("Invalid count of values!");
+               // throw new ArgumentException("Invalid count of values!");
             }
 
             string res = "";
@@ -41,7 +41,8 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Converters
 
             foreach (string instructionString in programString.Split("\r\n"))
             {
-                if (instructionString.Length != 18) continue;
+                //TODO: check by regex
+                if (instructionString.Length < 18) continue;
                 var instructionPart = instructionString.Substring(1, instructionString.Length - 2).Split(">,<");
 
                 var instruction = new CompilerEnvironmentTypes.Instruction();

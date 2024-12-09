@@ -56,8 +56,8 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/DistributedSystems.LaboratoryWork.Number1;V1.0.0.0;component/packages/controls/m" +
-                    "essagedialog.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/DistributedSystems.LaboratoryWork.Number1;component/packages/controls/messagedia" +
+                    "log.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\Packages\Controls\MessageDialog.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
