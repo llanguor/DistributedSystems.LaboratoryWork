@@ -8,8 +8,8 @@ using DistributedSystems.LaboratoryWork.Number1.View;
 
 namespace DistributedSystems.LaboratoryWork.Number1
 {
-    //TODO: add regions everywhere
-    //TODO: Binding OneWay almost everywhere.
+   
+    //TODO: Binding OneWay everywhere.
 
     /// <summary>
     /// Interaction logic for App.xaml

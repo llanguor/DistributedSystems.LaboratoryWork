@@ -45,7 +45,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
 
         private static readonly Lazy<string[]> _keyboardLayoutRu = new Lazy<string[]>(["Ё", "Й", "Ц", "У", "К", "Е", "Н", "Г", "Ш", "Щ", "З", "Х", LetterKeyboardTypes.ButtonTags.Clear, LetterKeyboardTypes.ButtonTags.CapsLock, "Ф", "Ы", "В", "А", "П", "Р", "О", "Л", "Д", "Ж", "Э", LetterKeyboardTypes.ButtonTags.ClearAll, LetterKeyboardTypes.ButtonTags.Language, "Я", "Ч", "С", "М", "И", "Т", "Ь", "Ъ", "ъ","Б", "Ю", LetterKeyboardTypes.ButtonTags.Enter]);
 
-        private static readonly Lazy<string[]> _keyboardLayoutEn = new Lazy<string[]>([LetterKeyboardTypes.ButtonTags.ClearAll, "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", LetterKeyboardTypes.ButtonTags.CapsLock, "A", "S", "D", "F", "G", "H", "J", "K", "L",  LetterKeyboardTypes.ButtonTags.Clear, LetterKeyboardTypes.ButtonTags.Void, LetterKeyboardTypes.ButtonTags.Language, "Z", "X", "C", "V", "B", "N", "M", LetterKeyboardTypes.ButtonTags.Enter, LetterKeyboardTypes.ButtonTags.Void]);
+        private static readonly Lazy<string[]> _keyboardLayoutEn = new Lazy<string[]>([ "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", LetterKeyboardTypes.ButtonTags.Clear, LetterKeyboardTypes.ButtonTags.CapsLock, "A", "S", "D", "F", "G", "H", "J", "K", "L",  LetterKeyboardTypes.ButtonTags.ClearAll, LetterKeyboardTypes.ButtonTags.Void, LetterKeyboardTypes.ButtonTags.Language, "Z", "X", "C", "V", "B", "N", "M", LetterKeyboardTypes.ButtonTags.Enter, LetterKeyboardTypes.ButtonTags.Void]);
 
         #endregion
 
