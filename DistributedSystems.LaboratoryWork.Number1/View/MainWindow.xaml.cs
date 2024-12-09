@@ -29,7 +29,8 @@ namespace DistributedSystems.LaboratoryWork.Number1
         {
             buttonsFrame.Navigate(App.Container.Resolve<ButtonsPage>());
             numericKeyboardFrame.Navigate(App.Container.Resolve<NumericKeyboardPage>());
-            letterKeyboardFrame.Navigate(App.Container.Resolve<LetterKeyboardPage>()); 
+            letterKeyboardFrame.Navigate(App.Container.Resolve<LetterKeyboardPage>());
+            compilersEnvironmentFrame.Navigate(App.Container.Resolve<CompilerEnvironmentPage>());
         }
     }
 }

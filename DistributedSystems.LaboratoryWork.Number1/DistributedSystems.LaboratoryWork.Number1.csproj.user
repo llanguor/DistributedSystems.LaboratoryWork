@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Packages\Controls\CompilerEnvironment.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Packages\Controls\DialogHost.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -22,6 +25,9 @@
     <Compile Update="View\ButtonsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\CompilerEnvironmentPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\LetterKeyboardPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -30,6 +36,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Packages\Controls\CompilerEnvironment.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Packages\Controls\DialogHost.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -49,6 +58,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Packages\Resources\ScrollViewersDictionary.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\CompilerEnvironmentPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\LetterKeyboardPage.xaml">

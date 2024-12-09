@@ -23,7 +23,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel
             _buttonClearCommand = new Lazy<ICommand>(() => new RelayCommand(_ => ButtonClearCommandExecute()));
             _buttonClearAllCommand = new Lazy<ICommand>(() => new RelayCommand(_ => ButtonClearAllCommandExecute()));
             _buttonEnterCommand = new Lazy<ICommand>(() => new RelayCommand(_ => ButtonEnterCommandExecute()));
-
         }
 
         #endregion

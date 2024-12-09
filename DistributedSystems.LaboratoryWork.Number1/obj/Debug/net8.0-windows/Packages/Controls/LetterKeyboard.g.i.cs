@@ -55,8 +55,8 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/DistributedSystems.LaboratoryWork.Number1;component/packages/controls/letterkeyb" +
-                    "oard.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/DistributedSystems.LaboratoryWork.Number1;V1.0.0.0;component/packages/controls/l" +
+                    "etterkeyboard.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\Packages\Controls\LetterKeyboard.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

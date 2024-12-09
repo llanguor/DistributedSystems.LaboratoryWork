@@ -42,3 +42,7 @@ C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems
 C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\View\LetterKeyboardPage.g.cs
 C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\Packages\Controls\LetterKeyboard.baml
 C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\View\LetterKeyboardPage.baml
+C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\View\CompilerEnvironmentPage.g.cs
+C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\View\CompilerEnvironmentPage.baml
+C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\Packages\Controls\CompilerEnvironment.g.cs
+C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\Packages\Controls\CompilerEnvironment.baml

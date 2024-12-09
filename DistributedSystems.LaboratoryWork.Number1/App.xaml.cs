@@ -77,6 +77,7 @@ namespace DistributedSystems.LaboratoryWork.Number1
             Container.Register<ButtonsPage>(Reuse.Singleton);
             Container.Register<NumericKeyboardPage>(Reuse.Singleton);
             Container.Register<LetterKeyboardPage>(Reuse.Singleton);
+            Container.Register<CompilerEnvironmentPage>(Reuse.Singleton);
             return this;
         }
 
@@ -104,6 +105,7 @@ namespace DistributedSystems.LaboratoryWork.Number1
             Container.Register<ButtonsPageViewModel>(Reuse.Singleton);
             Container.Register<NumericKeyboardPageViewModel>(Reuse.Singleton);
             Container.Register<LetterKeyboardPageViewModel>(Reuse.Singleton);
+            Container.Register<CompilerEnvironmentPageViewModel>(Reuse.Singleton);
             return this;
         }
 
@@ -128,7 +130,8 @@ namespace DistributedSystems.LaboratoryWork.Number1
             navigationManager
                 .AddMapping<ButtonsPage, ButtonsPageViewModel>()
                 .AddMapping<NumericKeyboardPage, NumericKeyboardPageViewModel>()
-                .AddMapping<LetterKeyboardPage, LetterKeyboardPageViewModel>();
+                .AddMapping<LetterKeyboardPage, LetterKeyboardPageViewModel>()
+                .AddMapping<CompilerEnvironmentPage, CompilerEnvironmentPageViewModel>();
 
 
             return this;

@@ -20,5 +20,8 @@
         <TabItem Header="LetterKeyboard">
             <Frame x:Name="letterKeyboardFrame"/>
         </TabItem>
+        <TabItem Header="Compiler's environment">
+            <Frame x:Name="compilersEnvironmentFrame"/>
+        </TabItem>
     </TabControl>
 </Window>

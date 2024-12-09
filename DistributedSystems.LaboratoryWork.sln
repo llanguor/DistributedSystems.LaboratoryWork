@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedSystems.LaboratoryWork.Number1", "DistributedSystems.LaboratoryWork.Number1\DistributedSystems.LaboratoryWork.Number1.csproj", "{3FD17162-EEB3-42C8-B54E-89D0F4BCFC14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DistributedSystems.LaboratoryWork.Number1", "DistributedSystems.LaboratoryWork.Number1\DistributedSystems.LaboratoryWork.Number1.csproj", "{3FD17162-EEB3-42C8-B54E-89D0F4BCFC14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedSystems.LaboratoryWork.Nuget", "DistributedSystems.LaboratoryWork.Nuget\DistributedSystems.LaboratoryWork.Nuget.csproj", "{B879B589-4D93-47E5-90DB-3172B37FF4D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DistributedSystems.LaboratoryWork.Nuget", "DistributedSystems.LaboratoryWork.Nuget\DistributedSystems.LaboratoryWork.Nuget.csproj", "{B879B589-4D93-47E5-90DB-3172B37FF4D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
