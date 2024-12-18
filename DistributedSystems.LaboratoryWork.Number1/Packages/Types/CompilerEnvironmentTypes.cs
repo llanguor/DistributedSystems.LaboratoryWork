@@ -1,6 +1,8 @@
-﻿using DistributedSystems.LaboratoryWork.Nuget.Command;
+﻿using Accessibility;
+using DistributedSystems.LaboratoryWork.Nuget.Command;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -13,147 +15,216 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
 {
     public class CompilerEnvironmentTypes
     {
-
-        public static class Operations
+        //все тут должно быть ассинхронным.
+        //нужно внедрить логгер чтобы выводить что-либо на консоль.
+    
+        /*
+        public static class CodeCompiler
         {
+            public static string Compile(List<Instruction> instructions)
+            {
+                return "";
+            }
+        }
+
+        public class CodePerformer
+        {
+            #region Fields
+
+            List<int> _registersList;
+
+            #endregion
+
+
+            #region Constructors
+
+            public CodePerformer()
+            {
+                _registersList = new List<int>();
+            }
+
+            #endregion
+
+
             #region Properties
 
-            public static List<Lazy<ICommand>> GetOperationsList
+            public List<int> RegistersList
             {
-                get
-                {
-                    return new List<Lazy<ICommand>>()
-                    {
-
-                    };
-                }
+                get => _registersList;
             }
-      
+
             #endregion
+
 
             #region Methods
 
-            public static void MethodId0()
+            public void Perform(Collection<int> instructions)
+            {
+                foreach(var instruction in instructions)
+                {
+
+                }
+            }
+
+            #endregion
+        }
+        */
+
+        public static class Operations
+        {
+            #region Fields
+
+            static List<Lazy<ICommand>> _operationsList;
+
+            #endregion
+
+
+            #region Constructors
+
+            static Operations()
+            {
+                _operationsList = new List<Lazy<ICommand>>()
+                {
+
+                };
+            }
+
+            #endregion
+
+
+            #region Properties
+
+            public static List<Lazy<ICommand>> OperationsList
+            {
+                get => _operationsList;
+            }
+
+            #endregion
+
+
+            #region Methods
+
+            static void MethodId0()
             {
 
             }
 
-            public static void MethodId1()
+            static void MethodId1()
             {
 
             }
 
-            public static void MethodId2()
+            static void MethodId2()
             {
 
             }
 
-            public static void MethodId3()
+            static void MethodId3()
             {
 
             }
 
-            public static void MethodId4()
+            static void MethodId4()
             {
 
             }
 
-            public static void MethodId5()
+            static void MethodId5()
             {
 
             }
 
-            public static void MethodId6()
+            static void MethodId6()
             {
 
             }
 
-            public static void MethodId7()
+            static void MethodId7()
             {
 
             }
 
-            public static void MethodId8()
+            static void MethodId8()
             {
 
             }
 
-            public static void MethodId9()
+            static void MethodId9()
             {
 
             }
 
-            public static void MethodId10()
+            static void MethodId10()
             {
 
             }
 
-            public static void MethodId11()
+            static void MethodId11()
             {
 
             }
 
-            public static void MethodId12()
+            static void MethodId12()
             {
 
             }
 
-            public static void MethodId13()
+            static void MethodId13()
             {
 
             }
 
-            public static void MethodId14()
+            static void MethodId14()
             {
 
             }
 
-            public static void MethodId15()
+            static void MethodId15()
             {
 
             }
 
-            public static void MethodId16()
+            static void MethodId16()
             {
 
             }
 
-            public static void MethodId17()
+            static void MethodId17()
             {
 
             }
 
-            public static void MethodId18()
+            static void MethodId18()
             {
 
             }
 
-            public static void MethodId19()
+            static void MethodId19()
             {
 
             }
 
-            public static void MethodId20()
+            static void MethodId20()
             {
 
             }
 
-            public static void MethodId21()
+            static void MethodId21()
             {
 
             }
 
-            public static void MethodId22()
+            static void MethodId22()
             {
 
             }
 
-            public static void MethodId23()
+            static void MethodId23()
             {
 
             }
 
-            public static void MethodId24()
+            static void MethodId24()
             {
 
             }
