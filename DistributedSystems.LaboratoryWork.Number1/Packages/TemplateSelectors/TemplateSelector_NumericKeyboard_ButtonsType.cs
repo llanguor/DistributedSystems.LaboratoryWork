@@ -9,7 +9,7 @@ using DistributedSystems.LaboratoryWork.Number1.Packages.Types;
 
 namespace DistributedSystems.LaboratoryWork.Number1.Packages.TemplateSelectors
 {
-    class TemplateSelector_NumericKeyboard_ButtonsType:
+    internal class TemplateSelector_NumericKeyboard_ButtonsType:
         DataTemplateSelector
     {
 

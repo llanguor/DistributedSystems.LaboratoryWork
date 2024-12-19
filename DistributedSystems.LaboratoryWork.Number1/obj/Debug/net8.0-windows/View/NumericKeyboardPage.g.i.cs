@@ -55,8 +55,8 @@ namespace DistributedSystems.LaboratoryWork.Number1.View {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/DistributedSystems.LaboratoryWork.Number1;component/view/numerickeyboardpage.xam" +
-                    "l", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/DistributedSystems.LaboratoryWork.Number1;V1.0.0.0;component/view/numerickeyboar" +
+                    "dpage.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\NumericKeyboardPage.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DistributedSystems.LaboratoryWork.Number1.Packages.Converters
 {
-    internal class LetterKeyboardCapslockConverter :
+    internal sealed class LetterKeyboardCapslockConverter :
         MultiValueConverterBase<LetterKeyboardCapslockConverter>
     {
         public override object? Convert(object[] values, Type targetType, object? parameter, CultureInfo culture)

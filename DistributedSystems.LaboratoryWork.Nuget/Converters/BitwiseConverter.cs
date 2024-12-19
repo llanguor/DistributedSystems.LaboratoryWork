@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DistributedSystems.LaboratoryWork.Nuget.Converters
 {
-    internal class BitwiseConverter :
+    public sealed class BitwiseConverter :
     MultiValueConverterBase<BitwiseConverter>
     {
         public enum Operators

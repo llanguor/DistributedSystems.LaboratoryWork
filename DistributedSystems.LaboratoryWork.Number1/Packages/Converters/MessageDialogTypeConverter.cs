@@ -9,7 +9,7 @@ using DistributedSystems.LaboratoryWork.Number1.Packages.Types;
 
 namespace DistributedSystems.LaboratoryWork.Number1.Packages.Converters
 {
-    public sealed class MessageDialogTypeConverter:
+    internal sealed class MessageDialogTypeConverter:
         MultiValueConverterBase<MessageDialogTypeConverter>
     {
 

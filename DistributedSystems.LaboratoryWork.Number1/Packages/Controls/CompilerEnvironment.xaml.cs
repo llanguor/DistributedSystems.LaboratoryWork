@@ -1,5 +1,6 @@
 ﻿using DistributedSystems.LaboratoryWork.Nuget.Command;
 using DistributedSystems.LaboratoryWork.Number1.Packages.Types;
+using DistributedSystems.LaboratoryWork.Number1.Utils.Numbers;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,9 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
 {
     public partial class CompilerEnvironment : UserControl
     {
+
+        #region Constructors
+
         public CompilerEnvironment()
         {
             InitializeComponent();
@@ -34,28 +38,51 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
             _compileCommand = new Lazy<ICommand>(() => new RelayCommand(_ => CompileCommandExecute()));
         }
 
-        public ObservableCollection<Instruction> Instructions
-        {
-            get => (ObservableCollection<Instruction>)GetValue(instructionsProperty);
-            set => SetValue(instructionsProperty, value);
-        }
-
-        public static readonly DependencyProperty instructionsProperty = DependencyProperty.Register(
-            nameof(Instructions),
-            typeof(ObservableCollection<Instruction>),
-            typeof(CompilerEnvironment));
+        #endregion
 
 
+        #region Commands
+
+        private readonly Lazy<ICommand> _compileCommand;
+
+        public ICommand CompileCommand
+            => _compileCommand.Value;
 
         private readonly Lazy<ICommand> _openFileCommand;
 
         public ICommand OpenFileCommand
-            => _openFileCommand.Value;
+           => _openFileCommand.Value;
+
+        #endregion
+
+
+        #region Properties
+
+        public ObservableCollection<Instruction> Instructions
+        {
+            get => (ObservableCollection<Instruction>)GetValue(InstructionsProperty);
+            set => SetValue(InstructionsProperty, value);
+        }
+
+        #endregion
+
+
+        #region DependencyProperties
+
+        public static readonly DependencyProperty InstructionsProperty = DependencyProperty.Register(
+            nameof(Instructions),
+            typeof(ObservableCollection<Instruction>),
+            typeof(CompilerEnvironment));
+
+        #endregion
+
+
+        #region Methods
 
         private void OpenFileCommandExecute()
         {
             var openFileDialog1 = new OpenFileDialog();
-            if (openFileDialog1.ShowDialog()==false)
+            if (openFileDialog1.ShowDialog() == false)
                 return;
 
             string fileText = System.IO.File.ReadAllText(openFileDialog1.FileName);
@@ -65,36 +92,56 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
             programDataGrid.Focus();
         }
 
-        private readonly Lazy<ICommand> _compileCommand;
-
-        public ICommand CompileCommand
-            => _compileCommand.Value;
-
         private void CompileCommandExecute()
         {
-            MessageBox.Show("Compile"); //сначала сделать диалог
-            //ко всему надо using? и dispose в класс
+            //сначала сделать диалог
+            //все это должно быть ассинхронным
+
+            //процесс компиляции
+            using var memoryStream = new MemoryStream(new byte[255]);
+
+            using var binaryWriter = new BinaryWriter(memoryStream);
+            foreach (var instruction in Instructions)
+            {
+                var instructionValue = NumberToBytesTransformations.ConvertToBytes(
+                    instruction.Operand1,
+                    instruction.Operand2,
+                    instruction.Operand3,
+                    instruction.Operation);
+
+                binaryWriter.Write(instructionValue);
+            }
 
 
 
-            MemoryStream memoryStream = new MemoryStream(new byte[255]);
-            BinaryWriter binaryWriter = new BinaryWriter(memoryStream);
-
-
-            binaryWriter.Write(543);
-            binaryWriter.Write(551);
+            //процесс исполнения
+            using var binaryReader = new BinaryReader(memoryStream);
+            long? readNumber;
+            int operand1Key, operand2Key, operand3Key, operationId;
 
             memoryStream.Position = 0;
-            using (BinaryReader reader = new BinaryReader(memoryStream))
-            {
-                int? readNumber;
-                while ((readNumber = reader.ReadInt32()) != null)
-                {
-                    if (readNumber == 0) break;
-                    MessageBox.Show(readNumber.ToString());
+            Registers registers = new Registers();
 
-                }
+            while ((readNumber = binaryReader.ReadInt64()) != null)
+            {
+                if (readNumber == 0) break;
+
+                NumberToBytesTransformations.ConvertToValues(
+                    readNumber.Value,
+                    out operand1Key,
+                    out operand2Key,
+                    out operand3Key,
+                    out operationId);
+
+                registers.ExecuteMethod(operand1Key, operand2Key, operand3Key, operationId);
+
+                
+               // operationMethod(ref registers, operand1Key, operand2Key, operand3Key);
+                // MessageBox.Show(registers[operand1Key].ToString());
             }
+            
         }
+
+        #endregion
     }
 }

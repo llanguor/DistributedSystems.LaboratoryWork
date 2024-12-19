@@ -10,7 +10,7 @@ using System.Windows.Media;
 
 namespace DistributedSystems.LaboratoryWork.Number1.Packages.Attached
 {
-    public class ImageButtonTemplateAttachedProperty :
+    internal class ImageButtonTemplateAttachedProperty :
         Button
     {
 

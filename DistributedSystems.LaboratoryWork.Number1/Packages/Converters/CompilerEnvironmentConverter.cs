@@ -11,15 +11,17 @@ using static DistributedSystems.LaboratoryWork.Number1.Packages.Types.CompilerEn
 
 namespace DistributedSystems.LaboratoryWork.Number1.Packages.Converters
 {
-    class CompilerEnvironmentConverter :
+    internal sealed class CompilerEnvironmentConverter :
        MultiValueConverterBase<CompilerEnvironmentConverter>
     {
         public override object? Convert(object[] values, Type targetType, object? parameter, CultureInfo culture)
         {
+           /* 
             if (values.Length != 1)
             {
-               // throw new ArgumentException("Invalid count of values!");
+               //throw new ArgumentException("Invalid count of values!");
             }
+           */
 
             string res = "";
             var instructions = (ObservableCollection<Instruction>)values[0];
@@ -32,8 +34,13 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Converters
 
         public override object[] ConvertBack(object? value, Type[] targetTypes, object? parameter, CultureInfo culture)
         {
+            //TODO: Check: если значение операции больше доступного. если значение операнда больше доступного. если ничего внутри нет (regex). Если в value null или нет параметров
             //TODO: Replace to regex; 
             //TODO: throw exceptions
+            if (value==null)
+            {
+                throw new ArgumentException("Invalid count of values!");
+            }
 
             var instructions = new ObservableCollection<Instruction>();
 
@@ -42,14 +49,14 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Converters
             foreach (string instructionString in programString.Split("\r\n"))
             {
                 //TODO: check by regex
-                if (instructionString.Length < 18) continue;
+                if (instructionString.Length < 15) continue;
                 var instructionPart = instructionString.Substring(1, instructionString.Length - 2).Split(">,<");
 
-                var instruction = new CompilerEnvironmentTypes.Instruction();
-                instruction.Operand1 = Int32.Parse(instructionPart[0]);
-                instruction.Operand2 = Int32.Parse(instructionPart[1]);
-                instruction.Operand3 = Int32.Parse(instructionPart[2]);
-                instruction.Operation = Int32.Parse(instructionPart[3]);
+                var instruction = new Instruction();
+                instruction.Operand1 = int.Parse(instructionPart[0]);
+                instruction.Operand2 = int.Parse(instructionPart[1]);
+                instruction.Operand3 = int.Parse(instructionPart[2]);
+                instruction.Operation = int.Parse(instructionPart[3]);
                 instructions.Add(instruction);
             }
 

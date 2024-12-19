@@ -9,7 +9,7 @@ using System.Windows.Navigation;
 
 namespace DistributedSystems.LaboratoryWork.Nuget.Converters
 {
-    internal class EqualsNullConverter :
+    public sealed class EqualsNullConverter :
         MultiValueConverterBase<EqualsNullConverter>
     {
         public override object? Convert(object[] values, Type targetType, object? parameter, CultureInfo culture)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DistributedSystems.LaboratoryWork.Number1.Utils.Numbers
 {
-    internal class NumberSystemTransformations
+    public sealed class NumberSystemTransformations
     {
         public static Int32 ConvertNumberFromBase(string input, int fromBase)
         {

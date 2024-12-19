@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
 {
-    public sealed class NumericKeyboardTypes
+    internal sealed class NumericKeyboardTypes
     {
         public static class ButtonTags
         {

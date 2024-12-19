@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DistributedSystems.LaboratoryWork.Nuget.Converters
 {
-    internal class OrderRelationConverter :
+    public sealed class OrderRelationConverter :
          MultiValueConverterBase<OrderRelationConverter>
     {
         public override object? Convert(object[] values, Type targetType, object? parameter, CultureInfo culture)

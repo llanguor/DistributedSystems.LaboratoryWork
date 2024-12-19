@@ -123,6 +123,14 @@
             "DryIoc.dll": {
               "target": "Package",
               "version": "[5.4.3, )"
+            },
+            "Microsoft.Extensions.Logging": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Microsoft.Extensions.Logging.Console": {
+              "target": "Package",
+              "version": "[9.0.0, )"
             }
           },
           "imports": [

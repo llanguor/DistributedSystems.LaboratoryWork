@@ -8,7 +8,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
 {
     public sealed class LetterKeyboardTypes
     {
-        public static class ButtonTags
+        internal static class ButtonTags
         {
             public const string Clear = "<";
             public const string ClearAll = "Clear";
