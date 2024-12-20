@@ -1,5 +1,9 @@
 ﻿using Accessibility;
 using DistributedSystems.LaboratoryWork.Nuget.Command;
+using DistributedSystems.LaboratoryWork.Number1.Utils.Logger;
+using DistributedSystems.LaboratoryWork.Number1.Utils.Numbers;
+using DryIoc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
@@ -12,6 +16,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
+
 
 namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
 {
@@ -30,19 +35,19 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
 
             private static List<Lazy<MethodDelegate>>? _operationsList;
 
-            private Dictionary<int, object?> _registers;
+            private SortedDictionary<int, int> _registers;
+
+            private Logger _logger;
 
             #endregion
 
 
             #region Properties
 
-            public object? this[int key]
+            public int this[int key]
             {
-                get
-                {
-                    return _registers[key];
-                }
+                get => _registers[key];
+                set => _registers[key] = value;
             }
 
             #endregion
@@ -52,7 +57,9 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
 
             public Registers()
             {
-                _registers = new Dictionary<int, object?>();
+                _registers = [];
+
+                _logger = App.Container.Resolve<Logger>();
 
                 _operationsList =
                 [
@@ -96,20 +103,27 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
 
             public void ExecuteMethod(int operand1Key, int operand2Key, int operand3Key, int operationId)
             {
-                if (!_registers.ContainsKey(operand1Key))
-                    _registers.Add(operand1Key, null);
+                if (operand1Key > 511 || operand1Key < 0) 
+                    throw new ArgumentOutOfRangeException(nameof(operand1Key));
+                if (operand2Key > 511 || operand2Key < 0) 
+                    throw new ArgumentOutOfRangeException(nameof(operand2Key));
+                if (operand3Key > 511 || operand3Key < 0) 
+                    throw new ArgumentOutOfRangeException(nameof(operand3Key));
+                if (operationId > 24 || operationId < 0) 
+                    throw new ArgumentOutOfRangeException(nameof(operationId));
+
+                if(!_registers.ContainsKey(operand1Key))
+                    _registers.Add(operand1Key, default (int));
                 if (!_registers.ContainsKey(operand2Key))
-                    _registers.Add(operand2Key, null);
+                    _registers.Add(operand2Key, default(int));
                 if (!_registers.ContainsKey(operand3Key))
-                    _registers.Add(operand3Key, null);
+                    _registers.Add(operand3Key, default(int));
 
                 var operationMethod = _operationsList![operationId].Value;
-                operationMethod(operand1Key, operand2Key, operand3Key);
-            }
 
-            private void ThrowIfIncorrectParameter(int operand1Key, int operand2Key, int operand3Key)
-            {
-                
+                _logger.Log($"Method {operationId} is being executed");
+                operationMethod(operand1Key, operand2Key, operand3Key);
+                _logger.Log($"Method {operationId} has finished executing.");
             }
 
             #endregion
@@ -117,130 +131,171 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
 
             #region Methods for registers
 
+            //TODO: Exceptions
+
             private void MethodId0(int operand1Key, int operand2Key, int operand3Key)
             {
-                _registers[operand1Key] = 7;
-                //MessageBox.Show(_registers[operand1Key]!.ToString());
+                int numberSystem = Convert.ToInt32(_registers[operand1Key]);
+                _logger.Log($"Register's values in {numberSystem} number system");
+
+                foreach (KeyValuePair<int, int> pair in _registers)
+                {
+                    int value = Convert.ToInt32(pair.Value);
+                    string result = NumberSystemTransformations.ConvertNumberToBase(value, numberSystem);
+
+                    _logger.Log($"{pair.Key}: {result}"); 
+                }
             }
 
             private void MethodId1(int operand1Key, int operand2Key, int operand3Key)
             {
-
+                _registers[operand3Key] = ~_registers[operand1Key];
             }
 
             private void MethodId2(int operand1Key, int operand2Key, int operand3Key)
             {
-
+                _registers[operand3Key] = _registers[operand1Key] | _registers[operand2Key];
             }
 
             private void MethodId3(int operand1Key, int operand2Key, int operand3Key)
             {
-
+                _registers[operand3Key] = _registers[operand1Key] & _registers[operand2Key];
             }
 
             private void MethodId4(int operand1Key, int operand2Key, int operand3Key)
             {
-
+                _registers[operand3Key] = _registers[operand1Key] ^ _registers[operand2Key];
             }
 
             private void MethodId5(int operand1Key, int operand2Key, int operand3Key)
             {
-
+                _registers[operand3Key] = ~_registers[operand1Key] | _registers[operand2Key];
             }
 
             private void MethodId6(int operand1Key, int operand2Key, int operand3Key)
             {
-
+                _registers[operand3Key] = ~(~_registers[operand1Key] | _registers[operand2Key]);
             }
 
             private void MethodId7(int operand1Key, int operand2Key, int operand3Key)
             {
-
+                _registers[operand3Key] =
+                    (~_registers[operand1Key] & ~_registers[operand2Key]) |
+                    (_registers[operand1Key] & _registers[operand2Key]);
             }
 
             private void MethodId8(int operand1Key, int operand2Key, int operand3Key)
             {
-
+                _registers[operand3Key] = ~(_registers[operand1Key] | _registers[operand2Key]);
             }
 
             private void MethodId9(int operand1Key, int operand2Key, int operand3Key)
             {
-
+                _registers[operand3Key] = ~(_registers[operand1Key] & _registers[operand2Key]);
             }
 
             private void MethodId10(int operand1Key, int operand2Key, int operand3Key)
             {
-
+                _registers[operand3Key] = _registers[operand1Key] + _registers[operand2Key];
             }
 
             private void MethodId11(int operand1Key, int operand2Key, int operand3Key)
             {
-
+                _registers[operand3Key] = _registers[operand1Key] - _registers[operand2Key];
             }
 
             private void MethodId12(int operand1Key, int operand2Key, int operand3Key)
             {
-
+                _registers[operand3Key] = _registers[operand1Key] * _registers[operand2Key];
             }
 
             private void MethodId13(int operand1Key, int operand2Key, int operand3Key)
             {
-
+                _registers[operand3Key] = _registers[operand1Key] / _registers[operand2Key];
             }
 
             private void MethodId14(int operand1Key, int operand2Key, int operand3Key)
             {
-
+                _registers[operand3Key] = _registers[operand1Key] % _registers[operand2Key];
             }
 
             private void MethodId15(int operand1Key, int operand2Key, int operand3Key)
             {
-
+                (_registers[operand1Key], _registers[operand2Key]) = (_registers[operand2Key], _registers[operand1Key]);
             }
 
             private void MethodId16(int operand1Key, int operand2Key, int operand3Key)
             {
+                //255 - маска для выделения одного байта
+                //byteNumber*8 - сдвиг на нужное количество байтов
+                
+                int byteIndex = _registers[operand2Key];
+                if (byteIndex < 0 || byteIndex > 3) throw new ArgumentException("In a 32 bit number there are only 4 bytes");
 
+                int byteValue = (_registers[operand3Key] >> byteIndex * 8) & 255;  // Извлечение третьего байта
+                _registers[operand1Key] &= ~(255 << byteIndex * 8);                // Маска для обнуления байта
+                _registers[operand1Key] |= (byteValue << byteIndex * 8);           // Запись байта на нужное место
             }
 
             private void MethodId17(int operand1Key, int operand2Key, int operand3Key)
             {
+                int numberSystem = Convert.ToInt32(_registers[operand2Key]);
+                int value = Convert.ToInt32(_registers[operand1Key]);
+                string result = NumberSystemTransformations.ConvertNumberToBase(value, numberSystem);
 
+                _logger.Log($"Value in operand {operand1Key} in {numberSystem} number system: {result}");
+                
             }
 
             private void MethodId18(int operand1Key, int operand2Key, int operand3Key)
             {
-
+                //ввод с клавиатуры
             }
 
             private void MethodId19(int operand1Key, int operand2Key, int operand3Key)
             {
+                int value = _registers[operand1Key]; 
+                int degree = 0;
 
+                while ((value & 1) == 0) //Двигаем число вправо пока младший бит = 0
+                {
+                    degree++;
+                    value >>= 1;
+                }
+
+                _registers[operand3Key] = 1 << degree; // 2^p
             }
 
             private void MethodId20(int operand1Key, int operand2Key, int operand3Key)
             {
-
+                _registers[operand3Key] = _registers[operand1Key] << _registers[operand2Key];
             }
 
             private void MethodId21(int operand1Key, int operand2Key, int operand3Key)
             {
-
+                _registers[operand3Key] = _registers[operand1Key] >> _registers[operand2Key];
             }
 
             private void MethodId22(int operand1Key, int operand2Key, int operand3Key)
             {
+                int value = _registers[operand1Key]; 
+                int shift = _registers[operand2Key];
+                shift %= 32; // чтобы не было избыточного сдвига (для 32 битных чисел)
+                _registers[operand3Key] = (value << shift) | (value >> (32 - shift));
 
             }
 
             private void MethodId23(int operand1Key, int operand2Key, int operand3Key)
             {
-
+                int value = _registers[operand1Key];
+                int shift = _registers[operand2Key];
+                shift %= 32; // чтобы не было избыточного сдвига (для 32 битных чисел)
+                _registers[operand3Key] = (value >> shift) | (value << (32 - shift));
             }
 
             private void MethodId24(int operand1Key, int operand2Key, int operand3Key)
             {
-
+                _registers[operand1Key] = _registers[operand2Key];
             }
 
             #endregion

@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\App.xaml
-13-615587489
+142146308606
 
-351548554659
+38-1198304298
 2131766890092
-Packages\Controls\CompilerEnvironment.xaml;Packages\Controls\DialogHost.xaml;Packages\Controls\LetterKeyboard.xaml;Packages\Controls\MessageDialog.xaml;Packages\Controls\NumericKeyboard.xaml;Packages\Resources\ButtonsAppendDictionary.xaml;Packages\Resources\ButtonsDictionary.xaml;Packages\Resources\ScrollViewersDictionary.xaml;View\ButtonsPage.xaml;View\CompilerEnvironmentPage.xaml;View\LetterKeyboardPage.xaml;View\MainWindow.xaml;View\NumericKeyboardPage.xaml;
+Packages\Controls\CompilerEnvironment.xaml;Packages\Controls\DialogHost.xaml;Packages\Controls\LetterKeyboard.xaml;Packages\Controls\MessageDialog.xaml;Packages\Controls\NumericKeyboard.xaml;Packages\Resources\ButtonsAppendDictionary.xaml;Packages\Resources\ButtonsDictionary.xaml;Packages\Resources\ScrollViewersDictionary.xaml;View\Dialogs\CompilerEnvironmentDialog.xaml;View\Pages\ButtonsPage.xaml;View\Pages\CompilerEnvironmentPage.xaml;View\Pages\LetterKeyboardPage.xaml;View\Pages\NumericKeyboardPage.xaml;View\Windows\MainWindow.xaml;
 
-False
+True
 

@@ -3,8 +3,15 @@ using System.Configuration;
 using System.Data;
 using System.Windows;
 using DryIoc;
-using DistributedSystems.LaboratoryWork.Number1.ViewModel;
-using DistributedSystems.LaboratoryWork.Number1.View;
+using DistributedSystems.LaboratoryWork.Number1.View.Pages;
+using DistributedSystems.LaboratoryWork.Number1.View.Windows;
+using DistributedSystems.LaboratoryWork.Number1.View.Dialogs;
+using DistributedSystems.LaboratoryWork.Number1.ViewModel.Pages;
+using DistributedSystems.LaboratoryWork.Number1.ViewModel.Windows;
+using DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs;
+
+using Microsoft.Extensions.Logging;
+using DistributedSystems.LaboratoryWork.Number1.Utils.Logger;
 
 namespace DistributedSystems.LaboratoryWork.Number1
 {
@@ -57,6 +64,10 @@ namespace DistributedSystems.LaboratoryWork.Number1
 
         private App RegisterLogging()
         {
+            // using ILoggerFactory factory = LoggerFactory.Create(builder => builder.AddConsole());
+            // ILogger logger = factory.CreateLogger("Program");
+
+            Container.Register<Logger>();
             return this;
         }
 
@@ -83,6 +94,7 @@ namespace DistributedSystems.LaboratoryWork.Number1
 
         private App RegisterDialogsViews()
         {
+            Container.Register<CompilerEnvironmentDialog>(Reuse.Singleton);
             return this;
         }
 
@@ -111,6 +123,7 @@ namespace DistributedSystems.LaboratoryWork.Number1
 
         private App RegisterDialogsViewModels()
         {
+            Container.Register<CompilerEnvironmentDialogViewModel>(Reuse.Singleton);
             return this;
         }
 
@@ -126,13 +139,11 @@ namespace DistributedSystems.LaboratoryWork.Number1
             var navigationManager = new NavigationManager();
             Container.RegisterInstance(navigationManager);
 
-
             navigationManager
                 .AddMapping<ButtonsPage, ButtonsPageViewModel>()
                 .AddMapping<NumericKeyboardPage, NumericKeyboardPageViewModel>()
                 .AddMapping<LetterKeyboardPage, LetterKeyboardPageViewModel>()
                 .AddMapping<CompilerEnvironmentPage, CompilerEnvironmentPageViewModel>();
-
 
             return this;
         }

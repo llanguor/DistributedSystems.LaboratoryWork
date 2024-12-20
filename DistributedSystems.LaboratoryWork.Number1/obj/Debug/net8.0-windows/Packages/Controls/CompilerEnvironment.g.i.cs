@@ -70,8 +70,8 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/DistributedSystems.LaboratoryWork.Number1;V1.0.0.0;component/packages/controls/c" +
-                    "ompilerenvironment.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/DistributedSystems.LaboratoryWork.Number1;component/packages/controls/compileren" +
+                    "vironment.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\Packages\Controls\CompilerEnvironment.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

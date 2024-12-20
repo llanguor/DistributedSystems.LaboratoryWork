@@ -7,9 +7,10 @@ FC:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystem
 FC:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\Packages\Controls\NumericKeyboard.xaml;;
 FC:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\Packages\Resources\ButtonsDictionary.xaml;;
 FC:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\Packages\Resources\ScrollViewersDictionary.xaml;;
-FC:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\View\ButtonsPage.xaml;;
-FC:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\View\CompilerEnvironmentPage.xaml;;
-FC:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\View\LetterKeyboardPage.xaml;;
-FC:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\View\MainWindow.xaml;;
-FC:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\View\NumericKeyboardPage.xaml;;
+FC:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\View\Pages\ButtonsPage.xaml;;
+FC:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\View\Pages\CompilerEnvironmentPage.xaml;;
+FC:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\View\Pages\LetterKeyboardPage.xaml;;
+FC:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\View\Pages\NumericKeyboardPage.xaml;;
+FC:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\View\Windows\MainWindow.xaml;;
+FC:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\View\Dialogs\CompilerEnvironmentDialog.xaml;;
 

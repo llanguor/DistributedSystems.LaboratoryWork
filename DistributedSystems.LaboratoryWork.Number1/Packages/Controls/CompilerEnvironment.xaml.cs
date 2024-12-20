@@ -1,6 +1,9 @@
 ﻿using DistributedSystems.LaboratoryWork.Nuget.Command;
 using DistributedSystems.LaboratoryWork.Number1.Packages.Types;
 using DistributedSystems.LaboratoryWork.Number1.Utils.Numbers;
+using DistributedSystems.LaboratoryWork.Number1.View.Dialogs;
+using DistributedSystems.LaboratoryWork.Number1.View.Windows;
+using DryIoc;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -115,16 +118,20 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
 
 
             //процесс исполнения
+           
+
             using var binaryReader = new BinaryReader(memoryStream);
             long? readNumber;
             int operand1Key, operand2Key, operand3Key, operationId;
 
             memoryStream.Position = 0;
             Registers registers = new Registers();
+            registers[0] = 10;
+
 
             while ((readNumber = binaryReader.ReadInt64()) != null)
             {
-                if (readNumber == 0) break;
+                if (readNumber == 0) break; 
 
                 NumberToBytesTransformations.ConvertToValues(
                     readNumber.Value,
@@ -136,11 +143,14 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
                 registers.ExecuteMethod(operand1Key, operand2Key, operand3Key, operationId);
 
                 
-               // operationMethod(ref registers, operand1Key, operand2Key, operand3Key);
-                // MessageBox.Show(registers[operand1Key].ToString());
+                var dialogWindow = App.Container.Resolve<CompilerEnvironmentDialog>();
+                dialogWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                dialogWindow.ShowDialog();
             }
             
-        }
+        }//TODO: потом исполнение переедет в Dialog. Внутри сделать клаву как я уже делал ранее. И консоль
+        //то есть совместить два моих окна. Ввод с клавы когда этого запросит прога. Если нет ввода то затемнять?
+        //вот так будет делаться ввод
 
         #endregion
     }

@@ -22,16 +22,19 @@
     <Compile Update="Packages\Controls\NumericKeyboard.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\ButtonsPage.xaml.cs">
+    <Compile Update="View\Pages\ButtonsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\CompilerEnvironmentPage.xaml.cs">
+    <Compile Update="View\Pages\CompilerEnvironmentPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\LetterKeyboardPage.xaml.cs">
+    <Compile Update="View\Pages\LetterKeyboardPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\NumericKeyboardPage.xaml.cs">
+    <Compile Update="View\Pages\NumericKeyboardPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Dialogs\CompilerEnvironmentDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -60,19 +63,22 @@
     <Page Update="Packages\Resources\ScrollViewersDictionary.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\CompilerEnvironmentPage.xaml">
+    <Page Update="View\Pages\CompilerEnvironmentPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\LetterKeyboardPage.xaml">
+    <Page Update="View\Pages\LetterKeyboardPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\MainWindow.xaml">
+    <Page Update="View\Dialogs\CompilerEnvironmentDialog.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\ButtonsPage.xaml">
+    <Page Update="View\Windows\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\NumericKeyboardPage.xaml">
+    <Page Update="View\Pages\ButtonsPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Pages\NumericKeyboardPage.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

@@ -1,0 +1,71 @@
+﻿<Page x:Class="DistributedSystems.LaboratoryWork.Number1.View.Pages.LetterKeyboardPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DistributedSystems.LaboratoryWork.Number1.View"
+      xmlns:controls="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Controls"
+      mc:Ignorable="d" 
+      Title="LetterKeyboardPage">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Packages/Resources/ButtonsDictionary.xaml"/>
+                <ResourceDictionary Source="../../Packages/Resources/ScrollViewersDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+               Padding="0,15,0,0"
+               Text="{Binding OutputText}"
+               TextAlignment="Center"
+               Foreground="DimGray"
+               FontSize="25">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                    <Style.Resources>
+
+                        <VisualBrush x:Key="VoidHint" AlignmentX="Center" AlignmentY="Center" Stretch="None">
+                            <VisualBrush.Visual>
+                                <Label FontSize="25" Padding="0,0,0,5" VerticalAlignment="Center" Content="Please Input Some Text" Foreground="DimGray" />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Style.Resources>
+                    <Style.Triggers>
+                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                            <Setter Property="Background" Value="{StaticResource VoidHint}" />
+                        </Trigger>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter Property="Background" Value="{StaticResource VoidHint}" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <controls:LetterKeyboard Grid.Row="2"
+                                 
+                                  ButtonsStyle="{StaticResource ResourceKey=ForegroundButtonStyle}"
+                                  ButtonClearStyle="{StaticResource ResourceKey=ForegroundButtonStyle}"
+                                  ButtonClearAllStyle="{StaticResource ResourceKey=ButtonStyle1}"
+                                  ButtonLanguageStyle="{StaticResource ResourceKey=ButtonStyle1}"
+                                  ButtonEnterStyle="{StaticResource ResourceKey=ButtonStyle1}"
+                                  ButtonCapsLockOffStyle="{StaticResource ResourceKey=ButtonStyle1}"
+                                  ButtonCapsLockOnStyle="{StaticResource ResourceKey=ButtonStyle2}"
+                                 
+                                  ButtonEnterCommand="{Binding ButtonEnterCommand}"
+                                  ButtonsCommand="{Binding ButtonCommand}"
+                                  ButtonClearCommand="{Binding ButtonClearCommand}"
+                                  ButtonClearAllCommand="{Binding ButtonClearAllCommand}">
+
+        </controls:LetterKeyboard>
+    </Grid>
+</Page>
