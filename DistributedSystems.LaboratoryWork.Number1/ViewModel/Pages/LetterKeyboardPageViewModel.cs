@@ -1,6 +1,6 @@
 ﻿using DistributedSystems.LaboratoryWork.Nuget.Command;
-using DistributedSystems.LaboratoryWork.Number1.Packages.Utils.Navigations;
-using DistributedSystems.LaboratoryWork.Number1.ViewModel.Base;
+using DistributedSystems.LaboratoryWork.Nuget.Navigation;
+using DistributedSystems.LaboratoryWork.Nuget.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +19,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Pages
         public LetterKeyboardPageViewModel(NavigationManager navigationManager) :
            base(navigationManager)
         {
-            _buttonCommand = new Lazy<ICommand>(() => new RelayCommand((prop) => ButtonCommandExecute(prop.ToString())));
+            _buttonCommand = new Lazy<ICommand>(() => new RelayCommand((prop) => ButtonCommandExecute(prop!.ToString()!)));
             _buttonClearCommand = new Lazy<ICommand>(() => new RelayCommand(_ => ButtonClearCommandExecute()));
             _buttonClearAllCommand = new Lazy<ICommand>(() => new RelayCommand(_ => ButtonClearAllCommandExecute()));
             _buttonEnterCommand = new Lazy<ICommand>(() => new RelayCommand(_ => ButtonEnterCommandExecute()));

@@ -18,8 +18,10 @@
                     Opacity="{Binding BackgroundOpacity,  RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:DialogHost}}" 
                     CornerRadius="{Binding DialogCornerRadius, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:DialogHost}}" 
                     Background="White">
-                    <ContentPresenter/>
+                    
                 </Border>
+                
+                <ContentPresenter/>
             </Grid>
         </ControlTemplate>
     </UserControl.Template>

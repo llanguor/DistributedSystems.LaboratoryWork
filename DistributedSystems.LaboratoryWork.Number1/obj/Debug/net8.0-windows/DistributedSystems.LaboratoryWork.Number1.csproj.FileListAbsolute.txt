@@ -27,8 +27,6 @@ C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems
 C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\Packages\Resources\ScrollViewersDictionary.baml
 C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\Packages\Controls\DialogHost.g.cs
 C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\Packages\Controls\DialogHost.baml
-C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\Packages\Controls\MessageDialog.g.cs
-C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\Packages\Controls\MessageDialog.baml
 C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\Packages\Controls\NumericKeyboard.g.cs
 C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\Packages\Controls\NumericKeyboard.baml
 C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\Packages\Resources\ButtonsAppendDictionary.baml
@@ -65,3 +63,9 @@ C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems
 C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\View\Windows\MainWindow.baml
 C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\View\Dialogs\CompilerEnvironmentDialog.g.cs
 C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\View\Dialogs\CompilerEnvironmentDialog.baml
+C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\View\Dialogs\MessageDialog.g.cs
+C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\View\Dialogs\MessageDialog.baml
+C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\Packages\Controls\Spinner.g.cs
+C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\Packages\Controls\Spinner.baml
+C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\View\Dialogs\SpinnerDialog.g.cs
+C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\View\Dialogs\SpinnerDialog.baml

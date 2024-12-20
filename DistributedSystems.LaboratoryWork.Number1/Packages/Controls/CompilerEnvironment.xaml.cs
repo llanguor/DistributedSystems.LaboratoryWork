@@ -1,8 +1,10 @@
 ﻿using DistributedSystems.LaboratoryWork.Nuget.Command;
+using DistributedSystems.LaboratoryWork.Nuget.Dialog;
 using DistributedSystems.LaboratoryWork.Number1.Packages.Types;
 using DistributedSystems.LaboratoryWork.Number1.Utils.Numbers;
 using DistributedSystems.LaboratoryWork.Number1.View.Dialogs;
 using DistributedSystems.LaboratoryWork.Number1.View.Windows;
+using DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs;
 using DryIoc;
 using Microsoft.Win32;
 using System;
@@ -97,9 +99,31 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
 
         private void CompileCommandExecute()
         {
-            //сначала сделать диалог
+            /*
+            if (_dialogAware.ShowDialog(DialogAwareParameters.Builder.Create()
+            .ForDialogType<SpinnerDialogViewModel>()
+            .AddParameter(SpinnerDialogViewModel.Parameters.SpinnerItemsCount, 2)
+            .AddParameter(SpinnerDialogViewModel.Parameters.SpinnerRadiusCoefficient, 0.2)
+            .AddParameter(SpinnerDialogViewModel.Parameters.SpinnerColor, Brushes.LightGray)
+            .AddParameter(SpinnerDialogViewModel.Parameters.SpinnerRotationDirection, Spinner.RotationDirection.Counterclockwise)
+            .AddParameter(SpinnerDialogViewModel.Parameters.SpinnerSpeed, new TimeSpan(1000))
+            .AddParameter(SpinnerDialogViewModel.Parameters.Text, "Please wait...")
+            .AddParameter(SpinnerDialogViewModel.Parameters.FontSize, 30)
+            .Build()))
+            {
+                System.Windows.MessageBox.Show("Dialog result: ACCEPTED");
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("Dialog result: CANCELLED");
+            }
+            */
+
+            
             //все это должно быть ассинхронным
 
+
+            /*
             //процесс компиляции
             using var memoryStream = new MemoryStream(new byte[255]);
 
@@ -131,7 +155,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
 
             while ((readNumber = binaryReader.ReadInt64()) != null)
             {
-                if (readNumber == 0) break; 
+                if (readNumber == 0) break;
 
                 NumberToBytesTransformations.ConvertToValues(
                     readNumber.Value,
@@ -142,13 +166,12 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
 
                 registers.ExecuteMethod(operand1Key, operand2Key, operand3Key, operationId);
 
-                
-                var dialogWindow = App.Container.Resolve<CompilerEnvironmentDialog>();
-                dialogWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                dialogWindow.ShowDialog();
+
             }
-            
-        }//TODO: потом исполнение переедет в Dialog. Внутри сделать клаву как я уже делал ранее. И консоль
+            */
+        }
+        
+        //TODO: потом исполнение переедет в Dialog. Внутри сделать клаву как я уже делал ранее. И консоль
         //то есть совместить два моих окна. Ввод с клавы когда этого запросит прога. Если нет ввода то затемнять?
         //вот так будет делаться ввод
 

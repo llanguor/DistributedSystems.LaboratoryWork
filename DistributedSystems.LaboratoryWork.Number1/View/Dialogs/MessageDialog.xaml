@@ -1,0 +1,121 @@
+﻿<Window x:Class="DistributedSystems.LaboratoryWork.Number1.View.Dialogs.MessageDialog"
+        x:Name="MessageDialogWindowObject"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DistributedSystems.LaboratoryWork.Number1.View.Dialogs"
+        xmlns:controls="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Controls"
+        xmlns:attached="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Attached"
+        xmlns:converters="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Converters"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:types="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Types"
+        mc:Ignorable="d" 
+        FontSize="24"
+        Title="MessageDialog" Height="320" Width="440">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Packages/Resources/ScrollViewersDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <controls:DialogHost 
+            BackgroundOpacity="0.95"
+            DialogCornerRadius ="0, 0, 20, 20"
+            BackgroundCommand="{Binding DialogHostCommand}">
+
+            <ScrollViewer
+                HorizontalScrollBarVisibility="{Binding ScrollViewerVisible}"
+                VerticalScrollBarVisibility="{Binding ScrollViewerVisible}"
+                Margin="0,15,0,25"
+                Style="{DynamicResource ResourceKey=ScrollViewerStyle}"
+                attached:ScrollViewerTemplateAttachedProperty.ScrollsColor="{Binding ScrollViewerBackground}">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="4*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock 
+                        TextWrapping="WrapWithOverflow"
+                        Margin="10"
+                        Grid.ColumnSpan="2"
+                        Grid.Row="0"
+                        FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MessageDialog}}"
+                        Text="{Binding Text}" 
+                        TextAlignment="Center"/>
+
+
+                    <Button 
+                        Margin="10,10,5,0"
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        Command="{Binding PositiveCommandSupplemented, Mode=OneWay}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:MessageDialog}}">
+                        <Button.Content>
+                            <MultiBinding Converter="{converters:MessageDialogTypeConverter}">
+                                <MultiBinding.Bindings>
+                                    <Binding Path="DialogTypeValue"/>
+                                    <Binding>
+                                        <Binding.Source>
+                                            <system:Boolean>
+                                                True
+                                            </system:Boolean>
+                                        </Binding.Source>
+                                    </Binding>
+                                </MultiBinding.Bindings>
+                            </MultiBinding>
+                        </Button.Content>
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding DialogTypeValue}" Value="{x:Static types:MessageDialogTypes+DialogType.Ok}">
+                                        <Setter Property="Grid.ColumnSpan" Value="2"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <Button 
+                        Margin="10,10,5,0"
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        Command="{Binding NegativeCommandSupplemented, Mode=OneWay}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:MessageDialog}}">
+                        <Button.Content>
+                            <MultiBinding Converter="{converters:MessageDialogTypeConverter}">
+                                <MultiBinding.Bindings>
+                                    <Binding Path="DialogTypeValue"/>
+                                    <Binding>
+                                        <Binding.Source>
+                                            <system:Boolean>
+                                                False
+                                            </system:Boolean>
+                                        </Binding.Source>
+                                    </Binding>
+                                </MultiBinding.Bindings>
+                            </MultiBinding>
+                        </Button.Content>
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding DialogTypeValue}" Value="{x:Static types:MessageDialogTypes+DialogType.Ok}">
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Grid>
+            </ScrollViewer>
+        </controls:DialogHost>
+    </Grid>
+</Window>

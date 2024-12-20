@@ -10,8 +10,23 @@
              d:DesignHeight="450" d:DesignWidth="800" FontSize="13">
     <DockPanel>
         <Menu Height="40" DockPanel.Dock="Top" FontSize="13" Padding="5,10,0,0">
-            <MenuItem Header="Open" Command="{Binding OpenFileCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:CompilerEnvironment}}"/>
-            <MenuItem Header="Compile" Command="{Binding CompileCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:CompilerEnvironment}}"/>
+            <MenuItem 
+                Padding="2,1,12,0" 
+                Header="Open" 
+                Command="{Binding OpenFileCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:CompilerEnvironment}}">
+                <MenuItem.Icon>
+                    <Image Source="/DistributedSystems.LaboratoryWork.Number1;component/Meta/FolderIcon.ico"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            
+            <MenuItem 
+                Padding="2,1,12,0" 
+                Header="Compile" 
+                Command="{Binding CompileCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:CompilerEnvironment}}">
+                <MenuItem.Icon>
+                    <Image Source="/DistributedSystems.LaboratoryWork.Number1;component/Meta/CompileIcon.ico"/>
+                </MenuItem.Icon>
+            </MenuItem>
         </Menu>
         
         <Grid>

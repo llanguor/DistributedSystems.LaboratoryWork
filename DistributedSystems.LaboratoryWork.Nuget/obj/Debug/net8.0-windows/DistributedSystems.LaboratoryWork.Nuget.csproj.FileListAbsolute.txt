@@ -10,3 +10,4 @@ C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems
 C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Nuget\obj\Debug\net8.0-windows\refint\DistributedSystems.LaboratoryWork.Nuget.dll
 C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Nuget\obj\Debug\net8.0-windows\DistributedSystems.LaboratoryWork.Nuget.pdb
 C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Nuget\obj\Debug\net8.0-windows\ref\DistributedSystems.LaboratoryWork.Nuget.dll
+C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Nuget\obj\Debug\net8.0-windows\DistributedSystems.LaboratoryWork.Nuget.csproj.AssemblyReference.cache

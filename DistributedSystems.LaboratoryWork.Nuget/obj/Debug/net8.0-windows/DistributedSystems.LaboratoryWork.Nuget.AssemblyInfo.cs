@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DistributedSystems.LaboratoryWork.Nuget")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5afea731bc61f2d7c3c12e446a5c576f95da189e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fb2d7ecd6a6fe14b43d0035f4c58d09b0d8f4035")]
 [assembly: System.Reflection.AssemblyProductAttribute("DistributedSystems.LaboratoryWork.Nuget")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DistributedSystems.LaboratoryWork.Nuget")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

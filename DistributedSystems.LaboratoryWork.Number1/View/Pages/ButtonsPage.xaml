@@ -28,9 +28,9 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="150"/>
         </Grid.RowDefinitions>
 
         <Button 
@@ -86,20 +86,30 @@
             <TextBlock FontSize="20" Width="170" Height="30" Text="Some content" TextAlignment="Center"></TextBlock>
         </controls:DialogHost>
 
-        <controls:MessageDialog
+        <Button
             Grid.Row="1"
             Grid.Column="1"
-            FontSize="14"
-            DialogTypeValue="Ok"
-            ScrollViewerBackground="DarkGray"
-            ScrollViewerVisible="Auto"
-            Text="Some funny text"
-            PositiveCommand="{Binding Path=PositiveCommand}"
-            NegativeCommand="{Binding Path=NegativeCommand}"/>
+            FontSize="15"
+            Content="Открыть MessageDialog"
+            Command="{Binding ShowMessageDialog}"/>
 
+        <Button
+         Grid.Row="1"
+         Grid.Column="2"
+         FontSize="15"
+         Content="Открыть SpinnerDialog"
+         Command="{Binding ShowSpinnerDialog}"/>
 
-
-
-
+        <Viewbox  
+            Margin="5"
+            Grid.Row="2"
+            Grid.Column="0"
+            Stretch="Uniform">
+            <controls:Spinner 
+                ItemsCount="4"
+                ItemsBrush="DarkGray"
+                Direction="Counterclockwise"
+                RadiusCoefficient="{Binding SpinnerRadiusCoefficient, Mode=OneWay}" />
+        </Viewbox>
     </Grid>
 </Page>

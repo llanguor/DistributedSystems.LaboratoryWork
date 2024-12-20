@@ -217,6 +217,9 @@
         }
       },
       "DistributedSystems.LaboratoryWork.Nuget/1.0.0": {
+        "dependencies": {
+          "DryIoc.dll": "5.4.3"
+        },
         "runtime": {
           "DistributedSystems.LaboratoryWork.Nuget.dll": {}
         }

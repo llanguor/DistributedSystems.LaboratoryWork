@@ -16,10 +16,16 @@
     <Compile Update="Packages\Controls\LetterKeyboard.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Packages\Controls\MessageDialog.xaml.cs">
+    <Compile Update="Packages\Controls\NumericKeyboard.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Packages\Controls\NumericKeyboard.xaml.cs">
+    <Compile Update="Packages\Controls\Spinner.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Dialogs\MessageDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Dialogs\SpinnerDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Pages\ButtonsPage.xaml.cs">
@@ -48,10 +54,10 @@
     <Page Update="Packages\Controls\LetterKeyboard.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Packages\Controls\MessageDialog.xaml">
+    <Page Update="Packages\Controls\NumericKeyboard.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Packages\Controls\NumericKeyboard.xaml">
+    <Page Update="Packages\Controls\Spinner.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Packages\Resources\ButtonsAppendDictionary.xaml">
@@ -61,6 +67,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Packages\Resources\ScrollViewersDictionary.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Dialogs\MessageDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Dialogs\SpinnerDialog.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Pages\CompilerEnvironmentPage.xaml">

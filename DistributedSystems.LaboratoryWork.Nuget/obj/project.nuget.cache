@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "xYgQE9pzf/BY/8LmMK6jk6PcVCJEhfSmsDzmCvb4a6Ls37LbKLLG4Qahm+zdJY6wN1HgFBlUF5BipPr+k1TfCQ==",
+  "dgSpecHash": "fhvqHlOjkAq24WfOWSrg16OyQLcDmne/PT322PDJ4x1ar3jf6i3/445RwdvSwe01u3KT0YgpX4TvUHGFWra47A==",
   "success": true,
   "projectFilePath": "C:\\Users\\lifem\\source\\repos\\DistributedSystems.LaboratoryWork\\DistributedSystems.LaboratoryWork.Nuget\\DistributedSystems.LaboratoryWork.Nuget.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\lifem\\.nuget\\packages\\dryioc.dll\\5.4.3\\dryioc.dll.5.4.3.nupkg.sha512"
+  ],
   "logs": []
 }

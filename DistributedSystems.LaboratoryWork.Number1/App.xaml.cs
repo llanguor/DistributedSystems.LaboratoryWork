@@ -1,5 +1,4 @@
-﻿using DistributedSystems.LaboratoryWork.Number1.Packages.Utils.Navigations;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Data;
 using System.Windows;
 using DryIoc;
@@ -9,9 +8,10 @@ using DistributedSystems.LaboratoryWork.Number1.View.Dialogs;
 using DistributedSystems.LaboratoryWork.Number1.ViewModel.Pages;
 using DistributedSystems.LaboratoryWork.Number1.ViewModel.Windows;
 using DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs;
-
-using Microsoft.Extensions.Logging;
+using DistributedSystems.LaboratoryWork.Nuget.ViewModel;
+using DistributedSystems.LaboratoryWork.Nuget.Navigation;
 using DistributedSystems.LaboratoryWork.Number1.Utils.Logger;
+using DistributedSystems.LaboratoryWork.Nuget.Dialog;
 
 namespace DistributedSystems.LaboratoryWork.Number1
 {
@@ -53,6 +53,7 @@ namespace DistributedSystems.LaboratoryWork.Number1
                 .RegisterConfiguration()
                 .RegisterViews()
                 .RegisterViewModels()
+                .RegisterNavigationDialogAware()
                 .RegisterNavigation();
 
             Container.Resolve<MainWindow>().Show();
@@ -76,27 +77,42 @@ namespace DistributedSystems.LaboratoryWork.Number1
             return this;
         }
 
-        private App RegisterWindowsViews()
+        #endregion
+
+
+
+        #region Navigations Methods
+
+        private App RegisterNavigation()
         {
-            Container.Register<MainWindow>(Reuse.Singleton);
+            var navigationManager = new NavigationManager(Container);
+            Container.RegisterInstance(navigationManager);
+
+            navigationManager
+                .AddMapping<ButtonsPage, ButtonsPageViewModel>()
+                .AddMapping<NumericKeyboardPage, NumericKeyboardPageViewModel>()
+                .AddMapping<LetterKeyboardPage, LetterKeyboardPageViewModel>()
+                .AddMapping<CompilerEnvironmentPage, CompilerEnvironmentPageViewModel>();
 
             return this;
         }
 
-        private App RegisterPagesViews()
+        private App RegisterNavigationDialogAware()
         {
-            Container.Register<ButtonsPage>(Reuse.Singleton);
-            Container.Register<NumericKeyboardPage>(Reuse.Singleton);
-            Container.Register<LetterKeyboardPage>(Reuse.Singleton);
-            Container.Register<CompilerEnvironmentPage>(Reuse.Singleton);
+            var navigationManager = new NavigationManagerDialogAware(Container);
+            Container.RegisterInstance(navigationManager);
+            Container.RegisterMapping<IDialogAware, NavigationManagerDialogAware>();
+
+            navigationManager
+                .AddMapping<MessageDialog, MessageDialogViewModel>()
+                .AddMapping<SpinnerDialog, SpinnerDialogViewModel>();
+
             return this;
         }
 
-        private App RegisterDialogsViews()
-        {
-            Container.Register<CompilerEnvironmentDialog>(Reuse.Singleton);
-            return this;
-        }
+        #endregion
+
+        #region Views Methods
 
         private App RegisterViews()
         {
@@ -104,11 +120,23 @@ namespace DistributedSystems.LaboratoryWork.Number1
                 .RegisterPagesViews()
                 .RegisterDialogsViews();
         }
-
-        private App RegisterWindowsViewModels()
+        private App RegisterViewModels()
         {
-            Container.Register<MainWindowViewModel>(Reuse.Singleton);
+            return RegisterWindowsViewModels()
+                .RegisterPagesViewModels()
+                .RegisterDialogsViewModels();
+        }
 
+        #endregion
+
+        #region Pages Methods
+
+        private App RegisterPagesViews()
+        {
+            Container.Register<ButtonsPage>(Reuse.Singleton);
+            Container.Register<NumericKeyboardPage>(Reuse.Singleton);
+            Container.Register<LetterKeyboardPage>(Reuse.Singleton);
+            Container.Register<CompilerEnvironmentPage>(Reuse.Singleton);
             return this;
         }
 
@@ -121,34 +149,46 @@ namespace DistributedSystems.LaboratoryWork.Number1
             return this;
         }
 
-        private App RegisterDialogsViewModels()
+        #endregion
+
+        #region Dialogs Methods
+
+        private App RegisterDialogsViews()
         {
-            Container.Register<CompilerEnvironmentDialogViewModel>(Reuse.Singleton);
+            Container.Register<MessageDialog>(Reuse.Transient);
+            Container.Register<SpinnerDialog>(Reuse.Transient);
+            Container.Register<CompilerEnvironmentDialog>(Reuse.Transient);
             return this;
         }
 
-        private App RegisterViewModels()
+        private App RegisterDialogsViewModels()
         {
-            return RegisterWindowsViewModels()
-                .RegisterPagesViewModels()
-                .RegisterDialogsViewModels();
-        }
-
-        private App RegisterNavigation()
-        {
-            var navigationManager = new NavigationManager();
-            Container.RegisterInstance(navigationManager);
-
-            navigationManager
-                .AddMapping<ButtonsPage, ButtonsPageViewModel>()
-                .AddMapping<NumericKeyboardPage, NumericKeyboardPageViewModel>()
-                .AddMapping<LetterKeyboardPage, LetterKeyboardPageViewModel>()
-                .AddMapping<CompilerEnvironmentPage, CompilerEnvironmentPageViewModel>();
+            Container.Register<MessageDialogViewModel>(Reuse.Transient);
+            Container.Register<SpinnerDialogViewModel>(Reuse.Transient);
+            Container.Register<CompilerEnvironmentDialogViewModel>(Reuse.Transient);
 
             return this;
         }
 
         #endregion
+
+        #region Windows Methods
+
+        private App RegisterWindowsViews()
+        {
+            Container.Register<MainWindow>(Reuse.Singleton);
+
+            return this;
+        }
+
+        private App RegisterWindowsViewModels()
+        {
+            Container.Register<MainWindowViewModel>(Reuse.Singleton);
+
+            return this;
+        }
+
+        #endregion 
     }
 
 }

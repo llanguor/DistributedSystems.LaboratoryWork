@@ -1,5 +1,5 @@
-﻿using DistributedSystems.LaboratoryWork.Number1.Packages.Utils.Navigations;
-using DistributedSystems.LaboratoryWork.Number1.ViewModel.Base;
+﻿using DistributedSystems.LaboratoryWork.Nuget.Navigation;
+using DistributedSystems.LaboratoryWork.Nuget.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;

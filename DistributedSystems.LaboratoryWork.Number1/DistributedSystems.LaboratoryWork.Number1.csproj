@@ -10,6 +10,8 @@
 
   <ItemGroup>
     <None Remove="Meta\ButtonImage.png" />
+    <None Remove="Meta\CompileIcon.ico" />
+    <None Remove="Meta\FolderIcon.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,10 +26,8 @@
 
   <ItemGroup>
     <Resource Include="Meta\ButtonImage.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Utils\Dialog\" />
+    <Resource Include="Meta\CompileIcon.ico" />
+    <Resource Include="Meta\FolderIcon.ico" />
   </ItemGroup>
 
 </Project>

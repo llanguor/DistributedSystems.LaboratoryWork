@@ -1,4 +1,4 @@
-﻿using DistributedSystems.LaboratoryWork.Number1.Packages.Utils.Navigations;
+﻿using DistributedSystems.LaboratoryWork.Nuget.Navigation;
 using DistributedSystems.LaboratoryWork.Number1.View.Pages;
 using DistributedSystems.LaboratoryWork.Number1.View.Windows;
 using DistributedSystems.LaboratoryWork.Number1.ViewModel.Pages;
