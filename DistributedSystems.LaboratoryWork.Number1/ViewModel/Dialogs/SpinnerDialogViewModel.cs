@@ -45,7 +45,8 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs
             SpinnerRotationDirection = (Spinner.RotationDirection)parameters[Parameters.SpinnerRotationDirection]!;
             SpinnerSpeed = (TimeSpan)parameters[Parameters.SpinnerSpeed]!;
             Text = (parameters[Parameters.Text] as string)!;
-            FontSize = (int)parameters[Parameters.FontSize]!;            
+            FontSize = (int)parameters[Parameters.FontSize]!;
+            LoadingAnimationActive = true;
         }
 
         #endregion

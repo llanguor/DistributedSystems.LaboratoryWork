@@ -10,5 +10,7 @@ namespace DistributedSystems.LaboratoryWork.Nuget.Dialog
     public interface IDialogAware
     {
         bool ShowDialog(DialogAwareParameters dialogAwareParameters);
+
+        public Task<bool> ShowDialogAsync(DialogAwareParameters dialogParameters);
     }
 }

@@ -1,30 +1,19 @@
 ﻿using DistributedSystems.LaboratoryWork.Nuget.Command;
 using DistributedSystems.LaboratoryWork.Nuget.Dialog;
+using DistributedSystems.LaboratoryWork.Number1.Packages.Converters;
 using DistributedSystems.LaboratoryWork.Number1.Packages.Types;
 using DistributedSystems.LaboratoryWork.Number1.Utils.Numbers;
-using DistributedSystems.LaboratoryWork.Number1.View.Dialogs;
-using DistributedSystems.LaboratoryWork.Number1.View.Windows;
 using DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs;
 using DryIoc;
 using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Formats.Asn1;
+using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Reflection.PortableExecutable;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using static DistributedSystems.LaboratoryWork.Number1.Packages.Types.CompilerEnvironmentTypes;
 
 namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
@@ -37,8 +26,9 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
         public CompilerEnvironment()
         {
             InitializeComponent();
-
+            
             Instructions = new ObservableCollection<Instruction>();
+            _inputFromDialogCommand = new Lazy<ICommand>(() => new RelayCommand((value) => InputFromDialogCommandExecute(value)));
             _openFileCommand = new Lazy<ICommand>(() => new RelayCommand(_ => OpenFileCommandExecute()));
             _launchCommand = new Lazy<ICommand>(() => new RelayCommand(_ => LaunchCommandExecute()));
             _dialogAware = App.Container.Resolve<IDialogAware>();
@@ -46,8 +36,10 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
 
         #endregion
 
+        //TODO: универсализировать все структуры регионов
 
         #region Commands
+
 
         private readonly Lazy<ICommand> _launchCommand;
 
@@ -59,12 +51,20 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
         public ICommand OpenFileCommand
            => _openFileCommand.Value;
 
+
+        private readonly Lazy<ICommand> _inputFromDialogCommand;
+
+        public ICommand InputFromDialogCommand
+            => _inputFromDialogCommand.Value;
+
         #endregion
 
 
         #region Fields
 
         private readonly IDialogAware _dialogAware;
+
+        ExecutionManager? _executionManager;
 
         #endregion
 
@@ -92,27 +92,23 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
 
         #region Methods
 
+
         private async void OpenFileCommandExecute()
         {
-            //TODO: посмотреть в каких случаях получается неотлавливаемая ошибка. Можно ли тут использовать лямбду,
-            //TODO: ИМЕННО ЭТОТ СЛУЧАЙ. ИСПРАВЛЯТЬ ВЕЗДЕ ЛЯМБЛЫ. ХЗ НА ЧТО
+            var dialogViewModel = App.Container.Resolve<SpinnerDialogViewModel>();
+            var openFileDialog1 = new OpenFileDialog();
+            if (openFileDialog1.ShowDialog() == false)
+                return;
 
-            Task<string> openFileTask = Task<string>.Run(() =>
+            Task<string> openFileTask = Task.Run(async () =>
             {
-                var openFileDialog1 = new OpenFileDialog();
-                if (openFileDialog1.ShowDialog() == false)
-                    return "";
-
+                await Task.Delay(1000);
                 string data = System.IO.File.ReadAllText(openFileDialog1.FileName); 
-
-                var dialogViewModel = App.Container.Resolve<SpinnerDialogViewModel>();
-                dialogViewModel.Text = "File searched";
-                dialogViewModel.LoadingAnimationActive = false;
-
+                dialogViewModel.Text = "File loaded";
                 return data;
             });
 
-            _dialogAware.ShowDialog(DialogAwareParameters.Builder.Create()
+            var dialog = _dialogAware.ShowDialogAsync(DialogAwareParameters.Builder.Create()
                 .ForDialogType<SpinnerDialogViewModel>()
                 .AddParameter(SpinnerDialogViewModel.Parameters.SpinnerItemsCount, 2)
                 .AddParameter(SpinnerDialogViewModel.Parameters.SpinnerRadiusCoefficient, 0.2)
@@ -124,9 +120,21 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
                 .Build());
 
             await openFileTask;
-            programTextBox.Text = openFileTask.Result;
-            programTextBox.Focus();
-            programDataGrid.Focus();
+
+            var res = new CompilerEnvironmentConverter().ConvertBack(openFileTask.Result, Array.Empty<Type>(), null, CultureInfo.CurrentCulture);
+            Instructions = (ObservableCollection<Instruction>)res[0];
+
+            await LaunchExecute();
+
+            await dialog;
+            if (dialog.Result)
+            {
+                //TODO
+            }
+            else
+            { 
+
+            }
 
         }
 
@@ -134,7 +142,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
         {
             Task launchExecuteTask = LaunchExecute();
 
-            if (_dialogAware.ShowDialog(DialogAwareParameters.Builder.Create()
+            var dialogTask = _dialogAware.ShowDialogAsync(DialogAwareParameters.Builder.Create()
             .ForDialogType<SpinnerDialogViewModel>()
             .AddParameter(SpinnerDialogViewModel.Parameters.SpinnerItemsCount, 2)
             .AddParameter(SpinnerDialogViewModel.Parameters.SpinnerRadiusCoefficient, 0.2)
@@ -143,7 +151,44 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
             .AddParameter(SpinnerDialogViewModel.Parameters.SpinnerSpeed, new TimeSpan(1000))
             .AddParameter(SpinnerDialogViewModel.Parameters.Text, "Building")
             .AddParameter(SpinnerDialogViewModel.Parameters.FontSize, 30)
-            .Build()))
+            .Build());
+           
+            await launchExecuteTask;
+            await dialogTask;
+
+            if (dialogTask.Result)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+
+        async Task LaunchExecute()
+        {
+            var dialogViewModel = App.Container.Resolve<SpinnerDialogViewModel>();
+            await Task.Delay(1000);
+
+            dialogViewModel.Text = "Compiling";
+            var byteArray = await CompileExecute(Instructions);
+            await Task.Delay(1000);
+
+
+            
+           
+            App.Container.Unregister<CompilerEnvironmentDialogViewModel>();
+            App.Container.Register<CompilerEnvironmentDialogViewModel>(Reuse.Singleton);
+            dialogViewModel.Text = "Executing";
+            await Task.Delay(1000);
+
+            Task performanceTask = PerformanceExecute(byteArray);
+
+            if (_dialogAware.ShowDialog(DialogAwareParameters.Builder.Create()
+             .ForDialogType<CompilerEnvironmentDialogViewModel>()
+             .AddParameter(CompilerEnvironmentDialogViewModel.Parameters.ButtonEnterCommand, InputFromDialogCommand)
+             .Build()))
             {
                 //TODO
             }
@@ -151,30 +196,8 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
             {
 
             }
-
-
-            await launchExecuteTask;
-        }
-
-        async Task LaunchExecute()
-        {
-            var dialogViewModel = App.Container.Resolve<SpinnerDialogViewModel>();
-            await Task.Delay(800);
-
-            dialogViewModel.Text = "Compiling";
-            var byteArray = await CompileExecute(Instructions);
-            await Task.Delay(800);
-
-            dialogViewModel.Text = "Executing";
-            Task performanceTask = PerformanceExecute(byteArray);
-
-            var dialog = App.Container.Resolve<CompilerEnvironmentDialog>();
-            dialog.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            dialog.ShowDialog();
-
-            await Task.Delay(800);
+         
             await performanceTask;
-            
             dialogViewModel.LoadingAnimationActive = false;
             dialogViewModel.Text = "Executed";
         }
@@ -182,55 +205,53 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
 
         async Task<byte[]> CompileExecute(ObservableCollection<Instruction> instructions)
         {
-            return await Task.Run(() =>
-            {
-                using var memoryStream = new MemoryStream(new byte[255]);
-
-                using var binaryWriter = new BinaryWriter(memoryStream);
-                foreach (var instruction in instructions)
-                {
-                    var instructionValue = NumberToBytesTransformations.ConvertToBytes(
-                        instruction.Operand1,
-                        instruction.Operand2,
-                        instruction.Operand3,
-                        instruction.Operation);
-
-                    binaryWriter.Write(instructionValue);
-                }
-
-                return memoryStream.ToArray();
-            });
+            return await CompilerManager.CompileAsync(instructions);
         }
 
         async Task PerformanceExecute(byte[] memoryStreamArray)
         {
-            await Task.Run(() =>
+            _executionManager?.Dispose();
+            _executionManager = 
+                new ExecutionManager(
+                    memoryStreamArray, 
+                    new RelayCommand(_ => RequestToInputFromDialogCommandExecute()),
+                    new RelayCommand((text) => LogCommandExecute(text!.ToString()!))
+                    );
+
+            await _executionManager.StartExecutionFlowAsync();
+        }
+
+        private void InputFromDialogCommandExecute(object? inputValue)
+        {
+            if (_executionManager is null)
+                throw new InvalidOperationException(
+                    "This operation can be execute only from CompilerEnvironmentDialog");
+
+            if (_executionManager.CompleteExecution)
+                throw new InvalidOperationException(
+                    "Execution already completed");
+
+            if (inputValue is null)
+                throw new ArgumentException("Incorrect parameter");
+
+
+            if (!int.TryParse(inputValue!.ToString(), out var value))
             {
-                long? readNumber;
-                int operand1Key, operand2Key, operand3Key, operationId;
+                throw new ArgumentException("Parameter must be int value");
+            }
 
-                using var memoryStream = new MemoryStream(memoryStreamArray);
-                memoryStream.Position = 0;
+            _executionManager.ContinueExecutionFlow(value);
+        }
 
-                Registers registers = new Registers();
-                registers[1] = 10;
+        private void RequestToInputFromDialogCommandExecute()
+        {
+            App.Container.Resolve<CompilerEnvironmentDialogViewModel>()
+                .InputExpected = true;
+        }
 
-                using var binaryReader = new BinaryReader(memoryStream);
-
-                while ((readNumber = binaryReader.ReadInt64()) != 0)
-                {
-                    NumberToBytesTransformations.ConvertToValues(
-                        readNumber.Value,
-                        out operand1Key,
-                        out operand2Key,
-                        out operand3Key,
-                        out operationId);
-
-                    registers.ExecuteMethod(operand1Key, operand2Key, operand3Key, operationId);
-                   
-                    //в класс регистров подвавать ICommand для того метода клавиатуры
-                }
-            });
+        private void LogCommandExecute(string message)
+        {
+            App.Container.Resolve<CompilerEnvironmentDialogViewModel>().ConsoleOut += $"\r\n{message}";
         }
 
         #endregion

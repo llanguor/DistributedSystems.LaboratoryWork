@@ -6,9 +6,11 @@ using DryIoc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.CodeDom.Compiler;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -16,15 +18,13 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
+using static DistributedSystems.LaboratoryWork.Number1.Packages.Types.CompilerEnvironmentTypes;
 
 
 namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
 {
     public class CompilerEnvironmentTypes
     {
-        //все тут должно быть ассинхронным.
-        //нужно внедрить логгер чтобы выводить что-либо на консоль.
-    
         //TODO: check public classes fields
 
         internal class Registers
@@ -39,6 +39,10 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
 
             private Logger _logger;
 
+            private Lazy<ICommand> _requestToInputCommand;
+
+            private Lazy<ICommand> _logCommand;
+
             #endregion
 
 
@@ -50,14 +54,19 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
                 set => _registers[key] = value;
             }
 
+
             #endregion
 
 
             #region Constructors
 
-            public Registers()
+            public Registers(ICommand requestToInputCommand, ICommand logCommand)
             {
                 _registers = [];
+
+                _requestToInputCommand = new Lazy<ICommand>(requestToInputCommand);
+
+                _logCommand = new Lazy<ICommand>(logCommand);
 
                 _logger = App.Container.Resolve<Logger>();
 
@@ -96,6 +105,11 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
 
             #region Methods
 
+            public void Log(string text)
+            {
+                _logCommand.Value.Execute(text);
+            }
+
             public object? FromIndex(int key)
             {
                 return _registers[key];
@@ -103,21 +117,21 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
 
             public void ExecuteMethod(int operand1Key, int operand2Key, int operand3Key, int operationId)
             {
-                if (operand1Key > 511 || operand1Key < 0) 
+                if (operand1Key > 511 || operand1Key < 0)
                     throw new ArgumentOutOfRangeException(nameof(operand1Key));
-                if (operand2Key > 511 || operand2Key < 0) 
+                if (operand2Key > 511 || operand2Key < 0)
                     throw new ArgumentOutOfRangeException(nameof(operand2Key));
-                if (operand3Key > 511 || operand3Key < 0) 
+                if (operand3Key > 511 || operand3Key < 0)
                     throw new ArgumentOutOfRangeException(nameof(operand3Key));
-                if (operationId > 24 || operationId < 0) 
+                if (operationId > 24 || operationId < 0)
                     throw new ArgumentOutOfRangeException(nameof(operationId));
 
-                if(!_registers.ContainsKey(operand1Key))
-                    _registers.Add(operand1Key, default (int));
+                if (!_registers.ContainsKey(operand1Key))
+                    _registers.Add(operand1Key, default);
                 if (!_registers.ContainsKey(operand2Key))
-                    _registers.Add(operand2Key, default(int));
+                    _registers.Add(operand2Key, default);
                 if (!_registers.ContainsKey(operand3Key))
-                    _registers.Add(operand3Key, default(int));
+                    _registers.Add(operand3Key, default);
 
                 var operationMethod = _operationsList![operationId].Value;
 
@@ -143,7 +157,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
                     int value = Convert.ToInt32(pair.Value);
                     string result = NumberSystemTransformations.ConvertNumberToBase(value, numberSystem);
 
-                    _logger.Log($"{pair.Key}: {result}"); 
+                    _logger.Log($"{pair.Key}: {result}");
                 }
             }
 
@@ -228,7 +242,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
             {
                 //255 - маска для выделения одного байта
                 //byteNumber*8 - сдвиг на нужное количество байтов
-                
+
                 int byteIndex = _registers[operand2Key];
                 if (byteIndex < 0 || byteIndex > 3) throw new ArgumentException("In a 32 bit number there are only 4 bytes");
 
@@ -244,17 +258,18 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
                 string result = NumberSystemTransformations.ConvertNumberToBase(value, numberSystem);
 
                 _logger.Log($"Value in operand {operand1Key} in {numberSystem} number system: {result}");
-                
+
             }
 
             private void MethodId18(int operand1Key, int operand2Key, int operand3Key)
             {
-                //ввод с клавиатуры
+                _logger.Log($"Please enter value for register with number {operand1Key}");
+                _requestToInputCommand.Value.Execute(null);
             }
 
             private void MethodId19(int operand1Key, int operand2Key, int operand3Key)
             {
-                int value = _registers[operand1Key]; 
+                int value = _registers[operand1Key];
                 int degree = 0;
 
                 while ((value & 1) == 0) //Двигаем число вправо пока младший бит = 0
@@ -278,7 +293,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
 
             private void MethodId22(int operand1Key, int operand2Key, int operand3Key)
             {
-                int value = _registers[operand1Key]; 
+                int value = _registers[operand1Key];
                 int shift = _registers[operand2Key];
                 shift %= 32; // чтобы не было избыточного сдвига (для 32 битных чисел)
                 _registers[operand3Key] = (value << shift) | (value >> (32 - shift));
@@ -381,6 +396,166 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
             }
 
             #endregion
+        }
+
+        internal class ExecutionManager : IDisposable
+        {
+            #region Fields
+
+            private long? _readNumber = null;
+
+            private int _operand1Key, _operand2Key, _operand3Key, _operationId;
+
+
+            private bool _disposed = false;
+
+            Registers _registers;
+
+            MemoryStream _memoryStream;
+
+            BinaryReader _binaryReader;
+
+            private bool _completeExecution = false;
+
+            #endregion
+
+
+            #region Properties
+
+            public bool CompleteExecution
+                => _completeExecution;
+
+            #endregion
+
+
+            #region Methods
+
+            public ExecutionManager(byte[] memoryStreamArray, ICommand requestToInputCommand, ICommand logCommand)
+            {
+                _registers = new Registers(requestToInputCommand, logCommand);
+
+                _memoryStream = new MemoryStream(memoryStreamArray);
+                _memoryStream.Position = 0;
+                _binaryReader = new BinaryReader(_memoryStream);
+            }
+
+            public async Task StartExecutionFlowAsync()
+            {
+                await Task.Run(() =>
+               {
+                   StartExecutionFlow();
+               });
+            }
+
+            public async Task ContinueExecutionFlowAsync(int inputValue)
+            {
+                await Task.Run(() =>
+                {
+                    ContinueExecutionFlow(inputValue);
+                });
+            }
+
+
+            public void StartExecutionFlow()
+            {
+                if (_readNumber != null)
+                {
+                    throw new InvalidOperationException("Execution had already started earlier");
+                }
+
+                ExecutionFlow();
+            }
+
+            public void ContinueExecutionFlow(int inputValue)
+            {
+                if (_readNumber is null)
+                {
+                    throw new InvalidOperationException("Execution has not yet begun");
+                }
+
+                _registers[_operand1Key] = inputValue;
+
+                ExecutionFlow();
+            }
+
+            private void ExecutionFlow()
+            {
+                while ((_readNumber = _binaryReader.ReadInt64()) != 0)
+                {
+                    NumberToBytesTransformations.ConvertToValues(
+                        _readNumber.Value,
+                        out _operand1Key,
+                        out _operand2Key,
+                        out _operand3Key,
+                        out _operationId);
+
+                    _registers.ExecuteMethod(_operand1Key, _operand2Key, _operand3Key, _operationId);
+
+                    if (_operationId == 18)
+                        break;
+                }
+            }
+
+            #endregion
+
+
+            #region Dispose
+
+            public void Dispose()
+            {
+                Dispose(true);
+                GC.SuppressFinalize(this);
+            }
+
+            protected virtual void Dispose(bool disposing)
+            {
+                if (_disposed) return;
+                if (disposing)
+                {
+
+                }
+
+                _binaryReader.Dispose();
+                _disposed = true;
+            }
+
+            ~ExecutionManager()
+            {
+                Dispose(false);
+            }
+
+            #endregion
+        }
+
+        internal static class CompilerManager
+        {
+            public static byte[] Compile(IEnumerable<Instruction> instructions)
+            {
+                using var memoryStream = new MemoryStream(new byte[255]);
+                using var binaryWriter = new BinaryWriter(memoryStream);
+
+                foreach (var instruction in instructions)
+                {
+                    var instructionValue = NumberToBytesTransformations.ConvertToBytes(
+                        instruction.Operand1,
+                        instruction.Operand2,
+                        instruction.Operand3,
+                        instruction.Operation);
+
+                    binaryWriter.Write(instructionValue);
+                }
+
+                return memoryStream.ToArray();
+            }
+
+            public static async Task<byte[]> CompileAsync(IEnumerable<Instruction> instructions)
+            {
+                return await Task.Run(() =>
+                {
+                    return Compile(instructions);
+                });
+            }
+
         }
     }
 }

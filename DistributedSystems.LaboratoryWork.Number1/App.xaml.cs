@@ -105,7 +105,8 @@ namespace DistributedSystems.LaboratoryWork.Number1
 
             navigationManager
                 .AddMapping<MessageDialog, MessageDialogViewModel>()
-                .AddMapping<SpinnerDialog, SpinnerDialogViewModel>();
+                .AddMapping<SpinnerDialog, SpinnerDialogViewModel>()
+                .AddMapping<CompilerEnvironmentDialog, CompilerEnvironmentDialogViewModel>();
 
             return this;
         }

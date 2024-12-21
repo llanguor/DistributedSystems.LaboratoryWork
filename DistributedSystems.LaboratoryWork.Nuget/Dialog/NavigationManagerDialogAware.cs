@@ -70,6 +70,13 @@ namespace DistributedSystems.LaboratoryWork.Nuget.Dialog
             return dialogControl.ShowDialog() ?? false;
         }
 
+        public async Task<bool> ShowDialogAsync(
+           DialogAwareParameters dialogParameters)
+        {
+            await Task.Yield();
+            return ShowDialog(dialogParameters);
+        }
+
         #endregion
     }
 }
