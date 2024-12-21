@@ -415,15 +415,15 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
 
             BinaryReader _binaryReader;
 
-            private bool _completeExecution = false;
+            private bool _executionComplete = false;
 
             #endregion
 
 
             #region Properties
 
-            public bool CompleteExecution
-                => _completeExecution;
+            public bool ExecutionComplete
+                => _executionComplete;
 
             #endregion
 
@@ -433,7 +433,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
             public ExecutionManager(byte[] memoryStreamArray, ICommand requestToInputCommand, ICommand logCommand)
             {
                 _registers = new Registers(requestToInputCommand, logCommand);
-
                 _memoryStream = new MemoryStream(memoryStreamArray);
                 _memoryStream.Position = 0;
                 _binaryReader = new BinaryReader(_memoryStream);
@@ -492,8 +491,10 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
                     _registers.ExecuteMethod(_operand1Key, _operand2Key, _operand3Key, _operationId);
 
                     if (_operationId == 18)
-                        break;
+                        return;
                 }
+
+                _executionComplete = true;
             }
 
             #endregion

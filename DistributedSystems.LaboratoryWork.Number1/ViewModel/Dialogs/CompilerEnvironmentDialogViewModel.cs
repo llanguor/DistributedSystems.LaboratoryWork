@@ -15,6 +15,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 using DistributedSystems.LaboratoryWork.Nuget.Command;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.ComponentModel;
 
 namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs
 {
@@ -32,6 +33,8 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs
             ConsoleOut = string.Empty;
             OutputText = string.Empty;
             InputExpected = false;
+            ExecutionComplete = false;
+
         }
 
         #endregion
@@ -40,9 +43,11 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs
 
         private bool _inputExpected;
 
-        private string _consoleOut;
+        private bool _executionComplete;
 
-        private string _outputText;
+        private string? _consoleOut;
+
+        private string? _outputText;
 
         private readonly Lazy<ICommand> _buttonCommand;
 
@@ -70,9 +75,20 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs
             
         }
 
+        public bool ExecutionComplete
+        {
+            get => _executionComplete;
+            set
+            {
+                _executionComplete = value;
+                RaisePropertyChanged(nameof(ExecutionComplete));
+            }
+
+        }
+
         public string ConsoleOut
         {
-            get => _consoleOut;
+            get => _consoleOut!;
 
             set
             {
@@ -83,7 +99,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs
 
         public string OutputText
         {
-            get => _outputText;
+            get => _outputText!;
 
             set
             {
@@ -116,7 +132,17 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs
             _externalButtonEnterCommand = new Lazy<ICommand>(
                 (ICommand)parameters[Parameters.ButtonEnterCommand]!);
         }
-        
+
+        #endregion
+
+        #region Events
+
+        public void OnWindowClosing(object sender, CancelEventArgs e)
+        {
+            if (!ExecutionComplete)
+                e.Cancel = true;
+        }
+
         #endregion
 
 

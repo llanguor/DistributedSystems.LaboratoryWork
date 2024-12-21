@@ -27,6 +27,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.View.Dialogs
             InitializeComponent();
 
             DataContext = App.Container.Resolve<CompilerEnvironmentDialogViewModel>();
+            Closing += (DataContext as CompilerEnvironmentDialogViewModel)!.OnWindowClosing!;
         }
     }
 }

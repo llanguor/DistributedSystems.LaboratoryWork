@@ -219,15 +219,18 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
                     );
 
             await _executionManager.StartExecutionFlowAsync();
+            if (_executionManager.ExecutionComplete)
+                App.Container.Resolve<CompilerEnvironmentDialogViewModel>().ExecutionComplete = true;
+
         }
 
-        private void InputFromDialogCommandExecute(object? inputValue)
+        private async void InputFromDialogCommandExecute(object? inputValue)
         {
             if (_executionManager is null)
                 throw new InvalidOperationException(
                     "This operation can be execute only from CompilerEnvironmentDialog");
 
-            if (_executionManager.CompleteExecution)
+            if (_executionManager.ExecutionComplete)
                 throw new InvalidOperationException(
                     "Execution already completed");
 
@@ -240,7 +243,9 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
                 throw new ArgumentException("Parameter must be int value");
             }
 
-            _executionManager.ContinueExecutionFlow(value);
+            await _executionManager.ContinueExecutionFlowAsync(value);
+            if (_executionManager.ExecutionComplete)
+                App.Container.Resolve<CompilerEnvironmentDialogViewModel>().ExecutionComplete = true;
         }
 
         private void RequestToInputFromDialogCommandExecute()
