@@ -163,9 +163,9 @@ namespace DistributedSystems.LaboratoryWork.Number1
 
         private App RegisterDialogsViewModels()
         {
-            Container.Register<MessageDialogViewModel>(Reuse.Transient);
-            Container.Register<SpinnerDialogViewModel>(Reuse.Transient);
-            Container.Register<CompilerEnvironmentDialogViewModel>(Reuse.Transient);
+            Container.Register<MessageDialogViewModel>(Reuse.Singleton);
+            Container.Register<SpinnerDialogViewModel>(Reuse.Singleton);
+            Container.Register<CompilerEnvironmentDialogViewModel>(Reuse.Singleton);
 
             return this;
         }

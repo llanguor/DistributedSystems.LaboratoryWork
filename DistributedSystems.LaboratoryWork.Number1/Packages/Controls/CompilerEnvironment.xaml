@@ -22,7 +22,7 @@
             <MenuItem 
                 Padding="2,1,12,0" 
                 Header="Compile" 
-                Command="{Binding CompileCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:CompilerEnvironment}}">
+                Command="{Binding LaunchCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controls:CompilerEnvironment}}">
                 <MenuItem.Icon>
                     <Image Source="/DistributedSystems.LaboratoryWork.Number1;component/Meta/CompileIcon.ico"/>
                 </MenuItem.Icon>

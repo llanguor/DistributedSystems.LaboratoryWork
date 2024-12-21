@@ -32,8 +32,7 @@ namespace DistributedSystems.LaboratoryWork.Nuget.Dialog
         public Type DialogType =>
             _dialogViewModelType;
 
-        public object? this[string parameterName] =>
-                _parameters[parameterName];
+        public object? this[string parameterName] => _parameters[parameterName];               
 
         #endregion
 

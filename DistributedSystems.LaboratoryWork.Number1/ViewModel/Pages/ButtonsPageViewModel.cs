@@ -15,6 +15,8 @@ using System.Windows.Media;
 using System.Windows.Controls;
 using DistributedSystems.LaboratoryWork.Number1.View.Windows;
 using DistributedSystems.LaboratoryWork.Number1.Packages.Controls;
+using DryIoc.ImTools;
+using DryIoc;
 
 namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Pages
 {
@@ -98,10 +100,12 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Pages
             
         }
 
+        
+
+      
+
         private void ShowMessageDialogExecute()
         {
-
-            MessageBox.Show("START");
             if (_dialogAware.ShowDialog(DialogAwareParameters.Builder.Create()
             .ForDialogType<MessageDialogViewModel>()
             .AddParameter(MessageDialogViewModel.Parameters.PositiveCommand, PositiveCommand)
@@ -130,7 +134,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Pages
             .AddParameter(SpinnerDialogViewModel.Parameters.SpinnerColor, Brushes.LightGray)
             .AddParameter(SpinnerDialogViewModel.Parameters.SpinnerRotationDirection, Spinner.RotationDirection.Counterclockwise)
             .AddParameter(SpinnerDialogViewModel.Parameters.SpinnerSpeed, new TimeSpan(1000))
-            .AddParameter(SpinnerDialogViewModel.Parameters.Text, "Please wait...")
+            .AddParameter(SpinnerDialogViewModel.Parameters.Text, "Please wait")
             .AddParameter(SpinnerDialogViewModel.Parameters.FontSize, 30)
             .Build()))
             {
