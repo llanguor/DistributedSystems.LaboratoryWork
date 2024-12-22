@@ -22,8 +22,8 @@
         </Grid.ColumnDefinitions>
         <ScrollViewer Grid.Column="0" >
             <TextBlock 
-                Margin="10,5,10,5"
-                FontSize="16"
+                Margin="20,10,20,10"
+                FontSize="17"
                 Text="{Binding Path=ConsoleOut, Mode=OneWay}"/>
         </ScrollViewer>
         <Grid Grid.Column="1">
@@ -40,8 +40,8 @@
                 <TextBox
                     VerticalContentAlignment="Center"
                     Text="{Binding OutputText, Mode=TwoWay}"
-                    Padding="20"
-                    FontSize="28"
+                    Padding="15"
+                    FontSize="30"
                     Grid.Column="0"
                     BorderThickness="2"
                     BorderBrush="Gray"/>

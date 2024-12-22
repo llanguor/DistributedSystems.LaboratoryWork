@@ -28,9 +28,9 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
             InitializeComponent();
             
             Instructions = new ObservableCollection<Instruction>();
-            _inputFromDialogCommand = new Lazy<ICommand>(() => new RelayCommand((value) => InputFromDialogCommandExecute(value)));
-            _openFileCommand = new Lazy<ICommand>(() => new RelayCommand(_ => OpenFileCommandExecute()));
-            _launchCommand = new Lazy<ICommand>(() => new RelayCommand(_ => LaunchCommandExecute()));
+            _inputFromDialogCommand = new Lazy<ICommand>(() => new AsyncRelayCommand((value)=>InputFromDialogCommandExecute(value!.ToString())));
+            _openFileCommand = new Lazy<ICommand>(() => new AsyncRelayCommand(OpenFileCommandExecute));
+            _launchCommand = new Lazy<ICommand>(() => new AsyncRelayCommand(_=>LaunchCommandExecute()));
             _dialogAware = App.Container.Resolve<IDialogAware>();
         }
 
@@ -93,7 +93,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
         #region Methods
 
 
-        private async void OpenFileCommandExecute()
+        private async Task OpenFileCommandExecute(object? obj)
         {
             var dialogViewModel = App.Container.Resolve<SpinnerDialogViewModel>();
             var openFileDialog1 = new OpenFileDialog();
@@ -138,7 +138,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
 
         }
 
-        private async void LaunchCommandExecute()
+        private async Task LaunchCommandExecute()
         {
             Task launchExecuteTask = LaunchExecute();
 
@@ -218,14 +218,26 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
                     new RelayCommand((text) => LogCommandExecute(text!.ToString()!))
                     );
 
-            await _executionManager.StartExecutionFlowAsync();
-            if (_executionManager.ExecutionComplete)
-                App.Container.Resolve<CompilerEnvironmentDialogViewModel>().ExecutionComplete = true;
-
+            var dialogViewModel = App.Container.Resolve<CompilerEnvironmentDialogViewModel>();
+            try
+            {
+                await _executionManager.StartExecutionFlowAsync();
+            }
+            catch
+            {
+                dialogViewModel.ExecutionComplete = true;
+                throw;
+            }
+            finally
+            {
+                if (_executionManager.ExecutionComplete)
+                    dialogViewModel.ExecutionComplete = true;
+            }
         }
 
-        private async void InputFromDialogCommandExecute(object? inputValue)
+        private async Task InputFromDialogCommandExecute(object? inputValue)
         {
+            //throw new ArgumentException();
             if (_executionManager is null)
                 throw new InvalidOperationException(
                     "This operation can be execute only from CompilerEnvironmentDialog");
@@ -243,9 +255,25 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
                 throw new ArgumentException("Parameter must be int value");
             }
 
-            await _executionManager.ContinueExecutionFlowAsync(value);
-            if (_executionManager.ExecutionComplete)
-                App.Container.Resolve<CompilerEnvironmentDialogViewModel>().ExecutionComplete = true;
+            var dialogViewModel = App.Container.Resolve<CompilerEnvironmentDialogViewModel>();
+            try
+            {
+               await _executionManager.ContinueExecutionFlowAsync(value);
+            }
+            catch
+            {
+                dialogViewModel.ExecutionComplete = true;
+                //MessageBox.Show("asd");
+                throw;
+            }
+           
+            finally
+            {
+                if (_executionManager.ExecutionComplete)
+                    dialogViewModel.ExecutionComplete = true;
+            }
+
+
         }
 
         private void RequestToInputFromDialogCommandExecute()

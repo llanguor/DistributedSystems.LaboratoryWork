@@ -37,8 +37,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
 
             private SortedDictionary<int, int> _registers;
 
-            private Logger _logger;
-
             private Lazy<ICommand> _requestToInputCommand;
 
             private Lazy<ICommand> _logCommand;
@@ -54,22 +52,24 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
                 set => _registers[key] = value;
             }
 
+            public static ObservableCollection<int> OperationsIdList { get; }
 
             #endregion
 
 
             #region Constructors
 
+            static Registers()
+            {
+                OperationsIdList = new ObservableCollection<int>();
+            }
+
             public Registers(ICommand requestToInputCommand, ICommand logCommand)
             {
-                _registers = [];
-
                 _requestToInputCommand = new Lazy<ICommand>(requestToInputCommand);
-
                 _logCommand = new Lazy<ICommand>(logCommand);
 
-                _logger = App.Container.Resolve<Logger>();
-
+                _registers = [];
                 _operationsList =
                 [
                     new Lazy<MethodDelegate>(MethodId0),
@@ -98,6 +98,11 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
                     new Lazy<MethodDelegate>(MethodId23),
                     new Lazy<MethodDelegate>(MethodId24)
                 ];
+
+                for (int i = 0; i < _operationsList.Count; ++i)
+                {
+                    OperationsIdList.Add(i);
+                }
             }
 
             #endregion
@@ -135,9 +140,9 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
 
                 var operationMethod = _operationsList![operationId].Value;
 
-                _logger.Log($"Method {operationId} is being executed");
+                Log($"Method {operationId} is being executed");
                 operationMethod(operand1Key, operand2Key, operand3Key);
-                _logger.Log($"Method {operationId} has finished executing.");
+                Log($"Method {operationId} has finished executing.");
             }
 
             #endregion
@@ -145,19 +150,24 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
 
             #region Methods for registers
 
-            //TODO: Exceptions
+            //TODO: Exceptions. Own type
 
             private void MethodId0(int operand1Key, int operand2Key, int operand3Key)
             {
                 int numberSystem = Convert.ToInt32(_registers[operand1Key]);
-                _logger.Log($"Register's values in {numberSystem} number system");
+                if(numberSystem<2 || numberSystem>16)
+                {
+                    throw new ArgumentException("Number system must be from 2 to 16");
+                }
+
+                Log($"Register's values in {numberSystem} number system");
 
                 foreach (KeyValuePair<int, int> pair in _registers)
                 {
                     int value = Convert.ToInt32(pair.Value);
                     string result = NumberSystemTransformations.ConvertNumberToBase(value, numberSystem);
 
-                    _logger.Log($"{pair.Key}: {result}");
+                    Log($"{pair.Key}: {result}");
                 }
             }
 
@@ -257,13 +267,13 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
                 int value = Convert.ToInt32(_registers[operand1Key]);
                 string result = NumberSystemTransformations.ConvertNumberToBase(value, numberSystem);
 
-                _logger.Log($"Value in operand {operand1Key} in {numberSystem} number system: {result}");
+                Log($"Value in operand {operand1Key} in {numberSystem} number system: {result}");
 
             }
 
             private void MethodId18(int operand1Key, int operand2Key, int operand3Key)
             {
-                _logger.Log($"Please enter value for register with number {operand1Key}");
+                Log($"Please enter value for register with number {operand1Key}");
                 _requestToInputCommand.Value.Execute(null);
             }
 
@@ -440,22 +450,15 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
 
             public async Task StartExecutionFlowAsync()
             {
-                await Task.Run(() =>
-               {
-                   StartExecutionFlow();
-               });
+                await StartExecutionFlow();
             }
 
             public async Task ContinueExecutionFlowAsync(int inputValue)
             {
-                await Task.Run(() =>
-                {
-                    ContinueExecutionFlow(inputValue);
-                });
+                await ContinueExecutionFlow(inputValue);
             }
 
-
-            public void StartExecutionFlow()
+            public Task StartExecutionFlow()
             {
                 if (_readNumber != null)
                 {
@@ -463,9 +466,10 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
                 }
 
                 ExecutionFlow();
+                return Task.CompletedTask;
             }
 
-            public void ContinueExecutionFlow(int inputValue)
+            public Task ContinueExecutionFlow(int inputValue)
             {
                 if (_readNumber is null)
                 {
@@ -475,9 +479,10 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
                 _registers[_operand1Key] = inputValue;
 
                 ExecutionFlow();
+                return Task.CompletedTask;
             }
 
-            private void ExecutionFlow()
+            private Task ExecutionFlow()
             {
                 while ((_readNumber = _binaryReader.ReadInt64()) != 0)
                 {
@@ -491,10 +496,11 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
                     _registers.ExecuteMethod(_operand1Key, _operand2Key, _operand3Key, _operationId);
 
                     if (_operationId == 18)
-                        return;
+                        return Task.CompletedTask;
                 }
 
                 _executionComplete = true;
+                return Task.CompletedTask;
             }
 
             #endregion

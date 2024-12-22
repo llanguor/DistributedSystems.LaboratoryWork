@@ -29,7 +29,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs
         {
             _buttonCommand = new Lazy<ICommand>(() => new RelayCommand((prop) => ButtonCommandExecute(prop!.ToString()!)));
             _buttonClearCommand = new Lazy<ICommand>(() => new RelayCommand(_ => ButtonClearCommandExecute()));
-            _buttonEnterCommand = new Lazy<ICommand>(() => new RelayCommand(_ => ButtonEnterCommandExecute()));
+            _buttonEnterCommand = new Lazy<ICommand>(() => new AsyncRelayCommand(ButtonEnterCommandExecute));
             ConsoleOut = string.Empty;
             OutputText = string.Empty;
             InputExpected = false;
@@ -163,7 +163,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs
             OutputText = string.Empty;
         }
 
-        private void ButtonEnterCommandExecute()
+        private Task ButtonEnterCommandExecute(object? value)
         {
             try
             {
@@ -179,6 +179,8 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs
             {
                 MessageBox.Show(ex.Message);
             }
+
+            return Task.CompletedTask;
         }
 
         #endregion
