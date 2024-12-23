@@ -15,8 +15,13 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Converters
     {
         public override object? Convert(object value, Type targetType, object? parameter, CultureInfo culture)
         {
-            int count = int.Parse(value.ToString()!);
-            return new string('.', count);
+            string line = value.ToString() ?? throw new ArgumentException("Null value is invalid");
+            if(!int.TryParse(line, out var number))
+            {
+                throw new ArgumentException("Incorrect input value type");
+            }
+
+            return new string('.', number);
         }
     }
 }

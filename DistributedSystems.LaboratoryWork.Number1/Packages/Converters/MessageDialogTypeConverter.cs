@@ -17,7 +17,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Converters
         {
             if (values.Length != 2)
             {
-                //TODO: set string in throw everywhere
                 throw new ArgumentException("Invalid count of values!");
             }
 

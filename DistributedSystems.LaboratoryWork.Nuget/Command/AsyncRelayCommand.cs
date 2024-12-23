@@ -10,6 +10,7 @@ namespace DistributedSystems.LaboratoryWork.Nuget.Command
     public class AsyncRelayCommand :
         ICommand
     {
+
         #region Fields
 
         private readonly Func<object?, Task> _execute;

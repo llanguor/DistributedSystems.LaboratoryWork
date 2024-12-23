@@ -12,6 +12,7 @@ namespace DistributedSystems.LaboratoryWork.Nuget.Dialog
     public sealed class NavigationManagerDialogAware:
         IDialogAware
     {
+
         #region Fields
 
         private readonly Dictionary<Type, Type> _viewTypeToViewMappings;
@@ -44,7 +45,6 @@ namespace DistributedSystems.LaboratoryWork.Nuget.Dialog
 
             return this;
         }
-
 
         public bool ShowDialog(
             DialogAwareParameters dialogParameters)
@@ -92,5 +92,6 @@ namespace DistributedSystems.LaboratoryWork.Nuget.Dialog
         }
 
         #endregion
+
     }
 }

@@ -57,10 +57,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs
 
         private Lazy<ICommand>? _externalButtonEnterCommand;
 
-        
-
         #endregion
-
 
         #region Properties
 
@@ -123,7 +120,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs
 
         #endregion
 
-
         #region Methods
 
         protected override void HandleParameters(
@@ -144,7 +140,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs
         }
 
         #endregion
-
 
         #region Nested
 
@@ -184,5 +179,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs
         }
 
         #endregion
+
     }
 }

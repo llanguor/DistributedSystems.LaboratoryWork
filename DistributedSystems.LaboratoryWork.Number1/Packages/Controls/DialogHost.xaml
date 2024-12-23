@@ -10,13 +10,13 @@
         <ControlTemplate TargetType="UserControl">
             <Grid>
                 <Grid.InputBindings>
-                    <MouseBinding MouseAction="LeftClick" Command="{Binding BackgroundCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:DialogHost}}"/>
+                    <MouseBinding MouseAction="LeftClick" Command="{Binding BackgroundCommand, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:DialogHost}}"/>
                 </Grid.InputBindings>
                 
                 <Rectangle Fill="Black"/>
                 <Border
-                    Opacity="{Binding BackgroundOpacity,  RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:DialogHost}}" 
-                    CornerRadius="{Binding DialogCornerRadius, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:DialogHost}}" 
+                    Opacity="{Binding BackgroundOpacity, Mode=OneWay,  RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:DialogHost}}" 
+                    CornerRadius="{Binding DialogCornerRadius, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:DialogHost}}" 
                     Background="White">
                     
                 </Border>

@@ -10,13 +10,10 @@ using DistributedSystems.LaboratoryWork.Number1.ViewModel.Windows;
 using DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs;
 using DistributedSystems.LaboratoryWork.Nuget.ViewModel;
 using DistributedSystems.LaboratoryWork.Nuget.Navigation;
-using DistributedSystems.LaboratoryWork.Number1.Utils.Logger;
 using DistributedSystems.LaboratoryWork.Nuget.Dialog;
 
 namespace DistributedSystems.LaboratoryWork.Number1
 {
-   
-    //TODO: Binding OneWay everywhere.
 
     /// <summary>
     /// Interaction logic for App.xaml
@@ -68,7 +65,6 @@ namespace DistributedSystems.LaboratoryWork.Number1
             // using ILoggerFactory factory = LoggerFactory.Create(builder => builder.AddConsole());
             // ILogger logger = factory.CreateLogger("Program");
 
-            Container.Register<Logger>();
             return this;
         }
 

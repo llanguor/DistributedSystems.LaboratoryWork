@@ -8,7 +8,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
 {
     internal sealed class NumericKeyboardTypes
     {
-        public static class ButtonTags
+        internal static class ButtonTags
         {
             public const char ClearButtonTag = 'C';
             public const char VoidTag = ' ';

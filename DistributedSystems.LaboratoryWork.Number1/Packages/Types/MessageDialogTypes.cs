@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
 {
-    public class MessageDialogTypes
+    internal sealed class MessageDialogTypes
     {
-        public enum DialogType
+        internal enum DialogType
         {
             Ok = 1,
             OkCancel = 2,

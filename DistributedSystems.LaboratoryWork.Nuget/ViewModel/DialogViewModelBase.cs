@@ -10,6 +10,7 @@ namespace DistributedSystems.LaboratoryWork.Nuget.ViewModel
     public class DialogViewModelBase:
         ViewModelBase
     {
+
         #region Constructors
 
         //для всех наследников гарантируем наличие конструктора без параметров
@@ -50,7 +51,6 @@ namespace DistributedSystems.LaboratoryWork.Nuget.ViewModel
         #endregion
 
         #region Methods
-
         protected virtual void HandleParameters(
             DialogAwareParameters parameters)
         {
@@ -58,5 +58,6 @@ namespace DistributedSystems.LaboratoryWork.Nuget.ViewModel
         }
 
         #endregion
+
     }
 }

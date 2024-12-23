@@ -18,10 +18,18 @@ public abstract class PageViewModelBase :
         NavigationManager = navigationManager ?? throw new ArgumentNullException(nameof(navigationManager));
     }
 
+    #endregion
+
+    #region Properties
+
     protected NavigationManager NavigationManager
     {
         get;
     }
+
+    #endregion
+
+    #region Methods
 
     public virtual void OnNavigatingFrom(
         NavigationContext navigationContext)

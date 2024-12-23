@@ -12,12 +12,19 @@ namespace DistributedSystems.LaboratoryWork.Nuget.Converters
     public sealed class OrderRelationConverter :
          MultiValueConverterBase<OrderRelationConverter>
     {
+
+        #region Nested
+
         public class OrderRelationResult
         {
             public bool Antisymmetric { get; set; } = true;
             public bool Reflexivity { get; set; } = true;
             public bool Transitivity { get; set; } = true;
         }
+
+        #endregion
+
+        #region Overrides
 
         public override object? Convert(object[] values, Type targetType, object? parameter, CultureInfo culture)
         {
@@ -72,5 +79,8 @@ namespace DistributedSystems.LaboratoryWork.Nuget.Converters
 
             return orderRelationResult;
         }
+
+        #endregion
+
     }
 }

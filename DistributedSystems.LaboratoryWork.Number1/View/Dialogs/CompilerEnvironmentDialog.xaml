@@ -58,8 +58,8 @@
                 Grid.Row="1"
                 ButtonsStyle="{StaticResource ResourceKey=ForegroundButtonStyle}"
                 ButtonClearStyle="{StaticResource ResourceKey=ForegroundButtonStyle}"
-                ButtonsCommand="{Binding ButtonCommand}"
-                ButtonClearCommand="{Binding ButtonClearCommand}"/>
+                ButtonsCommand="{Binding ButtonCommand, Mode=OneWay}"
+                ButtonClearCommand="{Binding ButtonClearCommand, Mode=OneWay}"/>
 
         </Grid>
 

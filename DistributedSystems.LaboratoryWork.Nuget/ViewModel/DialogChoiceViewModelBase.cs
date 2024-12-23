@@ -13,6 +13,7 @@ namespace DistributedSystems.LaboratoryWork.Nuget.ViewModel
     public class DialogChoiceViewModelBase:
         DialogViewModelBase
     {
+
         #region Constructors
 
         public DialogChoiceViewModelBase()
@@ -22,7 +23,6 @@ namespace DistributedSystems.LaboratoryWork.Nuget.ViewModel
         }
 
         #endregion
-
 
         #region Fields
 
@@ -41,9 +41,8 @@ namespace DistributedSystems.LaboratoryWork.Nuget.ViewModel
         public ICommand PositiveCommandSupplemented
            => _positiveCommandSupplemented.Value;
 
-        public ICommand NegativeCommandSupplemented =>
-                _negativeCommandSupplemented.Value;
-
+        public ICommand NegativeCommandSupplemented 
+            => _negativeCommandSupplemented.Value;
 
         public ICommand? PositiveCommand
         {
@@ -73,7 +72,7 @@ namespace DistributedSystems.LaboratoryWork.Nuget.ViewModel
 
         #region Methods
 
-        void NegativeCommandSupplementedExecute([CallerMemberName] object? messageDialog = null)
+        private void NegativeCommandSupplementedExecute([CallerMemberName] object? messageDialog = null)
         {
             if (messageDialog is null)
             {
@@ -89,7 +88,7 @@ namespace DistributedSystems.LaboratoryWork.Nuget.ViewModel
             (messageDialog as Window)!.DialogResult = false;
         }
 
-        void PositiveCommandSupplementedExecute([CallerMemberName] object? messageDialog = null)
+        private void PositiveCommandSupplementedExecute([CallerMemberName] object? messageDialog = null)
         {
             if (messageDialog is null)
             {

@@ -25,6 +25,12 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Converters
 
         public override object? Convert(object[] values, Type targetType, object? parameter, CultureInfo culture)
         {
+
+            if (values.Length < 1)
+            {
+                throw new ArgumentException("Invalid count of values!");
+            }
+
             string res = "";
             var instructions = (ObservableCollection<Instruction>)values[0];
             foreach (var instruction in instructions)
@@ -36,8 +42,8 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Converters
 
         public override object[] ConvertBack(object? value, Type[] targetTypes, object? parameter, CultureInfo culture)
         {
-            if (value == null)
-                return [];
+            if (value is null)
+                return Array.Empty<object>();
 
             object programText = value;
             var exceptions = new List<Exception>();

@@ -44,7 +44,6 @@ public sealed class NavigationManager
 
     #endregion
 
-
     #region Properties
 
     /// <summary>
@@ -64,7 +63,6 @@ public sealed class NavigationManager
     }
 
     #endregion
-
 
     #region Methods
 

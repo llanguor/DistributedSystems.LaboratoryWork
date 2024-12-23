@@ -9,6 +9,7 @@ namespace DistributedSystems.LaboratoryWork.Nuget.Dialog
 {
     public sealed class DialogAwareParameters
     {
+
         #region Fields
 
         private readonly Dictionary<string, object?> _parameters;
@@ -78,6 +79,7 @@ namespace DistributedSystems.LaboratoryWork.Nuget.Dialog
         }
 
         #endregion
+
     }
 }
 

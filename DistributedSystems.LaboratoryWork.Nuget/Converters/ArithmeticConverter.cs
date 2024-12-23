@@ -21,7 +21,7 @@ public sealed class ArithmeticConverter :
 
     #endregion
 
-    #region RGU.DistributedSystems.WPF.MVVM.MultiValueConverterBase<ArithmeticConverter> overrides
+    #region Overrides
 
     public override object? Convert(
         object?[] values,

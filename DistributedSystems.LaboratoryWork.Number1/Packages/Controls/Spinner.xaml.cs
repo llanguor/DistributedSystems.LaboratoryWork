@@ -58,7 +58,8 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
                 double radiusCoefficient,
                 double phi)
             {
-                // TODO: validate
+                if (radiusCoefficient < 0 || phi < 0)
+                    throw new ArgumentException("Incorrect arguments");
 
                 RadiusCoefficient = radiusCoefficient;
                 Phi = phi;
@@ -262,9 +263,8 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
         {
             if (dependencyObject is not Spinner spinner)
             {
-                // TODO: throw an exception
+                throw new ArgumentException("Method can only be called from spinner");
 
-                return;
             }
 
             var itemsNewCount = (int)eventArgs.NewValue;
@@ -274,7 +274,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
             for (var i = 0; i < itemsNewCount; ++i)
             {
                 newItems[i] = new SpinnerItemViewModel(
-                    // TODO: get value from DP
                     spinner.RadiusCoefficient, 360.0 / itemsNewCount * i);
             }
 
@@ -365,9 +364,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
         {
             if (dependencyObject is not Spinner spinner)
             {
-                // TODO: throw an exception
-
-                return;
+                throw new ArgumentException("Method can only be called from spinner");
             }
 
             foreach (var item in spinner.Items)
@@ -387,16 +384,12 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
         {
             if (dependencyObject is not Spinner)
             {
-                // TODO: throw an exception
-
-                return value;
+                throw new ArgumentException("Method can only be called from spinner");
             }
 
             if (value is not double radiusCoefficientCandidate)
             {
-                // TODO: throw an exception
-
-                return value;
+                throw new ArgumentException("Value must be double");
             }
 
             if (radiusCoefficientCandidate < 0.05)

@@ -12,6 +12,9 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Attached
     internal class ScrollViewerTemplateAttachedProperty :
         ScrollViewer
     {
+
+        #region DependencyProperties
+
         public static readonly DependencyProperty ScrollsColor =
             DependencyProperty.RegisterAttached(
                 "ScrollsColor",
@@ -19,6 +22,10 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Attached
                 typeof(ScrollViewerTemplateAttachedProperty),
                 new PropertyMetadata(Brushes.LightGray)
                 );
+
+        #endregion
+
+        #region Methods
 
         public static Brush GetScrollsColor(DependencyObject obj)
         {
@@ -29,5 +36,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Attached
         {
             obj.SetValue(ScrollsColor, value);
         }
+
+        #endregion
     }
 }

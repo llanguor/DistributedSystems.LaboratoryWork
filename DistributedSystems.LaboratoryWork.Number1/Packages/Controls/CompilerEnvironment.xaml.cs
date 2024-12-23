@@ -35,9 +35,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
 
         #endregion
 
-        //TODO: универсализировать все структуры регионов
-        //TODO: расставить private везде где надо
-
         #region Fields
 
         private readonly IDialogAware _dialogAware;
@@ -51,7 +48,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
         bool _disposed = false;
 
         #endregion
-
 
         #region Properties
 
@@ -69,7 +65,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
 
         #endregion
 
-
         #region DependencyProperties
 
         public static readonly DependencyProperty InstructionsProperty = DependencyProperty.Register(
@@ -78,7 +73,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
             typeof(CompilerEnvironment));
 
         #endregion
-
 
         #region Methods for commands
 
@@ -165,7 +159,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
 
         #endregion
 
-
         #region Methods for execution
 
         async Task LaunchExecute()
@@ -198,7 +191,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
 
         async Task<byte[]> CompileExecute(ObservableCollection<Instruction> instructions)
         {
-            //TODO
             try
             {
                 return await CompilerManager.CompileAsync(instructions);
@@ -351,5 +343,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
         }
 
         #endregion
+
     }
 }

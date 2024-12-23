@@ -1,6 +1,5 @@
 ﻿using Accessibility;
 using DistributedSystems.LaboratoryWork.Nuget.Command;
-using DistributedSystems.LaboratoryWork.Number1.Utils.Logger;
 using DistributedSystems.LaboratoryWork.Number1.Utils.Numbers;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -10,11 +9,10 @@ using System.Windows.Input;
 
 namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
 {
-    public class CompilerEnvironmentTypes
+    public sealed class CompilerEnvironmentTypes
     {
-        //TODO: check public classes fields
 
-        public class CompilerExceptions
+        public sealed class CompilerExceptions
         {
 
             public class CompilerException : Exception
@@ -100,7 +98,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
             }
         }
 
-        public class Registers
+        internal sealed class Registers
         {
             #region Fields
 
@@ -437,7 +435,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
             #endregion
         }
 
-        public class Instruction : INotifyPropertyChanged
+        public sealed class Instruction : INotifyPropertyChanged
         {
             #region Fields
 
@@ -677,5 +675,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
 
             #endregion
         }
+
     }
 }

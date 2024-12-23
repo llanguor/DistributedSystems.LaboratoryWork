@@ -20,6 +20,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs
     internal class SpinnerDialogViewModel :
         DialogViewModelBase
     {
+
         #region Constructors
 
         public SpinnerDialogViewModel() 
@@ -31,44 +32,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs
             _timer.Start();
         }
 
-
-        #endregion
-
-        #region Methods
-
-        protected override void HandleParameters(
-         DialogAwareParameters parameters)
-        {
-            SpinnerItemsCount = (int)parameters[Parameters.SpinnerItemsCount]!;
-            SpinnerRadiusCoefficient = (double)parameters[Parameters.SpinnerRadiusCoefficient]!;
-            SpinnerColor = (parameters[Parameters.SpinnerColor] as Brush)!;
-            SpinnerRotationDirection = (Spinner.RotationDirection)parameters[Parameters.SpinnerRotationDirection]!;
-            SpinnerSpeed = (TimeSpan)parameters[Parameters.SpinnerSpeed]!;
-            Text = (parameters[Parameters.Text] as string)!;
-            FontSize = (int)parameters[Parameters.FontSize]!;
-            LoadingAnimationActive = true;
-        }
-
-        #endregion
-
-        #region Nested
-
-        public static class Parameters
-        {
-            public const string SpinnerItemsCount = nameof(SpinnerItemsCount);
-
-            public const string SpinnerRadiusCoefficient = nameof(SpinnerRadiusCoefficient);
-
-            public const string SpinnerColor = nameof(SpinnerColor);
-
-            public const string SpinnerRotationDirection = nameof(SpinnerRotationDirection);
-
-            public const string SpinnerSpeed = nameof(SpinnerSpeed);
-
-            public const string Text = nameof(Text);
-
-            public const string FontSize = nameof(FontSize);
-        }
 
         #endregion
 
@@ -119,9 +82,9 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs
                 RaisePropertyChanged(nameof(SpinnerItemsCount));
             }
         }
-           
 
-        public double SpinnerRadiusCoefficient 
+
+        public double SpinnerRadiusCoefficient
         {
             get => _spinnerRadiusCoefficient;
             set
@@ -181,7 +144,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs
             }
         }
 
-        public int FontSize 
+        public int FontSize
         {
             get => _fontSize;
             set
@@ -192,6 +155,44 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs
         }
 
         #endregion
-      
+
+        #region Methods
+
+        protected override void HandleParameters(
+         DialogAwareParameters parameters)
+        {
+            SpinnerItemsCount = (int)parameters[Parameters.SpinnerItemsCount]!;
+            SpinnerRadiusCoefficient = (double)parameters[Parameters.SpinnerRadiusCoefficient]!;
+            SpinnerColor = (parameters[Parameters.SpinnerColor] as Brush)!;
+            SpinnerRotationDirection = (Spinner.RotationDirection)parameters[Parameters.SpinnerRotationDirection]!;
+            SpinnerSpeed = (TimeSpan)parameters[Parameters.SpinnerSpeed]!;
+            Text = (parameters[Parameters.Text] as string)!;
+            FontSize = (int)parameters[Parameters.FontSize]!;
+            LoadingAnimationActive = true;
+        }
+
+        #endregion
+
+        #region Nested
+
+        public static class Parameters
+        {
+            public const string SpinnerItemsCount = nameof(SpinnerItemsCount);
+
+            public const string SpinnerRadiusCoefficient = nameof(SpinnerRadiusCoefficient);
+
+            public const string SpinnerColor = nameof(SpinnerColor);
+
+            public const string SpinnerRotationDirection = nameof(SpinnerRotationDirection);
+
+            public const string SpinnerSpeed = nameof(SpinnerSpeed);
+
+            public const string Text = nameof(Text);
+
+            public const string FontSize = nameof(FontSize);
+        }
+
+        #endregion
+
     }
 }

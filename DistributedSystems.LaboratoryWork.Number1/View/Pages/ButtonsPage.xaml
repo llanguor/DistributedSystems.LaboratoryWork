@@ -37,7 +37,7 @@
         Grid.Column="0" 
         Grid.Row="0"
         Style="{StaticResource ResourceKey=ForegroundButtonStyle}"
-        Command="{Binding Path=DialogHostCommand}"
+        Command="{Binding Path=DialogHostCommand, Mode=OneWay}"
         Content="Foreground Button"
         />
         <!-- Background="Brown" Foreground="Aqua" FontSize="10" -->
@@ -47,7 +47,7 @@
         Grid.Column="1"
         Grid.Row="0"
         Style="{StaticResource ResourceKey=PictureButtonStyle}"
-        Command="{Binding Path=DialogHostCommand}"
+        Command="{Binding Path=DialogHostCommand, Mode=OneWay}"
         Content="ЖМИ"
         FontSize="20"
         Foreground="White"
@@ -81,7 +81,7 @@
         Grid.Row="1"
         BackgroundOpacity="0.7"
         DialogCornerRadius="25"
-        BackgroundCommand="{Binding Path=DialogHostCommand}"
+        BackgroundCommand="{Binding Path=DialogHostCommand, Mode=OneWay}"
         >
             <TextBlock FontSize="20" Width="170" Height="30" Text="Some content" TextAlignment="Center"></TextBlock>
         </controls:DialogHost>
@@ -91,14 +91,14 @@
             Grid.Column="1"
             FontSize="15"
             Content="Открыть MessageDialog"
-            Command="{Binding ShowMessageDialog}"/>
+            Command="{Binding ShowMessageDialog, Mode=OneWay}"/>
 
         <Button
          Grid.Row="1"
          Grid.Column="2"
          FontSize="15"
          Content="Открыть SpinnerDialog"
-         Command="{Binding ShowSpinnerDialog}"/>
+         Command="{Binding ShowSpinnerDialog, Mode=OneWay}"/>
 
         <Viewbox  
             Margin="5"

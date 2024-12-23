@@ -14,12 +14,12 @@ namespace DistributedSystems.LaboratoryWork.Nuget.Converters.Base
         IValueConverter
             where TValueConverter : new()
     {
+
         #region Fields
 
         private static readonly Lazy<TValueConverter> _instance;
 
         #endregion
-
 
         #region Constructors
 
@@ -29,7 +29,6 @@ namespace DistributedSystems.LaboratoryWork.Nuget.Converters.Base
         }
 
         #endregion
-
 
         #region System.Windows.Markup.MarkupExtension overrides
 
@@ -41,9 +40,7 @@ namespace DistributedSystems.LaboratoryWork.Nuget.Converters.Base
 
         #endregion
 
-
         #region System.Windows.Data.IValueConverter implementation
-
         public abstract object? Convert(
             object value, 
             Type targetType, 
@@ -60,5 +57,6 @@ namespace DistributedSystems.LaboratoryWork.Nuget.Converters.Base
         }
 
         #endregion
+
     }
 }

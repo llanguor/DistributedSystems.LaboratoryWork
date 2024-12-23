@@ -11,6 +11,9 @@ namespace DistributedSystems.LaboratoryWork.Nuget.Converters
     public sealed class BitwiseConverter :
     MultiValueConverterBase<BitwiseConverter>
     {
+
+        #region Nested
+
         public enum Operators
         {
             /// <summary>
@@ -39,6 +42,9 @@ namespace DistributedSystems.LaboratoryWork.Nuget.Converters
             Complement
         }
 
+        #endregion
+
+        #region Overrides
 
         public override object? Convert(object[] values, Type targetType, object? parameter, CultureInfo culture)
         {
@@ -82,5 +88,8 @@ namespace DistributedSystems.LaboratoryWork.Nuget.Converters
                     throw new ArgumentOutOfRangeException(nameof(parameter));
             }
         }
+
+        #endregion
+
     }
 }

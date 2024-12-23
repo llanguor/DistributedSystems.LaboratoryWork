@@ -14,6 +14,8 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Attached
         Button
     {
 
+        #region DependencyProperties
+
         public static readonly DependencyProperty Source =
             DependencyProperty.RegisterAttached(
                 "ImageSource",
@@ -21,6 +23,22 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Attached
                 typeof(ImageButtonTemplateAttachedProperty),
                 new PropertyMetadata(null)
                 );
+
+        public static readonly DependencyProperty ImageScaleX =
+            DependencyProperty.RegisterAttached(
+                "ImageScaleX",
+                typeof(double),
+                typeof(ImageButtonTemplateAttachedProperty));
+
+        public static readonly DependencyProperty ImageScaleY =
+            DependencyProperty.RegisterAttached(
+                "ImageScaleY",
+                typeof(double),
+                typeof(ImageButtonTemplateAttachedProperty));
+
+        #endregion
+
+        #region Methods
 
         public static ImageSource GetImageSource(DependencyObject obj)
         {
@@ -32,14 +50,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Attached
             obj.SetValue(Source, value);
         }
 
-
-
-        public static readonly DependencyProperty ImageScaleX =
-            DependencyProperty.RegisterAttached(
-                "ImageScaleX",
-                typeof(double),
-                typeof(ImageButtonTemplateAttachedProperty));
-
         public static double GetImageScaleX(DependencyObject obj)
         {
             return (double)obj.GetValue(ImageScaleX);
@@ -50,14 +60,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Attached
             obj.SetValue(ImageScaleX, value);
         }
 
-
-
-        public static readonly DependencyProperty ImageScaleY =
-            DependencyProperty.RegisterAttached(
-                "ImageScaleY",
-                typeof(double),
-                typeof(ImageButtonTemplateAttachedProperty));
-
         public static double GetImageScaleY(DependencyObject obj)
         {
             return (double)obj.GetValue(ImageScaleX);
@@ -67,5 +69,8 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Attached
         {
             obj.SetValue(ImageScaleX, value);
         }
+
+        #endregion
+
     }
 }

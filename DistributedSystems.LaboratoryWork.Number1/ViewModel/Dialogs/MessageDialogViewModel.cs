@@ -17,28 +17,10 @@ using System.Runtime.CompilerServices;
 
 namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs
 {
-    //TODO: во всем проекте расставить исключения на поля на случай если они null (на запись)
 
     internal sealed class MessageDialogViewModel:
         DialogChoiceViewModelBase
     {
-        #region Methods
-        protected override void HandleParameters(
-            DialogAwareParameters parameters)
-        {
-            Text = (parameters[Parameters.Text] as string)!;
-            ScrollViewerBackground = (parameters[Parameters.ScrollViewerBackground] as Brush)!;
-            DialogHostCommand = parameters[Parameters.DialogHostCommand] as ICommand;
-            PositiveCommand = parameters[Parameters.PositiveCommand] as ICommand;
-            NegativeCommand = parameters[Parameters.NegativeCommand] as ICommand;
-
-            DialogTypeValue = (MessageDialogTypes.DialogType)parameters[Parameters.DialogTypeValue]!;
-            ScrollViewerVerticalVisible = (ScrollBarVisibility)parameters[Parameters.ScrollViewerVerticalVisible]!;
-            ScrollViewerHorizontalVisible = (ScrollBarVisibility)parameters[Parameters.ScrollViewerHorizontalVisible]!;
-        }
-
-        #endregion
-
 
         #region Fields
 
@@ -55,7 +37,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs
         private ICommand? _dialogHostCommand;
 
         #endregion
-
 
         #region Style Properties
 
@@ -116,7 +97,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs
 
         #endregion
 
-
         #region Commands Properties
 
         public ICommand? DialogHostCommand
@@ -132,7 +112,23 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs
         }
 
         #endregion
-       
+
+        #region Methods
+        protected override void HandleParameters(
+            DialogAwareParameters parameters)
+        {
+            Text = (parameters[Parameters.Text] as string)!;
+            ScrollViewerBackground = (parameters[Parameters.ScrollViewerBackground] as Brush)!;
+            DialogHostCommand = parameters[Parameters.DialogHostCommand] as ICommand;
+            PositiveCommand = parameters[Parameters.PositiveCommand] as ICommand;
+            NegativeCommand = parameters[Parameters.NegativeCommand] as ICommand;
+
+            DialogTypeValue = (MessageDialogTypes.DialogType)parameters[Parameters.DialogTypeValue]!;
+            ScrollViewerVerticalVisible = (ScrollBarVisibility)parameters[Parameters.ScrollViewerVerticalVisible]!;
+            ScrollViewerHorizontalVisible = (ScrollBarVisibility)parameters[Parameters.ScrollViewerHorizontalVisible]!;
+        }
+
+        #endregion
 
         #region Nested
 
@@ -156,5 +152,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs
         }
 
         #endregion
+
     }
 }
