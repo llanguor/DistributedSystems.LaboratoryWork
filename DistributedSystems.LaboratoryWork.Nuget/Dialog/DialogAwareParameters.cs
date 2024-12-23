@@ -43,11 +43,11 @@ namespace DistributedSystems.LaboratoryWork.Nuget.Dialog
         {
             private readonly Dictionary<string, object?> _parameters;
 
-            private Type _dialogViewModelType;
+            private Type? _dialogViewModelType;
 
             private Builder()
             {
-                _parameters = new Dictionary<string, object?>();
+                _parameters = [];
             }
 
             public static Builder Create()
@@ -74,7 +74,7 @@ namespace DistributedSystems.LaboratoryWork.Nuget.Dialog
             {
                 return new DialogAwareParameters(
                     new Dictionary<string, object?>(_parameters),
-                    _dialogViewModelType);
+                    _dialogViewModelType!);
             }
         }
 

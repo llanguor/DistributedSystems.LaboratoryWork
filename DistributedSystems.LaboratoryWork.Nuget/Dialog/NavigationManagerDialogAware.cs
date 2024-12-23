@@ -73,13 +73,12 @@ namespace DistributedSystems.LaboratoryWork.Nuget.Dialog
             }
 
             dialogControl = (_resolver.Resolve(dialogWindowFactory) as Window)!;
-            var dialogControlViewModel = dialogControl.DataContext as DialogViewModelBase;
 
-            if (dialogControlViewModel is null)
-            {
+            var dialogControlViewModel = 
+                dialogControl.DataContext as DialogViewModelBase ?? 
                 throw new ArgumentException(
-                    nameof(dialogParameters), "Invalid dialog view model type, or view model does not exist");
-            }
+                    "Invalid dialog view model type, or view model does not exist", 
+                    nameof(dialogParameters));
 
             dialogControlViewModel.InputParameters = dialogParameters;
         }

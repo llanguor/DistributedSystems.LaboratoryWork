@@ -69,3 +69,5 @@ C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems
 C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\Packages\Controls\Spinner.baml
 C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\View\Dialogs\SpinnerDialog.g.cs
 C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\View\Dialogs\SpinnerDialog.baml
+C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\View\Pages\MirrorReflectionPage.g.cs
+C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems.LaboratoryWork.Number1\obj\Debug\net8.0-windows\View\Pages\MirrorReflectionPage.baml

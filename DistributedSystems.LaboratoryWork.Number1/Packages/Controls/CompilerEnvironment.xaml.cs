@@ -82,7 +82,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
 
             
 
-            Task<string?> openFileTask = Task.Run(async () =>
+            Task<string?> openFileTask = Task.Run(() =>
             {
                 var openFileDialog = new OpenFileDialog();
                 if (openFileDialog.ShowDialog() == false)

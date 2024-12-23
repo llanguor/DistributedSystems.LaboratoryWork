@@ -23,5 +23,8 @@
         <TabItem Header="Compiler's environment">
             <Frame x:Name="compilersEnvironmentFrame"/>
         </TabItem>
+        <TabItem Header="Mirror reflection">
+            <Frame x:Name="mirrorReflectionFrame"/>
+        </TabItem>
     </TabControl>
 </Window>

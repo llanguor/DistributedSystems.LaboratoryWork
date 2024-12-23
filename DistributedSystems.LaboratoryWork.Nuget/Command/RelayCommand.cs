@@ -2,29 +2,20 @@
 
 namespace DistributedSystems.LaboratoryWork.Nuget.Command;
 
-public class RelayCommand :
+public class RelayCommand(
+    Action<object?> execute,
+    Predicate<object?>? canExecute = null) :
     ICommand
 {
 
     #region Fields
 
-    private readonly Action<object?> _execute;
+    private readonly Action<object?> _execute = execute ?? throw new ArgumentNullException(nameof(execute));
 
-    private readonly Predicate<object?>? _canExecute;
-
-    #endregion
-
-    #region Constructors
-
-    public RelayCommand(
-        Action<object?> execute,
-        Predicate<object?>? canExecute = null)
-    {
-        _canExecute = canExecute;
-        _execute = execute ?? throw new ArgumentNullException(nameof(execute));
-    }
+    private readonly Predicate<object?>? _canExecute = canExecute;
 
     #endregion
+
 
     #region System.Windows.Input.ICommand implementation
 

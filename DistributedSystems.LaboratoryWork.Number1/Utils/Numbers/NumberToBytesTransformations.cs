@@ -12,11 +12,11 @@ namespace DistributedSystems.LaboratoryWork.Number1.Utils.Numbers
         {
             long res = operand3;
             res <<= 9;
-            res |= operand2;
+            res |= (uint)operand2;
             res <<= 9;
-            res |= operand1;
+            res |= (uint)operand1;
             res <<= 5;
-            res |= operation;
+            res |= (uint)operation;
             return res;
         }
 

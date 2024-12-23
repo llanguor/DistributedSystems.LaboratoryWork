@@ -37,6 +37,9 @@
     <Compile Update="View\Pages\LetterKeyboardPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Pages\MirrorReflectionPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Pages\NumericKeyboardPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -82,6 +85,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Dialogs\CompilerEnvironmentDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Pages\MirrorReflectionPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Windows\MainWindow.xaml">

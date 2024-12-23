@@ -104,10 +104,10 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
 
             private delegate void MethodDelegate(int operand1Key, int operand2Key, int operand3Key);
             private static List<Lazy<MethodDelegate>>? _operationsList;
-            private SortedDictionary<int, int> _registers;
+            private readonly SortedDictionary<int, int> _registers;
 
-            private Lazy<ICommand> _requestToInputCommand;
-            private Lazy<ICommand> _logCommand;
+            private readonly Lazy<ICommand> _requestToInputCommand;
+            private readonly Lazy<ICommand> _logCommand;
 
             #endregion
 
@@ -127,7 +127,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
 
             static Registers()
             {
-                OperationsIdList = new ObservableCollection<int>();
+                OperationsIdList = [];
             }
 
             public Registers(ICommand requestToInputCommand, ICommand logCommand)
@@ -529,9 +529,9 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
             private bool _disposed = false;
             private bool _executionComplete = false;
 
-            private Registers _registers;
-            private MemoryStream _memoryStream;
-            private BinaryReader _binaryReader;
+            private readonly Registers _registers;
+            private readonly MemoryStream _memoryStream;
+            private readonly BinaryReader _binaryReader;
 
             #endregion
 

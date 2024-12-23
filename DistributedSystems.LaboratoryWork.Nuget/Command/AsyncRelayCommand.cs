@@ -7,27 +7,17 @@ using System.Windows.Input;
 
 namespace DistributedSystems.LaboratoryWork.Nuget.Command
 {
-    public class AsyncRelayCommand :
+    public class AsyncRelayCommand(
+        Func<object?, Task> execute,
+        Predicate<object?>? canExecute = null) :
         ICommand
     {
 
         #region Fields
 
-        private readonly Func<object?, Task> _execute;
+        private readonly Func<object?, Task> _execute = execute ?? throw new ArgumentNullException(nameof(execute));
 
-        private readonly Predicate<object?>? _canExecute;
-
-        #endregion
-
-        #region Constructors
-
-        public AsyncRelayCommand(
-            Func<object?,Task> execute,
-            Predicate<object?>? canExecute = null)
-        {
-            _canExecute = canExecute;
-            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
-        }
+        private readonly Predicate<object?>? _canExecute = canExecute;
 
         #endregion
 
@@ -41,11 +31,11 @@ namespace DistributedSystems.LaboratoryWork.Nuget.Command
 
         public async void Execute(object? parameter)
         {
-            try
+           // try
             {
                 await ExecuteAsync(parameter);
             }
-            catch(Exception ex)
+            //catch(Exception ex)
             {
                 /*
                 //Перенаправляем исключение в основной поток

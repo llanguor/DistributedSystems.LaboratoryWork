@@ -88,6 +88,7 @@ namespace DistributedSystems.LaboratoryWork.Number1
                 .AddMapping<ButtonsPage, ButtonsPageViewModel>()
                 .AddMapping<NumericKeyboardPage, NumericKeyboardPageViewModel>()
                 .AddMapping<LetterKeyboardPage, LetterKeyboardPageViewModel>()
+                .AddMapping<MirrorReflectionPage, MirrorReflectionPageViewModel>()
                 .AddMapping<CompilerEnvironmentPage, CompilerEnvironmentPageViewModel>();
 
             return this;
@@ -134,6 +135,7 @@ namespace DistributedSystems.LaboratoryWork.Number1
             Container.Register<NumericKeyboardPage>(Reuse.Singleton);
             Container.Register<LetterKeyboardPage>(Reuse.Singleton);
             Container.Register<CompilerEnvironmentPage>(Reuse.Singleton);
+            Container.Register<MirrorReflectionPage>(Reuse.Singleton);
             return this;
         }
 
@@ -143,6 +145,7 @@ namespace DistributedSystems.LaboratoryWork.Number1
             Container.Register<NumericKeyboardPageViewModel>(Reuse.Singleton);
             Container.Register<LetterKeyboardPageViewModel>(Reuse.Singleton);
             Container.Register<CompilerEnvironmentPageViewModel>(Reuse.Singleton);
+            Container.Register<MirrorReflectionPageViewModel>(Reuse.Singleton);
             return this;
         }
 
