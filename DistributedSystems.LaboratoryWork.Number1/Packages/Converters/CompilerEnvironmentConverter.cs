@@ -48,6 +48,15 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Converters
             object programText = value;
             var exceptions = new List<Exception>();
             var instructions = new ObservableCollection<Instruction>();
+
+            // ^ - начало регулярки
+            //\d - число
+            //\d{1,3} - число от 1 до 3 символов
+            // скобки - сохранить значения чтобы можно было потом ссчитать ниже то что лежит внутри
+            // так же скобки позволяют раздробить выполнение на части. Например <111> - ок, <111>,<111> - ок
+            //      В таком случае мы ставим ?: - говорим о том, что не надо сохранять переменные
+            //все остальные символы - просто часть маски. Например >,< и тд
+
             const string regexMask = @"^<(\d{1,3})(?:>,<(\d{1,3})>(?:,<(\d{1,3})>(?:,<(\d{1,2})>)?)?)?$";
             int lineCount = 1;
 
