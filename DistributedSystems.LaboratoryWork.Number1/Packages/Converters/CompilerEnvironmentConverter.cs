@@ -56,8 +56,15 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Converters
             // так же скобки позволяют раздробить выполнение на части. Например <111> - ок, <111>,<111> - ок
             //      В таком случае мы ставим ?: - говорим о том, что не надо сохранять переменные
             //все остальные символы - просто часть маски. Например >,< и тд
+            //-? перед числом говорит о том что там может быть минус а может не быть
 
-            const string regexMask = @"^<(\d{1,3})(?:>,<(\d{1,3})>(?:,<(\d{1,3})>(?:,<(\d{1,2})>)?)?)?$";
+            //тут маска такая:
+            // <число от 1 до 3 знаков>,<число от 1 до 3 знаков>,<число от 1 до 3 знаков>,<число от 1 до 2 знаков>
+            //все числа сохраняются в переменные (скобки вокруг \d{1,3})
+            //так же регулярка считается выполненной если строка имеет одну из форм: <111>;  <111>,<111>;  <111>,<111>,<111>;  <111>,<111>,<111>,<11>
+            //если какая то часть отсутствует а мы ниже попробуем обратиться к ней в массиве то там будет пустая строка. Поэтому чекаем на пустую строку и заменяем ее на 0
+
+            const string regexMask = @"^<(-?\d{1,3})(?:>,<(-?\d{1,3})>(?:,<(-?\d{1,3})>(?:,<(\d{1,2})>)?)?)?$";
             int lineCount = 1;
 
             foreach (string instructionString in Regex.Split(programText.ToString()!, @"\s+"))
@@ -68,10 +75,10 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Converters
                 {
                     var instruction = new Instruction();
 
-                    instruction.Operand1 = match.Groups[1].Value == ""? 0 : int.Parse(match.Groups[1].Value);
-                    instruction.Operand2 = match.Groups[2].Value == "" ? 0 : int.Parse(match.Groups[2].Value);
-                    instruction.Operand3 = match.Groups[3].Value == "" ? 0 : int.Parse(match.Groups[3].Value);
-                    instruction.Operation = match.Groups[4].Value == "" ? 0 : int.Parse(match.Groups[4].Value);
+                    instruction.Operand1 = match.Groups[1].Value == string.Empty ? 0 : int.Parse(match.Groups[1].Value);
+                    instruction.Operand2 = match.Groups[2].Value == string.Empty ? 0 : int.Parse(match.Groups[2].Value);
+                    instruction.Operand3 = match.Groups[3].Value == string.Empty ? 0 : int.Parse(match.Groups[3].Value);
+                    instruction.Operation = match.Groups[4].Value == string.Empty ? 0 : int.Parse(match.Groups[4].Value);
                     instructions.Add(instruction);
                 }
                 else
