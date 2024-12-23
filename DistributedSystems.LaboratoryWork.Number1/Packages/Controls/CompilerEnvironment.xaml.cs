@@ -134,7 +134,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
 
             Instructions = (ObservableCollection<Instruction>)outputInstructions;
 
-            await LaunchExecute(); 
+            //await LaunchExecute(); 
             await dialogTask;
         }
 

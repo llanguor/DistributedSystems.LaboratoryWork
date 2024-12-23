@@ -41,7 +41,7 @@
             
             <TextBox x:Name="programTextBox" TextWrapping="Wrap" Grid.Column="0" AcceptsReturn="True" Grid.Row="0" DataContext="{Binding Instructions, RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor}}">
                 <TextBox.Text>
-                    <MultiBinding Converter="{converters:CompilerEnvironmentConverter}">
+                    <MultiBinding Converter="{converters:CompilerEnvironmentConverter}" UpdateSourceTrigger="PropertyChanged">
                         <Binding Mode="TwoWay"  Path="Instructions" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=UserControl}" />
                         <Binding Mode="OneWay"  Path="Operand1" />
                         <Binding Mode="OneWay"  Path="Operand2" />

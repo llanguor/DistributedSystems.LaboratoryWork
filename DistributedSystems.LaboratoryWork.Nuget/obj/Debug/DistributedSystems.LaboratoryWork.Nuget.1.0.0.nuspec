@@ -5,7 +5,7 @@
     <version>1.0.0</version>
     <authors>DistributedSystems.LaboratoryWork.Nuget</authors>
     <description>Package Description</description>
-    <repository type="git" commit="a547cebf64c4f028aece11eccbbc9a39a1fd23ec" />
+    <repository type="git" commit="538d3449d48409ffaaf0d56bc9c8ee2fdc7133eb" />
     <dependencies>
       <group targetFramework="net8.0-windows7.0">
         <dependency id="DryIoc.dll" version="5.4.3" exclude="Build,Analyzers" />

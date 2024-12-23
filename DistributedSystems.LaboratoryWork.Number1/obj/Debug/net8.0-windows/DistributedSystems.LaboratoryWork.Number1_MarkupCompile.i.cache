@@ -16,5 +16,5 @@ C:\Users\lifem\source\repos\DistributedSystems.LaboratoryWork\DistributedSystems
 2131766890092
 Packages\Controls\CompilerEnvironment.xaml;Packages\Controls\DialogHost.xaml;Packages\Controls\LetterKeyboard.xaml;Packages\Controls\NumericKeyboard.xaml;Packages\Controls\Spinner.xaml;Packages\Resources\ButtonsAppendDictionary.xaml;Packages\Resources\ButtonsDictionary.xaml;Packages\Resources\ScrollViewersDictionary.xaml;View\Dialogs\CompilerEnvironmentDialog.xaml;View\Dialogs\MessageDialog.xaml;View\Dialogs\SpinnerDialog.xaml;View\Pages\ButtonsPage.xaml;View\Pages\CompilerEnvironmentPage.xaml;View\Pages\LetterKeyboardPage.xaml;View\Pages\MirrorReflectionPage.xaml;View\Pages\NumericKeyboardPage.xaml;View\Windows\MainWindow.xaml;
 
-False
+True
 

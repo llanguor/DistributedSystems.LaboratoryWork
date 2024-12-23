@@ -48,7 +48,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Converters
             object programText = value;
             var exceptions = new List<Exception>();
             var instructions = new ObservableCollection<Instruction>();
-            const string regexMask = @"^<(\d{1,3})>,<(\d{1,3})>,<(\d{1,3})>,<(\d{1,2})>$";
+            const string regexMask = @"^<(\d{1,3})(?:>,<(\d{1,3})>(?:,<(\d{1,3})>(?:,<(\d{1,2})>)?)?)?$";
             int lineCount = 1;
 
             foreach (string instructionString in Regex.Split(programText.ToString()!, @"\s+"))
@@ -58,10 +58,11 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Converters
                 if (match.Success)
                 {
                     var instruction = new Instruction();
-                    instruction.Operand1 = int.Parse(match.Groups[1].Value);
-                    instruction.Operand2 = int.Parse(match.Groups[2].Value);
-                    instruction.Operand3 = int.Parse(match.Groups[3].Value);
-                    instruction.Operation = int.Parse(match.Groups[4].Value);
+
+                    instruction.Operand1 = match.Groups[1].Value == ""? 0 : int.Parse(match.Groups[1].Value);
+                    instruction.Operand2 = match.Groups[2].Value == "" ? 0 : int.Parse(match.Groups[2].Value);
+                    instruction.Operand3 = match.Groups[3].Value == "" ? 0 : int.Parse(match.Groups[3].Value);
+                    instruction.Operation = match.Groups[4].Value == "" ? 0 : int.Parse(match.Groups[4].Value);
                     instructions.Add(instruction);
                 }
                 else
@@ -76,6 +77,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Converters
             {
                 
                 //Select извлекает из объектов нужный параметр
+               /*
                 string allMessages = string.Join(
                     Environment.NewLine,
                     aggregateException.InnerExceptions.Select(ex => ex.Message));
@@ -91,7 +93,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Converters
                 .AddParameter(MessageDialogViewModel.Parameters.ScrollViewerHorizontalVisible, ScrollBarVisibility.Disabled)
                 .AddParameter(MessageDialogViewModel.Parameters.ScrollViewerVerticalVisible, ScrollBarVisibility.Visible)
                 .Build());
-
+               */
                 return [DependencyProperty.UnsetValue];
             }
 
