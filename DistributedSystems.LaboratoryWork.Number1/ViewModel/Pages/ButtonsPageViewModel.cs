@@ -114,7 +114,8 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Pages
             .AddParameter(MessageDialogViewModel.Parameters.Text, "Some text")
             .AddParameter(MessageDialogViewModel.Parameters.DialogTypeValue, MessageDialogTypes.DialogType.OkCancel)
             .AddParameter(MessageDialogViewModel.Parameters.ScrollViewerBackground, Colors.AliceBlue)
-            .AddParameter(MessageDialogViewModel.Parameters.ScrollViewerVisible, ScrollBarVisibility.Visible)
+            .AddParameter(MessageDialogViewModel.Parameters.ScrollViewerHorizontalVisible, ScrollBarVisibility.Disabled)
+               .AddParameter(MessageDialogViewModel.Parameters.ScrollViewerVerticalVisible, ScrollBarVisibility.Visible)
             .Build()))
             {
                 System.Windows.MessageBox.Show("Dialog result: ACCEPTED");

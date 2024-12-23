@@ -2,24 +2,11 @@
 using DistributedSystems.LaboratoryWork.Nuget.Command;
 using DistributedSystems.LaboratoryWork.Number1.Utils.Logger;
 using DistributedSystems.LaboratoryWork.Number1.Utils.Numbers;
-using DryIoc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.CodeDom.Compiler;
-using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Data;
 using System.Windows.Input;
-using static DistributedSystems.LaboratoryWork.Number1.Packages.Types.CompilerEnvironmentTypes;
-
 
 namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
 {
@@ -27,22 +14,104 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
     {
         //TODO: check public classes fields
 
-        internal class Registers
+        public class CompilerExceptions
+        {
+
+            public class CompilerException : Exception
+            {
+                public int Value { get; }
+                public CompilerException(string message, int methodNumber)
+                    : base(message)
+                {
+                    Value = methodNumber;
+                }
+            }
+
+            public class NumberSystemException : CompilerException
+            {
+                public NumberSystemException(string message, int methodNumber)
+                    : base(message, methodNumber)
+                { 
+                
+                }
+            }
+
+            public class IncorrectRegisterDataTypeException : CompilerException
+            {
+                public IncorrectRegisterDataTypeException(string message, int methodNumber)
+                    : base(message, methodNumber)
+                {
+
+                }
+            }
+
+            public class IncorrectRegisterInputException : CompilerException
+            {
+                public IncorrectRegisterInputException(string message, int methodNumber)
+                    : base(message, methodNumber)
+                {
+
+                }
+            }
+
+            public class NotExistentRegisterException : CompilerException
+            {
+                public NotExistentRegisterException(string message, int methodNumber)
+                    : base(message, methodNumber)
+                {
+
+                }
+            }
+
+            public class NotExistentOperationException : CompilerException
+            {
+                public NotExistentOperationException(string message, int methodNumber)
+                    : base(message, methodNumber)
+                {
+
+                }
+            }
+
+            public class NullValueDivisionException : CompilerException
+            {
+                public NullValueDivisionException(string message, int methodNumber)
+                    : base(message, methodNumber)
+                {
+
+                }
+            }
+
+            public class IncorrectByteIndexException : CompilerException
+            {
+                public IncorrectByteIndexException(string message, int methodNumber)
+                    : base(message, methodNumber)
+                {
+
+                }
+            }
+
+            public class InputFromKeyboardException : CompilerException
+            {
+                public InputFromKeyboardException(string message, int methodNumber)
+                    : base(message, methodNumber)
+                {
+
+                }
+            }
+        }
+
+        public class Registers
         {
             #region Fields
 
             private delegate void MethodDelegate(int operand1Key, int operand2Key, int operand3Key);
-
             private static List<Lazy<MethodDelegate>>? _operationsList;
-
             private SortedDictionary<int, int> _registers;
 
             private Lazy<ICommand> _requestToInputCommand;
-
             private Lazy<ICommand> _logCommand;
 
             #endregion
-
 
             #region Properties
 
@@ -55,7 +124,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
             public static ObservableCollection<int> OperationsIdList { get; }
 
             #endregion
-
 
             #region Constructors
 
@@ -107,7 +175,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
 
             #endregion
 
-
             #region Methods
 
             public void Log(string text)
@@ -123,13 +190,13 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
             public void ExecuteMethod(int operand1Key, int operand2Key, int operand3Key, int operationId)
             {
                 if (operand1Key > 511 || operand1Key < 0)
-                    throw new ArgumentOutOfRangeException(nameof(operand1Key));
+                    throw new CompilerExceptions.NotExistentRegisterException($"Register id: {operand1Key}", -1);
                 if (operand2Key > 511 || operand2Key < 0)
-                    throw new ArgumentOutOfRangeException(nameof(operand2Key));
+                    throw new CompilerExceptions.NotExistentRegisterException($"Register id: {operand2Key}", -1);
                 if (operand3Key > 511 || operand3Key < 0)
-                    throw new ArgumentOutOfRangeException(nameof(operand3Key));
+                    throw new CompilerExceptions.NotExistentRegisterException($"Register id: {operand3Key}", -1);
                 if (operationId > 24 || operationId < 0)
-                    throw new ArgumentOutOfRangeException(nameof(operationId));
+                    throw new CompilerExceptions.NotExistentRegisterException($"Operation id: {operationId}", -1);
 
                 if (!_registers.ContainsKey(operand1Key))
                     _registers.Add(operand1Key, default);
@@ -138,7 +205,16 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
                 if (!_registers.ContainsKey(operand3Key))
                     _registers.Add(operand3Key, default);
 
-                var operationMethod = _operationsList![operationId].Value;
+                MethodDelegate? operationMethod;
+
+                try
+                {
+                    operationMethod = _operationsList![operationId].Value;
+                }
+                catch(MissingMemberException ex)
+                {
+                    throw new CompilerExceptions.NotExistentOperationException($"Operation id: {operationId}. Message: {ex.Message}", -1);
+                }
 
                 Log($"Method {operationId} is being executed");
                 operationMethod(operand1Key, operand2Key, operand3Key);
@@ -147,25 +223,30 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
 
             #endregion
 
-
             #region Methods for registers
-
-            //TODO: Exceptions. Own type
 
             private void MethodId0(int operand1Key, int operand2Key, int operand3Key)
             {
                 int numberSystem = Convert.ToInt32(_registers[operand1Key]);
                 if(numberSystem<2 || numberSystem>16)
                 {
-                    throw new ArgumentException("Number system must be from 2 to 16");
+                    throw new CompilerExceptions.NumberSystemException("Number system must be from 2 to 16", 0);
                 }
 
                 Log($"Register's values in {numberSystem} number system");
 
-                foreach (KeyValuePair<int, int> pair in _registers)
+                foreach (var pair in _registers)
                 {
-                    int value = Convert.ToInt32(pair.Value);
-                    string result = NumberSystemTransformations.ConvertNumberToBase(value, numberSystem);
+                    int value = pair.Value;
+                    string result;
+                    try
+                    {
+                        result = NumberSystemTransformations.ConvertNumberToBase(value, numberSystem);
+                    }
+                    catch(ArgumentException ex)
+                    {
+                        throw new CompilerExceptions.IncorrectRegisterInputException(ex.Message, 0);
+                    }
 
                     Log($"{pair.Key}: {result}");
                 }
@@ -235,11 +316,17 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
 
             private void MethodId13(int operand1Key, int operand2Key, int operand3Key)
             {
+                if (_registers[operand2Key] == 0)
+                    throw new CompilerExceptions.NullValueDivisionException($"The value being divided by must not be zero. OperandId: {operand3Key}", 13);
+
                 _registers[operand3Key] = _registers[operand1Key] / _registers[operand2Key];
             }
 
             private void MethodId14(int operand1Key, int operand2Key, int operand3Key)
             {
+                if (_registers[operand2Key] == 0)
+                    throw new CompilerExceptions.NullValueDivisionException($"The value being divided by must not be zero. OperandId: {operand3Key}", 14);
+
                 _registers[operand3Key] = _registers[operand1Key] % _registers[operand2Key];
             }
 
@@ -254,7 +341,8 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
                 //byteNumber*8 - сдвиг на нужное количество байтов
 
                 int byteIndex = _registers[operand2Key];
-                if (byteIndex < 0 || byteIndex > 3) throw new ArgumentException("In a 32 bit number there are only 4 bytes");
+                if (byteIndex < 0 || byteIndex > 3) 
+                    throw new CompilerExceptions.IncorrectByteIndexException("In a 32 bit number there are only 4 bytes", 16);
 
                 int byteValue = (_registers[operand3Key] >> byteIndex * 8) & 255;  // Извлечение третьего байта
                 _registers[operand1Key] &= ~(255 << byteIndex * 8);                // Маска для обнуления байта
@@ -263,18 +351,32 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
 
             private void MethodId17(int operand1Key, int operand2Key, int operand3Key)
             {
-                int numberSystem = Convert.ToInt32(_registers[operand2Key]);
-                int value = Convert.ToInt32(_registers[operand1Key]);
-                string result = NumberSystemTransformations.ConvertNumberToBase(value, numberSystem);
+                int numberSystem = _registers[operand2Key];
+                int value = _registers[operand1Key];
+                string result;
 
+                try
+                {
+                    result = NumberSystemTransformations.ConvertNumberToBase(value, numberSystem);
+                }
+                catch (ArgumentException ex)
+                {
+                    throw new CompilerExceptions.IncorrectRegisterInputException(ex.Message, 17);
+                }
                 Log($"Value in operand {operand1Key} in {numberSystem} number system: {result}");
-
             }
 
             private void MethodId18(int operand1Key, int operand2Key, int operand3Key)
             {
                 Log($"Please enter value for register with number {operand1Key}");
-                _requestToInputCommand.Value.Execute(null);
+                try
+                {
+                    _requestToInputCommand.Value.Execute(null);
+                }
+                catch(Exception ex)
+                {
+                    throw new CompilerExceptions.InputFromKeyboardException(ex.Message, 18);
+                }
             }
 
             private void MethodId19(int operand1Key, int operand2Key, int operand3Key)
@@ -282,9 +384,12 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
                 int value = _registers[operand1Key];
                 int degree = 0;
 
+                if (value < 0)
+                    throw new CompilerExceptions.IncorrectRegisterInputException("Degree must be positive", 19);
+
                 while ((value & 1) == 0) //Двигаем число вправо пока младший бит = 0
                 {
-                    degree++;
+                    ++degree;
                     value >>= 1;
                 }
 
@@ -305,6 +410,9 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
             {
                 int value = _registers[operand1Key];
                 int shift = _registers[operand2Key];
+                if (shift < 0)
+                    throw new CompilerExceptions.IncorrectRegisterInputException("Shift must be positive", 22);
+
                 shift %= 32; // чтобы не было избыточного сдвига (для 32 битных чисел)
                 _registers[operand3Key] = (value << shift) | (value >> (32 - shift));
 
@@ -314,6 +422,9 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
             {
                 int value = _registers[operand1Key];
                 int shift = _registers[operand2Key];
+                if (shift < 0)
+                    throw new CompilerExceptions.IncorrectRegisterInputException("Shift must be positive", 22);
+
                 shift %= 32; // чтобы не было избыточного сдвига (для 32 битных чисел)
                 _registers[operand3Key] = (value >> shift) | (value << (32 - shift));
             }
@@ -365,6 +476,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
                     OnPropertyChanged(nameof(Operand1));
                 }
             }
+
             public int Operand2
             {
                 get => _operand2;
@@ -374,6 +486,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
                     OnPropertyChanged(nameof(Operand2));
                 }
             }
+
             public int Operand3
             {
                 get => _operand3;
@@ -399,6 +512,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
             #region INotifyPropertyChanged Implementation
 
             public event PropertyChangedEventHandler? PropertyChanged;
+
             public void OnPropertyChanged([CallerMemberName] string prop = "")
             {
                 if (PropertyChanged != null)
@@ -413,22 +527,15 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
             #region Fields
 
             private long? _readNumber = null;
-
             private int _operand1Key, _operand2Key, _operand3Key, _operationId;
-
-
             private bool _disposed = false;
-
-            Registers _registers;
-
-            MemoryStream _memoryStream;
-
-            BinaryReader _binaryReader;
-
             private bool _executionComplete = false;
 
-            #endregion
+            private Registers _registers;
+            private MemoryStream _memoryStream;
+            private BinaryReader _binaryReader;
 
+            #endregion
 
             #region Properties
 
@@ -437,8 +544,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
 
             #endregion
 
-
-            #region Methods
+            #region Constructors
 
             public ExecutionManager(byte[] memoryStreamArray, ICommand requestToInputCommand, ICommand logCommand)
             {
@@ -447,6 +553,10 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
                 _memoryStream.Position = 0;
                 _binaryReader = new BinaryReader(_memoryStream);
             }
+
+            #endregion
+
+            #region Methods
 
             public async Task StartExecutionFlowAsync()
             {
@@ -505,7 +615,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
 
             #endregion
 
-
             #region Dispose
 
             public void Dispose()
@@ -523,6 +632,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
                 }
 
                 _binaryReader.Dispose();
+                _memoryStream.Dispose();
                 _disposed = true;
             }
 
@@ -536,6 +646,8 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
 
         internal static class CompilerManager
         {
+            #region Methods
+
             public static byte[] Compile(IEnumerable<Instruction> instructions)
             {
                 using var memoryStream = new MemoryStream(new byte[255]);
@@ -563,61 +675,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Types
                 });
             }
 
+            #endregion
         }
     }
 }
-
-
-
-
-/*
-public static class CodeCompiler
-{
-    public static string Compile(List<Instruction> instructions)
-    {
-        return "";
-    }
-}
-
-public class CodePerformer
-{
-    #region Fields
-
-    List<int> _registersList;
-
-    #endregion
-
-
-    #region Constructors
-
-    public CodePerformer()
-    {
-        _registersList = new List<int>();
-    }
-
-    #endregion
-
-
-    #region Properties
-
-    public List<int> RegistersList
-    {
-        get => _registersList;
-    }
-
-    #endregion
-
-
-    #region Methods
-
-    public void Perform(Collection<int> instructions)
-    {
-        foreach(var instruction in instructions)
-        {
-
-        }
-    }
-
-    #endregion
-}
-*/

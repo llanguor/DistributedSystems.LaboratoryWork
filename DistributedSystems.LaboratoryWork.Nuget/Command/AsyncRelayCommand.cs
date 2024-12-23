@@ -46,7 +46,8 @@ namespace DistributedSystems.LaboratoryWork.Nuget.Command
             }
             catch(Exception ex)
             {
-                //Перенаправляем исключение в основной поток (команды сами это не делают)
+                /*
+                //Перенаправляем исключение в основной поток
                 //В коммерции это плохо?
                 //Тут это для демонстрации учебной задачи и учёта исключений
 
@@ -54,6 +55,7 @@ namespace DistributedSystems.LaboratoryWork.Nuget.Command
                 {
                     throw ex;
                 });
+                */
             }
         }
 

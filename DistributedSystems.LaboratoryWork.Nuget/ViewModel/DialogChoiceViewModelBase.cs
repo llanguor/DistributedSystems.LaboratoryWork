@@ -45,10 +45,10 @@ namespace DistributedSystems.LaboratoryWork.Nuget.ViewModel
                 _negativeCommandSupplemented.Value;
 
 
-        public ICommand PositiveCommand
+        public ICommand? PositiveCommand
         {
             get =>
-                _positiveCommand!;
+                _positiveCommand;
 
             set
             {
@@ -57,10 +57,10 @@ namespace DistributedSystems.LaboratoryWork.Nuget.ViewModel
             }
         }
 
-        public ICommand NegativeCommand
+        public ICommand? NegativeCommand
         {
             get =>
-                _negativeCommand!;
+                _negativeCommand;
 
             set
             {
@@ -85,7 +85,7 @@ namespace DistributedSystems.LaboratoryWork.Nuget.ViewModel
                 throw new ArgumentException(nameof(messageDialog));
             }
 
-            NegativeCommand.Execute(null);
+            NegativeCommand?.Execute(null);
             (messageDialog as Window)!.DialogResult = false;
         }
 
@@ -101,7 +101,7 @@ namespace DistributedSystems.LaboratoryWork.Nuget.ViewModel
                 throw new ArgumentException(nameof(messageDialog));
             }
 
-            PositiveCommand.Execute(null);
+            PositiveCommand?.Execute(null);
             (messageDialog as Window)!.DialogResult = true;
         }
 

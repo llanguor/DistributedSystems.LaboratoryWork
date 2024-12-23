@@ -26,22 +26,15 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs
         protected override void HandleParameters(
             DialogAwareParameters parameters)
         {
-            //MessageDialogTypes.DialogType DialogTypeValue
-            //ScrollBarVisibility ScrollViewerVisible
-            //ICommand DialogHostCommand
-            //ICommand PositiveCommand
-            //ICommand NegativeCommand
-            //string Text
-            //Brush ScrollViewerBackground
-
             Text = (parameters[Parameters.Text] as string)!;
             ScrollViewerBackground = (parameters[Parameters.ScrollViewerBackground] as Brush)!;
-            DialogHostCommand = (parameters[Parameters.DialogHostCommand] as ICommand)!;
-            PositiveCommand = (parameters[Parameters.PositiveCommand] as ICommand)!;
-            NegativeCommand = (parameters[Parameters.NegativeCommand] as ICommand)!;
+            DialogHostCommand = parameters[Parameters.DialogHostCommand] as ICommand;
+            PositiveCommand = parameters[Parameters.PositiveCommand] as ICommand;
+            NegativeCommand = parameters[Parameters.NegativeCommand] as ICommand;
 
             DialogTypeValue = (MessageDialogTypes.DialogType)parameters[Parameters.DialogTypeValue]!;
-            ScrollViewerVisible = (ScrollBarVisibility)parameters[Parameters.DialogTypeValue]!;
+            ScrollViewerVerticalVisible = (ScrollBarVisibility)parameters[Parameters.ScrollViewerVerticalVisible]!;
+            ScrollViewerHorizontalVisible = (ScrollBarVisibility)parameters[Parameters.ScrollViewerHorizontalVisible]!;
         }
 
         #endregion
@@ -49,7 +42,9 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs
 
         #region Fields
 
-        ScrollBarVisibility _scrollBarVisibility;
+        ScrollBarVisibility _scrollBarVerticalVisibility;
+
+        ScrollBarVisibility _scrollBarHorizontalVisibility;
 
         Brush? _brushBackground;
 
@@ -86,14 +81,25 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs
             }
         }
 
-        public ScrollBarVisibility ScrollViewerVisible
+        public ScrollBarVisibility ScrollViewerVerticalVisible
         {
-            get => _scrollBarVisibility;
+            get => _scrollBarVerticalVisibility;
 
             set
             {
-                _scrollBarVisibility = value;
-                RaisePropertyChanged(nameof(ScrollViewerVisible));
+                _scrollBarVerticalVisibility = value;
+                RaisePropertyChanged(nameof(ScrollViewerVerticalVisible));
+            }
+        }
+
+        public ScrollBarVisibility ScrollViewerHorizontalVisible
+        {
+            get => _scrollBarHorizontalVisibility;
+
+            set
+            {
+                _scrollBarHorizontalVisibility = value;
+                RaisePropertyChanged(nameof(ScrollViewerHorizontalVisible));
             }
         }
 
@@ -113,7 +119,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs
 
         #region Commands Properties
 
-        public ICommand DialogHostCommand
+        public ICommand? DialogHostCommand
         {
             get =>
                 _dialogHostCommand!;
@@ -136,7 +142,9 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs
 
             public const string Text = nameof(Text);
 
-            public const string ScrollViewerVisible = nameof(ScrollViewerVisible);
+            public const string ScrollViewerVerticalVisible = nameof(ScrollViewerVerticalVisible);
+
+            public const string ScrollViewerHorizontalVisible = nameof(ScrollViewerHorizontalVisible);
 
             public const string ScrollViewerBackground = nameof(ScrollViewerBackground);
 

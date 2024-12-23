@@ -11,8 +11,8 @@
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:types="clr-namespace:DistributedSystems.LaboratoryWork.Number1.Packages.Types"
         mc:Ignorable="d" 
-        FontSize="24"
-        Title="MessageDialog" Height="320" Width="440">
+        FontSize="16"
+        Title="MessageDialog" Height="230" Width="370">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -22,39 +22,37 @@
     </Window.Resources>
     <Grid>
         <controls:DialogHost 
-            BackgroundOpacity="0.95"
-            DialogCornerRadius ="0, 0, 20, 20"
+            BackgroundOpacity="0.9"
             BackgroundCommand="{Binding DialogHostCommand}">
 
-            <ScrollViewer
-                HorizontalScrollBarVisibility="{Binding ScrollViewerVisible}"
-                VerticalScrollBarVisibility="{Binding ScrollViewerVisible}"
-                Margin="0,15,0,25"
-                Style="{DynamicResource ResourceKey=ScrollViewerStyle}"
-                attached:ScrollViewerTemplateAttachedProperty.ScrollsColor="{Binding ScrollViewerBackground}">
-
-                <Grid>
+            
+                <Grid Margin="10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="4*"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="7*"/>
+                        <RowDefinition Height="2*"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock 
-                        TextWrapping="WrapWithOverflow"
+                <ScrollViewer
+                    Grid.ColumnSpan="2"
+                    Grid.Row="0"
+                    HorizontalScrollBarVisibility="{Binding ScrollViewerHorizontalVisible}"
+                    VerticalScrollBarVisibility="{Binding ScrollViewerVerticalVisible}"
+                    Style="{DynamicResource ResourceKey=ScrollViewerStyle}"
+                    attached:ScrollViewerTemplateAttachedProperty.ScrollsColor="{Binding ScrollViewerBackground}">  
+                    <TextBlock
+                        TextWrapping="Wrap"
                         Margin="10"
-                        Grid.ColumnSpan="2"
-                        Grid.Row="0"
+                        Padding="10,20,10,10"
                         FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MessageDialog}}"
                         Text="{Binding Text}" 
                         TextAlignment="Center"/>
-
-
-                    <Button 
-                        Margin="10,10,5,0"
+                </ScrollViewer>
+                <Button 
+                        Margin="5,5,5,5"
                         Grid.Column="0"
                         Grid.Row="1"
                         Command="{Binding PositiveCommandSupplemented, Mode=OneWay}"
@@ -85,7 +83,7 @@
                     </Button>
 
                     <Button 
-                        Margin="10,10,5,0"
+                        Margin="5,5,5,5"
                         Grid.Column="1"
                         Grid.Row="1"
                         Command="{Binding NegativeCommandSupplemented, Mode=OneWay}"
@@ -115,7 +113,7 @@
                         </Button.Style>
                     </Button>
                 </Grid>
-            </ScrollViewer>
+
         </controls:DialogHost>
     </Grid>
 </Window>

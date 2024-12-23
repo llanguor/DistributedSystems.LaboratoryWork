@@ -18,7 +18,7 @@ using static DistributedSystems.LaboratoryWork.Number1.Packages.Types.CompilerEn
 
 namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
 {
-    public partial class CompilerEnvironment : UserControl
+    public partial class CompilerEnvironment : UserControl, IDisposable
     {
 
         #region Constructors
@@ -28,7 +28,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
             InitializeComponent();
             
             Instructions = new ObservableCollection<Instruction>();
-            _inputFromDialogCommand = new Lazy<ICommand>(() => new AsyncRelayCommand((value)=>InputFromDialogCommandExecute(value!.ToString())));
             _openFileCommand = new Lazy<ICommand>(() => new AsyncRelayCommand(OpenFileCommandExecute));
             _launchCommand = new Lazy<ICommand>(() => new AsyncRelayCommand(_=>LaunchCommandExecute()));
             _dialogAware = App.Container.Resolve<IDialogAware>();
@@ -37,34 +36,19 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
         #endregion
 
         //TODO: универсализировать все структуры регионов
-
-        #region Commands
-
-
-        private readonly Lazy<ICommand> _launchCommand;
-
-        public ICommand LaunchCommand
-            => _launchCommand.Value;
-
-        private readonly Lazy<ICommand> _openFileCommand;
-
-        public ICommand OpenFileCommand
-           => _openFileCommand.Value;
-
-
-        private readonly Lazy<ICommand> _inputFromDialogCommand;
-
-        public ICommand InputFromDialogCommand
-            => _inputFromDialogCommand.Value;
-
-        #endregion
-
+        //TODO: расставить private везде где надо
 
         #region Fields
 
         private readonly IDialogAware _dialogAware;
 
-        ExecutionManager? _executionManager;
+        private ExecutionManager? _executionManager;
+
+        private readonly Lazy<ICommand> _launchCommand;
+
+        private readonly Lazy<ICommand> _openFileCommand;
+
+        bool _disposed = false;
 
         #endregion
 
@@ -76,6 +60,12 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
             get => (ObservableCollection<Instruction>)GetValue(InstructionsProperty);
             set => SetValue(InstructionsProperty, value);
         }
+
+        public ICommand LaunchCommand
+            => _launchCommand.Value;
+
+        public ICommand OpenFileCommand
+            => _openFileCommand.Value;
 
         #endregion
 
@@ -90,25 +80,35 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
         #endregion
 
 
-        #region Methods
-
+        #region Methods for commands
 
         private async Task OpenFileCommandExecute(object? obj)
         {
             var dialogViewModel = App.Container.Resolve<SpinnerDialogViewModel>();
-            var openFileDialog1 = new OpenFileDialog();
-            if (openFileDialog1.ShowDialog() == false)
-                return;
 
-            Task<string> openFileTask = Task.Run(async () =>
+            
+
+            Task<string?> openFileTask = Task.Run(async () =>
             {
-                await Task.Delay(1000);
-                string data = System.IO.File.ReadAllText(openFileDialog1.FileName); 
-                dialogViewModel.Text = "File loaded";
+                var openFileDialog = new OpenFileDialog();
+                if (openFileDialog.ShowDialog() == false)
+                    return null;
+
+                string? data = null;
+                try
+                {
+                    data = System.IO.File.ReadAllText(openFileDialog.FileName);
+                    dialogViewModel.Text = "File loaded";
+                }
+                catch(Exception ex)
+                {
+                    ShowMessageDialogException(ex.Message);
+                }
+                
                 return data;
             });
 
-            var dialog = _dialogAware.ShowDialogAsync(DialogAwareParameters.Builder.Create()
+            var dialogTask = _dialogAware.ShowDialogAsync(DialogAwareParameters.Builder.Create()
                 .ForDialogType<SpinnerDialogViewModel>()
                 .AddParameter(SpinnerDialogViewModel.Parameters.SpinnerItemsCount, 2)
                 .AddParameter(SpinnerDialogViewModel.Parameters.SpinnerRadiusCoefficient, 0.2)
@@ -119,23 +119,29 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
                 .AddParameter(SpinnerDialogViewModel.Parameters.FontSize, 30)
                 .Build());
 
-            await openFileTask;
+            if (await openFileTask is null) return;
 
-            var res = new CompilerEnvironmentConverter().ConvertBack(openFileTask.Result, Array.Empty<Type>(), null, CultureInfo.CurrentCulture);
-            Instructions = (ObservableCollection<Instruction>)res[0];
-
-            await LaunchExecute();
-
-            await dialog;
-            if (dialog.Result)
+            object outputInstructions;
+            try
             {
-                //TODO
+                outputInstructions = new CompilerEnvironmentConverter()
+                    .ConvertBack(
+                        openFileTask.Result,
+                        Array.Empty<Type>(),
+                        null,
+                        CultureInfo.CurrentCulture)[0];
             }
-            else
-            { 
-
+            catch(Exception ex)
+            {
+                ShowMessageDialogException($"File does not exist or is in an invalid format. {ex.Message}");
+                return;
             }
 
+
+            Instructions = (ObservableCollection<Instruction>)outputInstructions;
+
+            await LaunchExecute(); 
+            await dialogTask;
         }
 
         private async Task LaunchCommandExecute()
@@ -155,16 +161,12 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
            
             await launchExecuteTask;
             await dialogTask;
-
-            if (dialogTask.Result)
-            {
-
-            }
-            else
-            {
-
-            }
         }
+
+        #endregion
+
+
+        #region Methods for execution
 
         async Task LaunchExecute()
         {
@@ -175,9 +177,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
             var byteArray = await CompileExecute(Instructions);
             await Task.Delay(1000);
 
-
-            
-           
             App.Container.Unregister<CompilerEnvironmentDialogViewModel>();
             App.Container.Register<CompilerEnvironmentDialogViewModel>(Reuse.Singleton);
             dialogViewModel.Text = "Executing";
@@ -185,27 +184,31 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
 
             Task performanceTask = PerformanceExecute(byteArray);
 
-            if (_dialogAware.ShowDialog(DialogAwareParameters.Builder.Create()
+            _dialogAware.ShowDialog(DialogAwareParameters.Builder.Create()
              .ForDialogType<CompilerEnvironmentDialogViewModel>()
-             .AddParameter(CompilerEnvironmentDialogViewModel.Parameters.ButtonEnterCommand, InputFromDialogCommand)
-             .Build()))
-            {
-                //TODO
-            }
-            else
-            {
-
-            }
+             .AddParameter(
+                CompilerEnvironmentDialogViewModel.Parameters.ButtonEnterCommand,
+                new AsyncRelayCommand((value) => InputFromDialogCommandExecute(value!.ToString())))
+             .Build());
          
             await performanceTask;
             dialogViewModel.LoadingAnimationActive = false;
             dialogViewModel.Text = "Executed";
         }
 
-
         async Task<byte[]> CompileExecute(ObservableCollection<Instruction> instructions)
         {
-            return await CompilerManager.CompileAsync(instructions);
+            //TODO
+            try
+            {
+                return await CompilerManager.CompileAsync(instructions);
+            }
+            catch (Exception ex)
+            {
+                ShowMessageDialogException(ex.Message);
+            }
+
+            return Array.Empty<byte>();
         }
 
         async Task PerformanceExecute(byte[] memoryStreamArray)
@@ -223,10 +226,15 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
             {
                 await _executionManager.StartExecutionFlowAsync();
             }
-            catch
+            catch (CompilerExceptions.CompilerException ex)
             {
+                ShowMessageDialogException($"Error in method {ex.Value}: {ex.Message}");
                 dialogViewModel.ExecutionComplete = true;
-                throw;
+            }
+            catch (Exception ex)
+            {
+                ShowMessageDialogException(ex.Message);
+                dialogViewModel.ExecutionComplete = true;
             }
             finally
             {
@@ -234,45 +242,73 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
                     dialogViewModel.ExecutionComplete = true;
             }
         }
+       
+        private bool ShowMessageDialogException(string message)
+        {
+            var closeCommand = new RelayCommand(_ =>
+                    _dialogAware.CloseDialog(DialogAwareParameters.Builder.Create()
+                        .ForDialogType<MessageDialogViewModel>().Build(), false));
+            var parameters = DialogAwareParameters.Builder.Create()
+               .ForDialogType<MessageDialogViewModel>()
+               .AddParameter(MessageDialogViewModel.Parameters.PositiveCommand, null)
+               .AddParameter(MessageDialogViewModel.Parameters.NegativeCommand, null)
+               .AddParameter(MessageDialogViewModel.Parameters.DialogHostCommand, closeCommand)
+               .AddParameter(MessageDialogViewModel.Parameters.Text, message)
+               .AddParameter(MessageDialogViewModel.Parameters.DialogTypeValue, MessageDialogTypes.DialogType.Ok)
+               .AddParameter(MessageDialogViewModel.Parameters.ScrollViewerBackground, Colors.AliceBlue)
+               .AddParameter(MessageDialogViewModel.Parameters.ScrollViewerHorizontalVisible, ScrollBarVisibility.Disabled)
+               .AddParameter(MessageDialogViewModel.Parameters.ScrollViewerVerticalVisible, ScrollBarVisibility.Visible)
+               .Build();
+
+            return _dialogAware.ShowDialog(parameters);
+        }
+
+        #endregion
+
+        #region Methods for injection
 
         private async Task InputFromDialogCommandExecute(object? inputValue)
         {
-            //throw new ArgumentException();
-            if (_executionManager is null)
-                throw new InvalidOperationException(
-                    "This operation can be execute only from CompilerEnvironmentDialog");
-
-            if (_executionManager.ExecutionComplete)
-                throw new InvalidOperationException(
-                    "Execution already completed");
-
-            if (inputValue is null)
-                throw new ArgumentException("Incorrect parameter");
-
-
-            if (!int.TryParse(inputValue!.ToString(), out var value))
-            {
-                throw new ArgumentException("Parameter must be int value");
-            }
-
             var dialogViewModel = App.Container.Resolve<CompilerEnvironmentDialogViewModel>();
+
             try
             {
-               await _executionManager.ContinueExecutionFlowAsync(value);
-            }
-            catch
-            {
-                dialogViewModel.ExecutionComplete = true;
-                //MessageBox.Show("asd");
-                throw;
-            }
-           
-            finally
-            {
+                if (_executionManager is null)
+                    throw new InvalidOperationException(
+                        "This operation can be execute only from CompilerEnvironmentDialog");
+
+                if (_executionManager.ExecutionComplete)
+                    throw new InvalidOperationException(
+                        "Execution already completed");
+
+                if (inputValue is null)
+                    throw new ArgumentException("Incorrect parameter");
+
+                if (!int.TryParse(inputValue!.ToString(), out var value))
+                    throw new ArgumentException("Parameter must be int value");
+
+                await _executionManager.ContinueExecutionFlowAsync(value);
                 if (_executionManager.ExecutionComplete)
                     dialogViewModel.ExecutionComplete = true;
             }
-
+            catch (CompilerExceptions.CompilerException ex)
+            {
+                ShowMessageDialogException($"Error in method {ex.Value}: {ex.Message}");
+                dialogViewModel.ExecutionComplete = true;
+            }
+            catch(InvalidOperationException ex)
+            {
+                ShowMessageDialogException(ex.Message);
+            }
+            catch (ArgumentException ex)
+            {
+                ShowMessageDialogException(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                ShowMessageDialogException(ex.Message);
+                dialogViewModel.ExecutionComplete = true;
+            }
 
         }
 
@@ -285,6 +321,33 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
         private void LogCommandExecute(string message)
         {
             App.Container.Resolve<CompilerEnvironmentDialogViewModel>().ConsoleOut += $"\r\n{message}";
+        }
+
+        #endregion
+
+        #region Dispose
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (_disposed) return;
+            if (disposing)
+            {
+
+            }
+
+            _executionManager?.Dispose();
+            _disposed = true;
+        }
+
+        ~CompilerEnvironment()
+        {
+            Dispose(false);
         }
 
         #endregion

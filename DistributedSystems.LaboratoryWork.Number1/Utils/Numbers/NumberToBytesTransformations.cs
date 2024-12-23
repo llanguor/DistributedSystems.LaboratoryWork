@@ -8,8 +8,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.Utils.Numbers
 {
     public sealed class NumberToBytesTransformations
     {
-        //TODO: change to uint?
-
         public static long ConvertToBytes(int operand1, int operand2, int operand3, int operation)
         {
             long res = operand3;

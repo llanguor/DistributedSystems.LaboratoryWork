@@ -49,13 +49,30 @@ namespace DistributedSystems.LaboratoryWork.Nuget.Dialog
         public bool ShowDialog(
             DialogAwareParameters dialogParameters)
         {
+            GetWindowFromParameters(dialogParameters, out Window dialogControl);
+            dialogControl.Owner = System.Windows.Application.Current.MainWindow;
+            dialogControl.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            return dialogControl.ShowDialog() ?? false;
+        }
+
+        public void CloseDialog(
+            DialogAwareParameters dialogParameters,
+            bool dialogResult)
+        {
+            GetWindowFromParameters(dialogParameters, out Window dialogControl);
+            dialogControl.DialogResult = dialogResult;
+            dialogControl.Close();
+        }
+
+        private void GetWindowFromParameters(DialogAwareParameters dialogParameters, out Window dialogControl)
+        {
             if (!_viewTypeToViewMappings.TryGetValue(dialogParameters.DialogType, out var dialogWindowFactory))
             {
                 throw new ArgumentOutOfRangeException(
                     nameof(dialogParameters), "Factory for dialog was not registred!");
             }
-        
-            Window dialogControl = (_resolver.Resolve(dialogWindowFactory) as Window)!;
+
+            dialogControl = (_resolver.Resolve(dialogWindowFactory) as Window)!;
             var dialogControlViewModel = dialogControl.DataContext as DialogViewModelBase;
 
             if (dialogControlViewModel is null)
@@ -65,9 +82,6 @@ namespace DistributedSystems.LaboratoryWork.Nuget.Dialog
             }
 
             dialogControlViewModel.InputParameters = dialogParameters;
-            dialogControl.Owner = System.Windows.Application.Current.MainWindow;
-            dialogControl.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            return dialogControl.ShowDialog() ?? false;
         }
 
         public async Task<bool> ShowDialogAsync(
