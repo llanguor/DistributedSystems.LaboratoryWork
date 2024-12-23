@@ -18,8 +18,8 @@ namespace DistributedSystems.LaboratoryWork.Nuget.ViewModel
 
         public DialogChoiceViewModelBase()
         {
-            _positiveCommandSupplemented = new Lazy<ICommand>(() => new RelayCommand((window) => PositiveCommandSupplementedExecute(window)));
-            _negativeCommandSupplemented = new Lazy<ICommand>(() => new RelayCommand((window) => NegativeCommandSupplementedExecute(window)));
+            _positiveCommandSupplemented = new Lazy<ICommand>(() => new RelayCommand((window) => SupplementedExecute(PositiveCommand, true, window)));
+            _negativeCommandSupplemented = new Lazy<ICommand>(() => new RelayCommand((window) => SupplementedExecute(NegativeCommand, false, window)));
         }
 
         #endregion
@@ -72,7 +72,7 @@ namespace DistributedSystems.LaboratoryWork.Nuget.ViewModel
 
         #region Methods
 
-        private void NegativeCommandSupplementedExecute([CallerMemberName] object? messageDialog = null)
+        protected void SupplementedExecute(ICommand? command, bool dialogResult, [CallerMemberName] object? messageDialog = null)
         {
             if (messageDialog is null)
             {
@@ -84,24 +84,9 @@ namespace DistributedSystems.LaboratoryWork.Nuget.ViewModel
                 throw new ArgumentException(nameof(messageDialog));
             }
 
-            NegativeCommand?.Execute(null);
-            (messageDialog as Window)!.DialogResult = false;
-        }
+            command?.Execute(null);
+            (messageDialog as Window)!.DialogResult = dialogResult;
 
-        private void PositiveCommandSupplementedExecute([CallerMemberName] object? messageDialog = null)
-        {
-            if (messageDialog is null)
-            {
-                throw new ArgumentNullException(nameof(messageDialog));
-            }
-
-            if (messageDialog is not Window)
-            {
-                throw new ArgumentException(nameof(messageDialog));
-            }
-
-            PositiveCommand?.Execute(null);
-            (messageDialog as Window)!.DialogResult = true;
         }
 
         #endregion

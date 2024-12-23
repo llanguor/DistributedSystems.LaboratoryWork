@@ -23,7 +23,7 @@
     <Grid>
         <controls:DialogHost 
             BackgroundOpacity="0.9"
-            BackgroundCommand="{Binding DialogHostCommand}">
+            BackgroundCommand="{Binding DialogHostCommand, Mode=OneWay}">
 
             
                 <Grid Margin="10">

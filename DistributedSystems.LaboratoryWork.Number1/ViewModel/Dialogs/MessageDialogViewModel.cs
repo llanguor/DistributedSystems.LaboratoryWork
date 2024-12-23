@@ -34,11 +34,11 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs
 
         MessageDialogTypes.DialogType _dialogType;
 
-        private ICommand? _dialogHostCommand;
+        private Lazy<ICommand?>? _dialogHostCommand;
 
         #endregion
 
-        #region Style Properties
+        #region Properties
 
         public MessageDialogTypes.DialogType DialogTypeValue
         {
@@ -95,18 +95,14 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs
             }
         }
 
-        #endregion
-
-        #region Commands Properties
-
         public ICommand? DialogHostCommand
         {
             get =>
-                _dialogHostCommand!;
+                _dialogHostCommand!.Value;
 
             set
             {
-                _dialogHostCommand = value;
+                _dialogHostCommand = new Lazy<ICommand?>(value);
                 RaisePropertyChanged(nameof(DialogHostCommand));
             }
         }
@@ -114,6 +110,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs
         #endregion
 
         #region Methods
+
         protected override void HandleParameters(
             DialogAwareParameters parameters)
         {
@@ -126,6 +123,9 @@ namespace DistributedSystems.LaboratoryWork.Number1.ViewModel.Dialogs
             DialogTypeValue = (MessageDialogTypes.DialogType)parameters[Parameters.DialogTypeValue]!;
             ScrollViewerVerticalVisible = (ScrollBarVisibility)parameters[Parameters.ScrollViewerVerticalVisible]!;
             ScrollViewerHorizontalVisible = (ScrollBarVisibility)parameters[Parameters.ScrollViewerHorizontalVisible]!;
+
+            if (DialogHostCommand is null)
+                _dialogHostCommand = new Lazy<ICommand?>(() => new RelayCommand((window) => SupplementedExecute(PositiveCommand, true, window)));
         }
 
         #endregion

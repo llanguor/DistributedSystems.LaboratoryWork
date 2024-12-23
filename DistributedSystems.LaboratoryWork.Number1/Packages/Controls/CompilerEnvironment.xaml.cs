@@ -237,14 +237,12 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
        
         private bool ShowMessageDialogException(string message)
         {
-            var closeCommand = new RelayCommand(_ =>
-                    _dialogAware.CloseDialog(DialogAwareParameters.Builder.Create()
-                        .ForDialogType<MessageDialogViewModel>().Build(), false));
+
             var parameters = DialogAwareParameters.Builder.Create()
                .ForDialogType<MessageDialogViewModel>()
                .AddParameter(MessageDialogViewModel.Parameters.PositiveCommand, null)
                .AddParameter(MessageDialogViewModel.Parameters.NegativeCommand, null)
-               .AddParameter(MessageDialogViewModel.Parameters.DialogHostCommand, closeCommand)
+               .AddParameter(MessageDialogViewModel.Parameters.DialogHostCommand, null)
                .AddParameter(MessageDialogViewModel.Parameters.Text, message)
                .AddParameter(MessageDialogViewModel.Parameters.DialogTypeValue, MessageDialogTypes.DialogType.Ok)
                .AddParameter(MessageDialogViewModel.Parameters.ScrollViewerBackground, Colors.AliceBlue)

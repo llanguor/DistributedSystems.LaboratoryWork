@@ -21,6 +21,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
     /// </summary>
     public partial class DialogHost : UserControl
     {
+
         #region Constructors
 
         public DialogHost()
@@ -30,8 +31,7 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
 
         #endregion
 
-
-        #region DependencyProperty DialogStyle
+        #region Properties
 
         public CornerRadius DialogCornerRadius
         {
@@ -42,13 +42,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
                 SetValue(DialogCornerRadiusProperty, value);
         }
 
-        public static readonly DependencyProperty DialogCornerRadiusProperty
-            = DependencyProperty.Register(
-                nameof(DialogCornerRadius),
-                typeof(CornerRadius),
-                typeof(DialogHost),
-                new PropertyMetadata(new CornerRadius(0, 0, 0, 0)));
-
         public double BackgroundOpacity
         {
             get =>
@@ -57,18 +50,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
             set =>
                 SetValue(BackgroundOpacityProperty, value);
         }
-
-        public static readonly DependencyProperty BackgroundOpacityProperty
-            = DependencyProperty.Register(
-                nameof(BackgroundOpacity),
-                typeof(double),
-                typeof(DialogHost),
-                new PropertyMetadata(0.4));
-
-        #endregion
-
-
-        #region DependencyProperty Commands
 
         public ICommand BackgroundCommand
         {
@@ -79,6 +60,24 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
                 SetValue(BackgroundCommandProperty, value);
         }
 
+        #endregion
+
+        #region DependencyProperty DialogStyle
+
+        public static readonly DependencyProperty DialogCornerRadiusProperty
+            = DependencyProperty.Register(
+                nameof(DialogCornerRadius),
+                typeof(CornerRadius),
+                typeof(DialogHost),
+                new PropertyMetadata(new CornerRadius(0, 0, 0, 0)));
+
+        public static readonly DependencyProperty BackgroundOpacityProperty
+            = DependencyProperty.Register(
+                nameof(BackgroundOpacity),
+                typeof(double),
+                typeof(DialogHost),
+                new PropertyMetadata(0.4));
+
         public static readonly DependencyProperty BackgroundCommandProperty
             = DependencyProperty.Register(
                 nameof(BackgroundCommand),
@@ -86,5 +85,6 @@ namespace DistributedSystems.LaboratoryWork.Number1.Packages.Controls
                 typeof(DialogHost));
 
         #endregion
+
     }
 }
